@@ -14,20 +14,32 @@ const debugLog = (message: string, data?: any) => {
   console.log(`[NextAuth Debug] ${message}`, data ? JSON.stringify(data, null, 2) : "")
 }
 
+// Create a more resilient MongoDB adapter
+const getMongoDBAdapter = async () => {
+  try {
+    debugLog("Initializing MongoDB adapter")
+    const { db } = await connectToDatabase()
+    debugLog("MongoDB connection successful for adapter")
+    return MongoDBAdapter({
+      db,
+    })
+  } catch (error) {
+    debugLog("Error initializing MongoDB adapter", error)
+    // Return null to fall back to JWT
+    return null
+  }
+}
+
 export const authOptions: NextAuthOptions = {
-  adapter: MongoDBAdapter({
-    db: (async () => {
-      try {
-        debugLog("Connecting to MongoDB")
-        const { db } = await connectToDatabase()
-        debugLog("MongoDB connection successful")
-        return db
-      } catch (error) {
-        debugLog("MongoDB connection error", error)
-        throw error
-      }
-    })(),
-  }),
+  // Use a function to get the adapter to handle connection issues gracefully
+  adapter: (async () => {
+    try {
+      return await getMongoDBAdapter()
+    } catch (error) {
+      debugLog("Failed to initialize MongoDB adapter, falling back to JWT only", error)
+      return null
+    }
+  })(),
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -184,7 +196,7 @@ export const authOptions: NextAuthOptions = {
   },
   debug: true,
   session: {
-    strategy: "jwt",
+    strategy: "jwt", // Use JWT as the primary strategy for more resilience
   },
   secret: process.env.NEXTAUTH_SECRET,
 }
