@@ -2,8 +2,6 @@
 
 import { useSearchParams } from "next/navigation"
 import Link from "next/link"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { AlertTriangle } from "lucide-react"
@@ -132,13 +130,11 @@ function AuthErrorContent() {
 export default function AuthErrorPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      <SiteHeader />
       <main className="flex-1 flex items-center justify-center p-4">
         <Suspense fallback={<div>Loading...</div>}>
           <AuthErrorContent />
         </Suspense>
       </main>
-      <SiteFooter />
     </div>
   )
 }

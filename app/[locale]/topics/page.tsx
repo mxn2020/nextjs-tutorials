@@ -1,5 +1,5 @@
+import { getDictionary } from "@/lib/i18n/server"
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
 import Link from "next/link"
 
 export async function generateMetadata({
@@ -7,15 +7,16 @@ export async function generateMetadata({
 }: {
   params: { locale: string }
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "Topics" })
+  const dictionary = await getDictionary(locale)
   return {
-    title: t("title"),
-    description: t("description"),
+    title: dictionary.Topics.title,
+    description: dictionary.Topics.description,
   }
 }
 
-export default async function TopicsPage() {
-  const t = await getTranslations("Topics")
+export default async function TopicsPage({ params }: { params: { locale: string } }) {
+  const dictionary = await getDictionary(params.locale)
+  const t = (key: keyof typeof dictionary.Topics) => dictionary.Topics[key]
 
   const topics = [
     {
@@ -59,7 +60,7 @@ export default async function TopicsPage() {
         {topics.map((topic) => (
           <Link
             key={topic.slug}
-            href={`/en/topics/${topic.slug}`}
+            href={`/${params.locale}/topics/${topic.slug}`}
             className="group border rounded-lg p-6 bg-card hover:bg-accent transition-colors"
           >
             <h2 className="text-2xl font-semibold mb-2 group-hover:text-primary transition-colors">{topic.title}</h2>

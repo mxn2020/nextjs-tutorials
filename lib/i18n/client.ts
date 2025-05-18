@@ -1,6 +1,4 @@
-import "server-only"
 import { locales, defaultLocale } from "./constants"
-import { Dictionary } from "@/types/dictionary"
 
 const dictionaries = {
   en: () => import("../../dictionaries/en.json").then((module) => module.default),
@@ -28,7 +26,7 @@ export const localeNames: Record<string, string> = {
   ja: "日本語",
 }
 
-export const getDictionary = async (locale: string): Promise<Dictionary> => {
+export const getDictionary = async (locale: string) => {
   if (!locales.includes(locale)) {
     return dictionaries[defaultLocale]()
   }

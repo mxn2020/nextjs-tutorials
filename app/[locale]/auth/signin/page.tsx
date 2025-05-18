@@ -6,8 +6,6 @@ import { useState, useEffect } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { motion } from "framer-motion"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -217,13 +215,11 @@ function SignInForm() {
 export default function SignInPage() {
   return (
     <div className="flex min-h-screen flex-col">
-      <SiteHeader />
       <main className="flex-1 flex items-center justify-center p-4">
         <Suspense fallback={<div>Loading...</div>}>
           <SignInForm />
         </Suspense>
       </main>
-      <SiteFooter />
     </div>
   )
 }

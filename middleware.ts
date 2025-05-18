@@ -16,36 +16,45 @@ function getLocale(request: NextRequest) {
 
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
-
-  // i18n: Check if the pathname already has a locale
-  const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
-  )
-  if (!pathnameHasLocale && !pathname.startsWith("/_next") && !pathname.startsWith("/api") && !pathname.includes(".")) {
-    const locale = getLocale(request)
-    request.nextUrl.pathname = `/${locale}${pathname}`
-    return NextResponse.redirect(request.nextUrl)
+  
+  // Skip static assets and API routes immediately
+  if (pathname.startsWith("/_next") || 
+      pathname.startsWith("/api") || 
+      pathname.includes(".")) {
+    return NextResponse.next()
   }
 
-  // Redirect root / to preferred language or default locale
+  // Handle root redirect first (/) - prioritize this check
   if (pathname === "/") {
     const preferred = request.cookies.get("NEXT_LOCALE")?.value
     const locale = (preferred && locales.includes(preferred)) ? preferred : defaultLocale
     return NextResponse.redirect(new URL(`/${locale}`, request.url))
   }
 
-  // Check if the pathname is for an API route or static asset
-  if (pathname.startsWith("/_next") || pathname.startsWith("/api") || pathname.includes(".")) {
-    return NextResponse.next()
+  // Check for locale in pathname
+  const pathnameHasLocale = locales.some(
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  )
+  
+  // Add locale to path if missing
+  if (!pathnameHasLocale) {
+    const locale = getLocale(request)
+    const newUrl = new URL(`/${locale}${pathname}`, request.url)
+    return NextResponse.redirect(newUrl)
   }
 
-  // Check if the user is authorized for protected routes
+  // Authorization check for protected routes
   if (pathname.includes("/admin") || pathname.includes("/dashboard")) {
-    const token = await getToken({ req: request })
-    if (!token || token.role !== "admin") {
-      const url = new URL("/auth/signin", request.url)
-      url.searchParams.set("callbackUrl", pathname)
-      return NextResponse.redirect(url)
+    try {
+      const token = await getToken({ req: request })
+      if (!token || token.role !== "admin") {
+        const url = new URL("/auth/signin", request.url)
+        url.searchParams.set("callbackUrl", pathname)
+        return NextResponse.redirect(url)
+      }
+    } catch (error) {
+      console.error("Auth token validation error:", error)
+      // Fall through to next() if token validation fails
     }
   }
 

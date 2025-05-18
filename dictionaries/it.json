@@ -1,54 +1,273 @@
 {
   "Hero": {
-    "title": "Biblioteca di Conoscenza Next.js",
-    "description": "Una piattaforma di apprendimento multilingue di Next.js con integrazione AI e collaborazione della comunità",
-    "browseButton": "Sfoglia Tutorial",
+    "title": "Tutorial e Risorse Next.js",
+    "description": "Guide e tutorial completi per imparare Next.js",
+    "browseButton": "Sfoglia i Tutorial",
+    "exploreButton": "Esplora gli Argomenti",
     "contributeButton": "Contribuisci",
-    "newsletterTitle": "Resta Aggiornato",
-    "newsletterDescription": "Iscriviti alla nostra newsletter per ricevere gli ultimi tutorial e aggiornamenti",
+    "newsletterTitle": "Iscriviti alla nostra Newsletter",
+    "newsletterDescription": "Ricevi gli ultimi tutorial e risorse direttamente nella tua casella di posta",
     "emailPlaceholder": "Inserisci la tua email",
     "subscribeButton": "Iscriviti",
+    "subscribedUsers": "Sviluppatori si sono già iscritti",
     "privacyNotice": "Iscrivendoti, accetti la nostra",
-    "privacyLink": "Politica sulla Privacy"
-  },
-  "Navigation": {
-    "home": "Home",
-    "tutorials": "Tutorial",
-    "topics": "Argomenti",
-    "aiPrompts": "Prompt AI",
-    "snippets": "Frammenti",
-    "community": "Comunità",
-    "contribute": "Contribuisci",
-    "about": "Chi Siamo",
-    "signIn": "Accedi",
-    "signOut": "Esci"
-  },
-  "Footer": {
-    "copyright": "© {year} Biblioteca di Conoscenza Next.js. Tutti i diritti riservati.",
-    "privacy": "Politica sulla Privacy",
-    "terms": "Termini di Servizio",
-    "contact": "Contattaci"
-  },
-  "UserNav": {
-    "profile": "Profilo",
-    "bookmarks": "Segnalibri",
-    "settings": "Impostazioni",
-    "signOut": "Esci"
-  },
-  "FeaturedContent": {
-    "title": "Contenuti in Evidenza",
-    "viewAll": "Vedi Tutti"
-  },
-  "ContentCard": {
-    "readMore": "Leggi di Più"
+    "privacyLink": "Informativa sulla Privacy"
   },
   "ContentMatrix": {
-    "title": "Matrice dei Contenuti",
-    "topic": "Argomento",
     "all": "Tutti",
+    "title": "Percorsi di Apprendimento",
+    "description": "Esplora i nostri tutorial per argomento e livello di difficoltà",
+    "tabs": {
+      "all": "Tutti gli Argomenti",
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzato"
+    },
     "available": "Disponibile",
     "inProgress": "In Corso",
     "notAvailable": "Non Disponibile",
-    "content": "Contenuto"
+    "content": "Contenuto",
+    "topic": "Argomento",
+    "explore": "Esplora",
+    "comingSoon": "Prossimamente",
+    "noContent": "Nessun contenuto disponibile per questa selezione"
+  },
+  "Profile": {
+    "meta": {
+      "title": "Il Tuo Profilo",
+      "description": "Visualizza e gestisci le informazioni del tuo profilo"
+    },
+    "editProfile": "Modifica Profilo",
+    "noBio": "Nessuna biografia fornita",
+    "tabs": {
+      "profile": "Profilo",
+      "activity": "Attività"
+    },
+    "profileForm": {
+      "title": "Informazioni del Profilo",
+      "description": "Aggiorna le tue informazioni personali e come gli altri ti vedono sulla piattaforma",
+      "nameLabel": "Nome",
+      "namePlaceholder": "Il tuo nome",
+      "nameDescription": "Questo è il tuo nome visualizzato pubblicamente",
+      "nameRequired": "Il nome deve contenere almeno 2 caratteri",
+      "bioLabel": "Biografia",
+      "bioPlaceholder": "Raccontaci qualcosa di te",
+      "bioDescription": "Breve descrizione per il tuo profilo. Gli URL sono ipercollegati.",
+      "bioTooLong": "La biografia deve contenere meno di 160 caratteri",
+      "locationLabel": "Posizione",
+      "locationPlaceholder": "La tua posizione",
+      "locationTooLong": "La posizione deve contenere meno di 100 caratteri",
+      "websiteLabel": "Sito Web",
+      "websitePlaceholder": "https://il-tuo-sito-web.com",
+      "invalidUrl": "Inserisci un URL valido",
+      "saveChanges": "Salva Modifiche",
+      "saving": "Salvataggio...",
+      "updateSuccess": "Profilo Aggiornato",
+      "profileUpdated": "Il tuo profilo è stato aggiornato con successo",
+      "updateError": "Aggiornamento Fallito",
+      "errorOccurred": "Si è verificato un errore durante l'aggiornamento del tuo profilo"
+    },
+    "activity": {
+      "title": "Attività Recente",
+      "description": "Visualizza le tue interazioni recenti con i contenuti",
+      "noActivity": "Nessuna attività recente trovata",
+      "viewedContent": "Hai visualizzato",
+      "bookmarkedContent": "Hai aggiunto ai segnalibri",
+      "likedContent": "Ti è piaciuto",
+      "commentedContent": "Hai commentato"
+    }
+  },
+  "Bookmarks": {
+    "meta": {
+      "title": "I Tuoi Segnalibri",
+      "description": "Visualizza e gestisci i tuoi contenuti salvati"
+    },
+    "title": "I Tuoi Segnalibri",
+    "description": "Contenuti che hai salvato per dopo",
+    "noBookmarks": "Nessun segnalibro ancora",
+    "startBookmarking": "Inizia ad aggiungere contenuti ai segnalibri per vederli qui",
+    "exploreTutorials": "Esplora i Tutorial",
+    "viewContent": "Visualizza Contenuto",
+    "remove": "Rimuovi",
+    "removed": "Segnalibro Rimosso",
+    "bookmarkRemoved": "Il segnalibro è stato rimosso dalla tua raccolta",
+    "error": "Errore",
+    "errorRemoving": "Si è verificato un errore durante la rimozione del segnalibro"
+  },
+  "Settings": {
+    "meta": {
+      "title": "Impostazioni Account",
+      "description": "Gestisci le preferenze e le impostazioni del tuo account"
+    },
+    "title": "Impostazioni Account",
+    "tabs": {
+      "general": "Generale",
+      "notifications": "Notifiche",
+      "account": "Account"
+    },
+    "general": {
+      "title": "Impostazioni Generali",
+      "description": "Gestisci le preferenze del tuo account",
+      "languageLabel": "Lingua",
+      "selectLanguage": "Seleziona una lingua",
+      "languageDescription": "La lingua utilizzata in tutta la piattaforma",
+      "themeLabel": "Tema",
+      "selectTheme": "Seleziona un tema",
+      "lightTheme": "Chiaro",
+      "darkTheme": "Scuro",
+      "systemTheme": "Sistema",
+      "themeDescription": "Imposta il tema per l'interfaccia utente",
+      "autoplayVideosLabel": "Riproduzione Automatica Video",
+      "autoplayVideosDescription": "Riproduci automaticamente i video durante la navigazione dei contenuti",
+      "showCodeLineNumbersLabel": "Mostra Numeri di Riga del Codice",
+      "showCodeLineNumbersDescription": "Visualizza i numeri di riga negli snippet di codice",
+      "saveChanges": "Salva Modifiche",
+      "saving": "Salvataggio...",
+      "updateSuccess": "Impostazioni Aggiornate",
+      "settingsUpdated": "Le tue impostazioni sono state aggiornate con successo",
+      "updateError": "Aggiornamento Fallito",
+      "errorOccurred": "Si è verificato un errore durante l'aggiornamento delle tue impostazioni"
+    },
+    "notifications": {
+      "title": "Impostazioni Notifiche",
+      "description": "Controlla quali notifiche ricevi",
+      "emailNotificationsLabel": "Notifiche Email",
+      "emailNotificationsDescription": "Ricevi notifiche via email",
+      "newContentLabel": "Nuovi Contenuti",
+      "newContentDescription": "Avvisami quando vengono pubblicati nuovi contenuti",
+      "contentUpdatesLabel": "Aggiornamenti Contenuti",
+      "contentUpdatesDescription": "Avvisami quando i contenuti che ho visualizzato vengono aggiornati",
+      "commentsLabel": "Commenti",
+      "commentsDescription": "Avvisami riguardo alle risposte ai miei commenti",
+      "mentionsLabel": "Menzioni",
+      "mentionsDescription": "Avvisami quando vengo menzionato nei commenti",
+      "newsletterLabel": "Newsletter",
+      "newsletterDescription": "Ricevi la nostra newsletter settimanale con gli ultimi aggiornamenti",
+      "saveChanges": "Salva Modifiche",
+      "saving": "Salvataggio...",
+      "updateSuccess": "Impostazioni Notifiche Aggiornate",
+      "settingsUpdated": "Le tue impostazioni di notifica sono state aggiornate con successo",
+      "updateError": "Aggiornamento Fallito",
+      "errorOccurred": "Si è verificato un errore durante l'aggiornamento delle tue impostazioni di notifica"
+    },
+    "account": {
+      "exportDataTitle": "Esporta i Tuoi Dati",
+      "exportDataDescription": "Scarica una copia dei tuoi dati personali",
+      "exportData": "Esporta Dati",
+      "exporting": "Esportazione...",
+      "exportSuccess": "Dati Esportati",
+      "dataExported": "I tuoi dati sono stati esportati con successo",
+      "exportError": "Esportazione Fallita",
+      "errorExporting": "Si è verificato un errore durante l'esportazione dei tuoi dati",
+      "signOutTitle": "Esci",
+      "signOutDescription": "Esci dal tuo account",
+      "signOut": "Esci",
+      "dangerZoneTitle": "Zona Pericolosa",
+      "dangerZoneDescription": "Elimina permanentemente il tuo account e tutti i tuoi dati",
+      "deleteAccountWarningTitle": "Attenzione: Questa azione non può essere annullata",
+      "deleteAccountWarningDescription": "Una volta eliminato il tuo account, tutti i tuoi dati verranno rimossi permanentemente. Questa azione non può essere annullata.",
+      "deleteAccount": "Elimina Account",
+      "confirmDeleteTitle": "Sei assolutamente sicuro?",
+      "confirmDeleteDescription": "Questa azione non può essere annullata. Ciò eliminerà permanentemente il tuo account e rimuoverà tutti i tuoi dati dai nostri server.",
+      "typeEmailToConfirm": "Digita {email} per confermare",
+      "emailLabel": "Email",
+      "cancel": "Annulla",
+      "confirmDelete": "Elimina il Mio Account",
+      "deleting": "Eliminazione...",
+      "accountDeleted": "Account Eliminato",
+      "accountDeletedDescription": "Il tuo account è stato eliminato con successo",
+      "deleteError": "Eliminazione Fallita",
+      "errorDeleting": "Si è verificato un errore durante l'eliminazione del tuo account",
+      "emailMismatch": "Email non corrispondente",
+      "emailMismatchDescription": "L'email inserita non corrisponde all'email del tuo account"
+    }
+  },
+  "ContentCard": {
+    "readMore": "Leggi di più",
+    "bookmark": "Segnalibro",
+    "bookmarked": "Salvato",
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzato"
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} Libreria di Conoscenza Next.js. Tutti i diritti riservati.",
+    "privacy": "Informativa sulla Privacy",
+    "terms": "Termini di Servizio",
+    "contact": "Contattaci"
+  },
+  "languageSwitcher": {
+    "label": "Seleziona lingua:"
+  },
+  "Navigation": {
+    "tutorials": "Tutorial",
+    "snippets": "Snippet",
+    "aiPrompts": "Prompt AI",
+    "topics": "Argomenti",
+    "community": "Comunità",
+    "about": "Informazioni",
+    "search": "Cerca",
+    "bookmarks": "Segnalibri",
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "signIn": "Accedi",
+    "signUp": "Registrati",
+    "dashboard": "Dashboard",
+    "contribute": "Contribuisci",
+    "home": "Home"
+  },
+  "FeaturedContent": {
+    "title": "Tutorial in Evidenza",
+    "viewAll": "Visualizza tutti i tutorial"
+  },
+  "Newsletter": {
+    "title": "Iscriviti alla nostra Newsletter",
+    "description": "Ricevi gli ultimi tutorial, suggerimenti e aggiornamenti direttamente nella tua casella di posta.",
+    "emailLabel": "Indirizzo email",
+    "emailPlaceholder": "Inserisci la tua email",
+    "subscribeButton": "Iscriviti",
+    "subscribing": "Iscrizione...",
+    "successTitle": "Grazie per esserti iscritto!",
+    "successMessage": "Ora riceverai i nostri ultimi aggiornamenti direttamente nella tua casella di posta.",
+    "errorTitle": "Iscrizione fallita",
+    "errorMessage": "Si è verificato un errore durante l'iscrizione alla newsletter. Riprova.",
+    "alreadySubscribed": "Sei già iscritto alla nostra newsletter.",
+    "emailRequired": "L'indirizzo email è obbligatorio.",
+    "invalidEmail": "Inserisci un indirizzo email valido.",
+    "privacyNotice": "Rispettiamo la tua privacy. Annulla l'iscrizione in qualsiasi momento."
+  },
+  "Search": {
+    "title": "Cerca",
+    "placeholder": "Cerca tutorial, snippet, argomenti...",
+    "noResults": "Nessun risultato trovato.",
+    "tryAgain": "Prova parole chiave diverse o sfoglia i nostri tutorial.",
+    "searching": "Ricerca...",
+    "close": "Chiudi",
+    "tip": "Premi Invio per cercare o Esc per chiudere",
+    "categories": {
+      "all": "Tutti",
+      "tutorials": "Tutorial",
+      "snippets": "Snippet",
+      "topics": "Argomenti"
+    }
+  },
+  "UserNav": {
+    "profile": "Profilo",
+    "settings": "Impostazioni",
+    "bookmarks": "Segnalibri",
+    "signOut": "Esci"
+  },
+  "BookmarkButton": {
+    "bookmark": "Segnalibro",
+    "bookmarked": "Salvato",
+    "signInToBookmark": "Accedi per aggiungere ai segnalibri",
+    "addedToBookmarks": "Aggiunto ai segnalibri",
+    "removedFromBookmarks": "Rimosso dai segnalibri",
+    "itemAddedDescription": "Questo elemento è stato aggiunto ai tuoi segnalibri.",
+    "itemRemovedDescription": "Questo elemento è stato rimosso dai tuoi segnalibri.",
+    "error": "Errore",
+    "errorDescription": "Impossibile aggiornare lo stato del segnalibro."
   }
 }

@@ -1,26 +1,24 @@
+import { getDictionary } from "@/lib/i18n/server"
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
 import Image from "next/image"
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string }
-}): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "Community" })
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  const dictionary = await getDictionary(locale)
+  const communityDict = dictionary.Community || { title: "Community", description: "Join our community." }
   return {
-    title: t("title"),
-    description: t("description"),
+    title: communityDict.title,
+    description: communityDict.description,
   }
 }
 
-export default async function CommunityPage() {
-  const t = await getTranslations("Community")
+export default async function CommunityPage({ params }: { params: { locale: string } }) {
+  const dictionary = await getDictionary(params.locale)
+  const communityDict = dictionary.Community || { title: "Community", description: "Join our community." }
 
   return (
     <div className="container py-10">
-      <h1 className="text-4xl font-bold mb-6">{t("title")}</h1>
-      <p className="text-xl text-muted-foreground mb-10">{t("description")}</p>
+      <h1 className="text-4xl font-bold mb-6">{communityDict.title}</h1>
+      <p className="text-xl text-muted-foreground mb-10">{communityDict.description}</p>
 
       <div className="grid grid-cols-1 gap-10">
         <section>

@@ -1,5 +1,6 @@
+import { getDictionary } from "@/lib/i18n/server"
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
+
 import Link from "next/link"
 
 export async function generateMetadata({
@@ -9,19 +10,47 @@ export async function generateMetadata({
   params: { locale: string }
   searchParams: { q?: string }
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "Search" })
+  const dictionary = await getDictionary(locale)
+  const searchDict = dictionary.Search || {
+    title: "Search",
+    description: "Search the site.",
+    searchResults: "Results",
+    resultCount: {
+      one: "1 result for {query}",
+      other: "{count} results for {query}",
+    },
+    noResults: "No results found",
+    tryDifferentQuery: "Try a different search.",
+    enterQuery: "Enter a search query.",
+  }
   return {
-    title: searchParams.q ? `${t("searchResults")}: ${searchParams.q}` : t("title"),
-    description: t("description"),
+    title: searchParams.q
+      ? `${searchDict.searchResults}: ${searchParams.q}`
+      : searchDict.title,
+    description: searchDict.description,
   }
 }
 
 export default async function SearchPage({
+  params,
   searchParams,
 }: {
+  params: { locale: string }
   searchParams: { q?: string }
 }) {
-  const t = await getTranslations("Search")
+  const dictionary = await getDictionary(params.locale)
+  const searchDict = dictionary.Search || {
+    title: "Search",
+    description: "Search the site.",
+    searchResults: "Results",
+    resultCount: {
+      one: "1 result for {query}",
+      other: "{count} results for {query}",
+    },
+    noResults: "No results found",
+    tryDifferentQuery: "Try a different search.",
+    enterQuery: "Enter a search query.",
+  }
   const query = searchParams.q || ""
 
   // This would be replaced with actual search logic in a production app
@@ -74,17 +103,17 @@ export default async function SearchPage({
 
   return (
     <div className="container py-10">
-      <h1 className="text-4xl font-bold mb-2">{query ? t("searchResults") : t("title")}</h1>
+      <h1 className="text-4xl font-bold mb-2">{query ? searchDict.searchResults : searchDict.title}</h1>
 
       {query && (
         <p className="text-xl text-muted-foreground mb-10">
           {searchResults.length === 1
-            ? t("resultCount.one", { query })
-            : t("resultCount.other", { count: searchResults.length, query })}
+            ? searchDict.resultCount.one.replace("{query}", query)
+            : searchDict.resultCount.other.replace("{count}", searchResults.length.toString()).replace("{query}", query)}
         </p>
       )}
 
-      {!query && <p className="text-xl text-muted-foreground mb-10">{t("enterQuery")}</p>}
+      {!query && <p className="text-xl text-muted-foreground mb-10">{searchDict.enterQuery}</p>}
 
       {searchResults.length > 0 ? (
         <div className="space-y-6">
@@ -102,8 +131,8 @@ export default async function SearchPage({
         </div>
       ) : query ? (
         <div className="text-center py-10">
-          <h2 className="text-xl font-semibold mb-2">{t("noResults")}</h2>
-          <p className="text-muted-foreground">{t("tryDifferentQuery")}</p>
+          <h2 className="text-xl font-semibold mb-2">{searchDict.noResults}</h2>
+          <p className="text-muted-foreground">{searchDict.tryDifferentQuery}</p>
         </div>
       ) : null}
     </div>

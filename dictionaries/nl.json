@@ -1,54 +1,273 @@
 {
   "Hero": {
-    "title": "Next.js Kennisbibliotheek",
-    "description": "Een meertalig Next.js leerplatform met AI-integratie en gemeenschapssamenwerking",
-    "browseButton": "Tutorials Verkennen",
+    "title": "Next.js Handleidingen & Bronnen",
+    "description": "Uitgebreide gidsen en handleidingen voor het leren van Next.js",
+    "browseButton": "Blader door Handleidingen",
+    "exploreButton": "Ontdek Onderwerpen",
     "contributeButton": "Bijdragen",
-    "newsletterTitle": "Blijf op de Hoogte",
-    "newsletterDescription": "Abonneer je op onze nieuwsbrief voor de nieuwste tutorials en updates",
-    "emailPlaceholder": "Voer je e-mail in",
+    "newsletterTitle": "Abonneer u op onze Nieuwsbrief",
+    "newsletterDescription": "Ontvang de nieuwste handleidingen en bronnen rechtstreeks in uw inbox",
+    "emailPlaceholder": "Voer uw e-mailadres in",
     "subscribeButton": "Abonneren",
-    "privacyNotice": "Door je te abonneren, ga je akkoord met ons",
+    "subscribedUsers": "Ontwikkelaars hebben zich al geabonneerd",
+    "privacyNotice": "Door u te abonneren, gaat u akkoord met ons",
     "privacyLink": "Privacybeleid"
   },
-  "Navigation": {
-    "home": "Home",
-    "tutorials": "Tutorials",
-    "topics": "Onderwerpen",
-    "aiPrompts": "AI-prompts",
-    "snippets": "Fragmenten",
-    "community": "Gemeenschap",
-    "contribute": "Bijdragen",
-    "about": "Over",
-    "signIn": "Inloggen",
-    "signOut": "Uitloggen"
+  "ContentMatrix": {
+    "all": "Alle",
+    "title": "Leerpaden",
+    "description": "Verken onze handleidingen per onderwerp en moeilijkheidsgraad",
+    "tabs": {
+      "all": "Alle Onderwerpen",
+      "beginner": "Beginner",
+      "intermediate": "Gemiddeld",
+      "advanced": "Gevorderd"
+    },
+    "available": "Beschikbaar",
+    "inProgress": "In Uitvoering",
+    "notAvailable": "Niet Beschikbaar",
+    "content": "Inhoud",
+    "topic": "Onderwerp",
+    "explore": "Verkennen",
+    "comingSoon": "Binnenkort Beschikbaar",
+    "noContent": "Geen inhoud beschikbaar voor deze selectie"
+  },
+  "Profile": {
+    "meta": {
+      "title": "Uw Profiel",
+      "description": "Bekijk en beheer uw profielinformatie"
+    },
+    "editProfile": "Profiel Bewerken",
+    "noBio": "Nog geen biografie opgegeven",
+    "tabs": {
+      "profile": "Profiel",
+      "activity": "Activiteit"
+    },
+    "profileForm": {
+      "title": "Profielinformatie",
+      "description": "Werk uw persoonlijke informatie bij en hoe anderen u op het platform zien",
+      "nameLabel": "Naam",
+      "namePlaceholder": "Uw naam",
+      "nameDescription": "Dit is uw openbare weergavenaam",
+      "nameRequired": "Naam moet minimaal 2 tekens bevatten",
+      "bioLabel": "Biografie",
+      "bioPlaceholder": "Vertel ons iets over uzelf",
+      "bioDescription": "Korte beschrijving voor uw profiel. URL's worden gehyperlinkt.",
+      "bioTooLong": "Biografie moet minder dan 160 tekens bevatten",
+      "locationLabel": "Locatie",
+      "locationPlaceholder": "Uw locatie",
+      "locationTooLong": "Locatie moet minder dan 100 tekens bevatten",
+      "websiteLabel": "Website",
+      "websitePlaceholder": "https://uw-website.com",
+      "invalidUrl": "Voer een geldige URL in",
+      "saveChanges": "Wijzigingen Opslaan",
+      "saving": "Opslaan...",
+      "updateSuccess": "Profiel Bijgewerkt",
+      "profileUpdated": "Uw profiel is succesvol bijgewerkt",
+      "updateError": "Update Mislukt",
+      "errorOccurred": "Er is een fout opgetreden bij het bijwerken van uw profiel"
+    },
+    "activity": {
+      "title": "Recente Activiteit",
+      "description": "Bekijk uw recente interacties met inhoud",
+      "noActivity": "Geen recente activiteit gevonden",
+      "viewedContent": "U bekeek",
+      "bookmarkedContent": "U heeft gebookmarkt",
+      "likedContent": "U vond leuk",
+      "commentedContent": "U reageerde op"
+    }
+  },
+  "Bookmarks": {
+    "meta": {
+      "title": "Uw Bladwijzers",
+      "description": "Bekijk en beheer uw opgeslagen inhoud"
+    },
+    "title": "Uw Bladwijzers",
+    "description": "Inhoud die u voor later heeft opgeslagen",
+    "noBookmarks": "Nog geen bladwijzers",
+    "startBookmarking": "Begin met het bookmarken van inhoud om het hier te zien",
+    "exploreTutorials": "Verken Handleidingen",
+    "viewContent": "Bekijk Inhoud",
+    "remove": "Verwijderen",
+    "removed": "Bladwijzer Verwijderd",
+    "bookmarkRemoved": "De bladwijzer is uit uw verzameling verwijderd",
+    "error": "Fout",
+    "errorRemoving": "Er is een fout opgetreden bij het verwijderen van de bladwijzer"
+  },
+  "Settings": {
+    "meta": {
+      "title": "Accountinstellingen",
+      "description": "Beheer uw accountvoorkeuren en -instellingen"
+    },
+    "title": "Accountinstellingen",
+    "tabs": {
+      "general": "Algemeen",
+      "notifications": "Meldingen",
+      "account": "Account"
+    },
+    "general": {
+      "title": "Algemene Instellingen",
+      "description": "Beheer uw accountvoorkeuren",
+      "languageLabel": "Taal",
+      "selectLanguage": "Selecteer een taal",
+      "languageDescription": "De taal die op het hele platform wordt gebruikt",
+      "themeLabel": "Thema",
+      "selectTheme": "Selecteer een thema",
+      "lightTheme": "Licht",
+      "darkTheme": "Donker",
+      "systemTheme": "Systeem",
+      "themeDescription": "Stel het thema voor de gebruikersinterface in",
+      "autoplayVideosLabel": "Video's Automatisch Afspelen",
+      "autoplayVideosDescription": "Video's automatisch afspelen bij het bladeren door inhoud",
+      "showCodeLineNumbersLabel": "Regelnummers Code Weergeven",
+      "showCodeLineNumbersDescription": "Regelnummers weergeven in codefragmenten",
+      "saveChanges": "Wijzigingen Opslaan",
+      "saving": "Opslaan...",
+      "updateSuccess": "Instellingen Bijgewerkt",
+      "settingsUpdated": "Uw instellingen zijn succesvol bijgewerkt",
+      "updateError": "Update Mislukt",
+      "errorOccurred": "Er is een fout opgetreden bij het bijwerken van uw instellingen"
+    },
+    "notifications": {
+      "title": "Meldingsinstellingen",
+      "description": "Bepaal welke meldingen u ontvangt",
+      "emailNotificationsLabel": "E-mailmeldingen",
+      "emailNotificationsDescription": "Meldingen via e-mail ontvangen",
+      "newContentLabel": "Nieuwe Inhoud",
+      "newContentDescription": "Melden wanneer nieuwe inhoud wordt gepubliceerd",
+      "contentUpdatesLabel": "Inhoudsupdates",
+      "contentUpdatesDescription": "Melden wanneer inhoud die ik heb bekeken, wordt bijgewerkt",
+      "commentsLabel": "Opmerkingen",
+      "commentsDescription": "Melden over reacties op mijn opmerkingen",
+      "mentionsLabel": "Vermeldingen",
+      "mentionsDescription": "Melden wanneer ik word genoemd in opmerkingen",
+      "newsletterLabel": "Nieuwsbrief",
+      "newsletterDescription": "Ontvang onze wekelijkse nieuwsbrief met de laatste updates",
+      "saveChanges": "Wijzigingen Opslaan",
+      "saving": "Opslaan...",
+      "updateSuccess": "Meldingsinstellingen Bijgewerkt",
+      "settingsUpdated": "Uw meldingsinstellingen zijn succesvol bijgewerkt",
+      "updateError": "Update Mislukt",
+      "errorOccurred": "Er is een fout opgetreden bij het bijwerken van uw meldingsinstellingen"
+    },
+    "account": {
+      "exportDataTitle": "Uw Gegevens Exporteren",
+      "exportDataDescription": "Download een kopie van uw persoonlijke gegevens",
+      "exportData": "Gegevens Exporteren",
+      "exporting": "Exporteren...",
+      "exportSuccess": "Gegevens Geëxporteerd",
+      "dataExported": "Uw gegevens zijn succesvol geëxporteerd",
+      "exportError": "Export Mislukt",
+      "errorExporting": "Er is een fout opgetreden bij het exporteren van uw gegevens",
+      "signOutTitle": "Uitloggen",
+      "signOutDescription": "Log uit bij uw account",
+      "signOut": "Uitloggen",
+      "dangerZoneTitle": "Gevarenzone",
+      "dangerZoneDescription": "Verwijder uw account en al uw gegevens permanent",
+      "deleteAccountWarningTitle": "Waarschuwing: Deze actie kan niet ongedaan worden gemaakt",
+      "deleteAccountWarningDescription": "Zodra u uw account verwijdert, worden al uw gegevens permanent verwijderd. Deze actie kan niet ongedaan worden gemaakt.",
+      "deleteAccount": "Account Verwijderen",
+      "confirmDeleteTitle": "Weet u het absoluut zeker?",
+      "confirmDeleteDescription": "Deze actie kan niet ongedaan worden gemaakt. Hiermee wordt uw account permanent verwijderd en worden al uw gegevens van onze servers verwijderd.",
+      "typeEmailToConfirm": "Typ {email} om te bevestigen",
+      "emailLabel": "E-mail",
+      "cancel": "Annuleren",
+      "confirmDelete": "Mijn Account Verwijderen",
+      "deleting": "Verwijderen...",
+      "accountDeleted": "Account Verwijderd",
+      "accountDeletedDescription": "Uw account is succesvol verwijderd",
+      "deleteError": "Verwijderen Mislukt",
+      "errorDeleting": "Er is een fout opgetreden bij het verwijderen van uw account",
+      "emailMismatch": "E-mail komt niet overeen",
+      "emailMismatchDescription": "Het ingevoerde e-mailadres komt niet overeen met het e-mailadres van uw account"
+    }
+  },
+  "ContentCard": {
+    "readMore": "Lees meer",
+    "bookmark": "Bladwijzer",
+    "bookmarked": "Geboekmarkt",
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Gemiddeld",
+      "advanced": "Gevorderd"
+    }
   },
   "Footer": {
     "copyright": "© {year} Next.js Kennisbibliotheek. Alle rechten voorbehouden.",
     "privacy": "Privacybeleid",
     "terms": "Servicevoorwaarden",
-    "contact": "Contact"
+    "contact": "Neem contact op"
+  },
+  "languageSwitcher": {
+    "label": "Selecteer taal:"
+  },
+  "Navigation": {
+    "tutorials": "Handleidingen",
+    "snippets": "Snippets",
+    "aiPrompts": "AI-prompts",
+    "topics": "Onderwerpen",
+    "community": "Community",
+    "about": "Over",
+    "search": "Zoeken",
+    "bookmarks": "Bladwijzers",
+    "profile": "Profiel",
+    "settings": "Instellingen",
+    "signIn": "Inloggen",
+    "signUp": "Registreren",
+    "dashboard": "Dashboard",
+    "contribute": "Bijdragen",
+    "home": "Home"
+  },
+  "FeaturedContent": {
+    "title": "Uitgelichte Handleidingen",
+    "viewAll": "Bekijk alle handleidingen"
+  },
+  "Newsletter": {
+    "title": "Abonneer u op onze Nieuwsbrief",
+    "description": "Ontvang de nieuwste handleidingen, tips en updates rechtstreeks in uw inbox.",
+    "emailLabel": "E-mailadres",
+    "emailPlaceholder": "Voer uw e-mailadres in",
+    "subscribeButton": "Abonneren",
+    "subscribing": "Abonneren...",
+    "successTitle": "Bedankt voor uw abonnement!",
+    "successMessage": "U ontvangt nu onze laatste updates rechtstreeks in uw inbox.",
+    "errorTitle": "Abonnement mislukt",
+    "errorMessage": "Er is een fout opgetreden bij het abonneren op de nieuwsbrief. Probeer het opnieuw.",
+    "alreadySubscribed": "U bent al geabonneerd op onze nieuwsbrief.",
+    "emailRequired": "E-mailadres is verplicht.",
+    "invalidEmail": "Voer een geldig e-mailadres in.",
+    "privacyNotice": "Wij respecteren uw privacy. U kunt zich op elk moment afmelden."
+  },
+  "Search": {
+    "title": "Zoeken",
+    "placeholder": "Zoek naar handleidingen, snippets, onderwerpen...",
+    "noResults": "Geen resultaten gevonden.",
+    "tryAgain": "Probeer andere trefwoorden of blader door onze handleidingen.",
+    "searching": "Zoeken...",
+    "close": "Sluiten",
+    "tip": "Druk op Enter om te zoeken of op Escape om te sluiten",
+    "categories": {
+      "all": "Alle",
+      "tutorials": "Handleidingen",
+      "snippets": "Snippets",
+      "topics": "Onderwerpen"
+    }
   },
   "UserNav": {
     "profile": "Profiel",
-    "bookmarks": "Bladwijzers",
     "settings": "Instellingen",
+    "bookmarks": "Bladwijzers",
     "signOut": "Uitloggen"
   },
-  "FeaturedContent": {
-    "title": "Uitgelichte Content",
-    "viewAll": "Alles Bekijken"
-  },
-  "ContentCard": {
-    "readMore": "Meer Lezen"
-  },
-  "ContentMatrix": {
-    "title": "Contentmatrix",
-    "topic": "Onderwerp",
-    "all": "Alle",
-    "available": "Beschikbaar",
-    "inProgress": "In Uitvoering",
-    "notAvailable": "Niet Beschikbaar",
-    "content": "Content"
+  "BookmarkButton": {
+    "bookmark": "Bladwijzer",
+    "bookmarked": "Geboekmarkt",
+    "signInToBookmark": "Log in om te bookmarken",
+    "addedToBookmarks": "Toegevoegd aan bladwijzers",
+    "removedFromBookmarks": "Verwijderd uit bladwijzers",
+    "itemAddedDescription": "Dit item is toegevoegd aan uw bladwijzers.",
+    "itemRemovedDescription": "Dit item is verwijderd uit uw bladwijzers.",
+    "error": "Fout",
+    "errorDescription": "Kan bladwijzerstatus niet bijwerken."
   }
 }

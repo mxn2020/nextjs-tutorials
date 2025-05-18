@@ -198,6 +198,9 @@
     "terms": "Terms of Service",
     "contact": "Contact Us"
   },
+  "languageSwitcher": {
+    "label": "Select language:"
+  },
   "Navigation": {
     "tutorials": "Tutorials",
     "snippets": "Snippets",
@@ -266,5 +269,14 @@
     "itemRemovedDescription": "This item has been removed from your bookmarks.",
     "error": "Error",
     "errorDescription": "Failed to update bookmark status."
+  },
+  "Home": {
+    "title": "Welcome to the Next.js Knowledge Library",
+    "welcome": "Welcome to the Next.js Knowledge Library",
+    "description": "Explore tutorials, snippets, and resources to enhance your Next.js skills."
+  },
+  "Topics": {
+    "title": "Topics",
+    "description": "Browse all topics related to Next.js."
   }
 }

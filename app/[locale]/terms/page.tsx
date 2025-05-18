@@ -1,24 +1,33 @@
+import { getDictionary } from "@/lib/i18n/server"
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
 
 export async function generateMetadata({
   params: { locale },
 }: {
   params: { locale: string }
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "Terms" })
+  const dictionary = await getDictionary(locale)
+  const termsDictionary = dictionary.Terms || {
+    title: "Terms of Service",
+    description: "Read our terms of service to understand your rights and responsibilities.",
+  }
+
   return {
-    title: t("title"),
-    description: t("description"),
+    title: termsDictionary.title,
+    description: termsDictionary.description,
   }
 }
 
-export default async function TermsPage() {
-  const t = await getTranslations("Terms")
+export default async function TermsPage({ params }: { params: { locale: string } }) {
+  const dictionary = await getDictionary(params.locale)
+  const termsDictionary = dictionary.Terms || {
+    title: "Terms of Service",
+    description: "Read our terms of service to understand your rights and responsibilities.",
+  }
 
   return (
     <div className="container py-10">
-      <h1 className="text-4xl font-bold mb-6">{t("title")}</h1>
+      <h1 className="text-4xl font-bold mb-6">{termsDictionary.title}</h1>
       <div className="prose dark:prose-invert max-w-none">
         <p className="text-xl text-muted-foreground mb-10">Last Updated: May 18, 2024</p>
 

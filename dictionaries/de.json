@@ -1,0 +1,273 @@
+{
+  "Hero": {
+    "title": "Next.js-Tutorials & Ressourcen",
+    "description": "Umfassende Anleitungen und Tutorials zum Erlernen von Next.js",
+    "browseButton": "Tutorials durchsuchen",
+    "exploreButton": "Themen erkunden",
+    "contributeButton": "Beitragen",
+    "newsletterTitle": "Abonnieren Sie unseren Newsletter",
+    "newsletterDescription": "Erhalten Sie die neuesten Tutorials und Ressourcen direkt in Ihren Posteingang",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "subscribeButton": "Abonnieren",
+    "subscribedUsers": "Entwickler haben bereits abonniert",
+    "privacyNotice": "Mit dem Abonnieren stimmen Sie unserer",
+    "privacyLink": "Datenschutzrichtlinie zu"
+  },
+  "ContentMatrix": {
+    "all": "Alle",
+    "title": "Lernpfade",
+    "description": "Entdecken Sie unsere Tutorials nach Thema und Schwierigkeitsgrad",
+    "tabs": {
+      "all": "Alle Themen",
+      "beginner": "Anfänger",
+      "intermediate": "Mittelstufe",
+      "advanced": "Fortgeschritten"
+    },
+    "available": "Verfügbar",
+    "inProgress": "In Bearbeitung",
+    "notAvailable": "Nicht verfügbar",
+    "content": "Inhalt",
+    "topic": "Thema",
+    "explore": "Erkunden",
+    "comingSoon": "Demnächst verfügbar",
+    "noContent": "Für diese Auswahl ist kein Inhalt verfügbar"
+  },
+  "Profile": {
+    "meta": {
+      "title": "Ihr Profil",
+      "description": "Sehen und verwalten Sie Ihre Profilinformationen"
+    },
+    "editProfile": "Profil bearbeiten",
+    "noBio": "Noch keine Biografie angegeben",
+    "tabs": {
+      "profile": "Profil",
+      "activity": "Aktivität"
+    },
+    "profileForm": {
+      "title": "Profilinformationen",
+      "description": "Aktualisieren Sie Ihre persönlichen Informationen und wie andere Sie auf der Plattform sehen",
+      "nameLabel": "Name",
+      "namePlaceholder": "Ihr Name",
+      "nameDescription": "Dies ist Ihr öffentlicher Anzeigename",
+      "nameRequired": "Name muss mindestens 2 Zeichen lang sein",
+      "bioLabel": "Biografie",
+      "bioPlaceholder": "Erzählen Sie uns etwas über sich",
+      "bioDescription": "Kurze Beschreibung für Ihr Profil. URLs werden verlinkt.",
+      "bioTooLong": "Biografie darf höchstens 160 Zeichen lang sein",
+      "locationLabel": "Standort",
+      "locationPlaceholder": "Ihr Standort",
+      "locationTooLong": "Standort darf höchstens 100 Zeichen lang sein",
+      "websiteLabel": "Webseite",
+      "websitePlaceholder": "https://ihre-webseite.com",
+      "invalidUrl": "Bitte geben Sie eine gültige URL ein",
+      "saveChanges": "Änderungen speichern",
+      "saving": "Speichern...",
+      "updateSuccess": "Profil aktualisiert",
+      "profileUpdated": "Ihr Profil wurde erfolgreich aktualisiert",
+      "updateError": "Aktualisierung fehlgeschlagen",
+      "errorOccurred": "Beim Aktualisieren Ihres Profils ist ein Fehler aufgetreten"
+    },
+    "activity": {
+      "title": "Letzte Aktivität",
+      "description": "Sehen Sie Ihre letzten Interaktionen mit Inhalten",
+      "noActivity": "Keine kürzlichen Aktivitäten gefunden",
+      "viewedContent": "Sie haben angesehen",
+      "bookmarkedContent": "Sie haben mit Lesezeichen versehen",
+      "likedContent": "Ihnen gefiel",
+      "commentedContent": "Sie haben kommentiert"
+    }
+  },
+  "Bookmarks": {
+    "meta": {
+      "title": "Ihre Lesezeichen",
+      "description": "Gespeicherte Inhalte anzeigen und verwalten"
+    },
+    "title": "Ihre Lesezeichen",
+    "description": "Inhalte, die Sie für später gespeichert haben",
+    "noBookmarks": "Noch keine Lesezeichen",
+    "startBookmarking": "Beginnen Sie mit dem Setzen von Lesezeichen, um sie hier zu sehen",
+    "exploreTutorials": "Tutorials erkunden",
+    "viewContent": "Inhalt ansehen",
+    "remove": "Entfernen",
+    "removed": "Lesezeichen entfernt",
+    "bookmarkRemoved": "Das Lesezeichen wurde aus Ihrer Sammlung entfernt",
+    "error": "Fehler",
+    "errorRemoving": "Beim Entfernen des Lesezeichens ist ein Fehler aufgetreten"
+  },
+  "Settings": {
+    "meta": {
+      "title": "Kontoeinstellungen",
+      "description": "Verwalten Sie Ihre Kontoeinstellungen und Präferenzen"
+    },
+    "title": "Kontoeinstellungen",
+    "tabs": {
+      "general": "Allgemein",
+      "notifications": "Benachrichtigungen",
+      "account": "Konto"
+    },
+    "general": {
+      "title": "Allgemeine Einstellungen",
+      "description": "Verwalten Sie Ihre Kontopräferenzen",
+      "languageLabel": "Sprache",
+      "selectLanguage": "Wählen Sie eine Sprache",
+      "languageDescription": "Die auf der gesamten Plattform verwendete Sprache",
+      "themeLabel": "Thema",
+      "selectTheme": "Wählen Sie ein Thema",
+      "lightTheme": "Hell",
+      "darkTheme": "Dunkel",
+      "systemTheme": "System",
+      "themeDescription": "Legen Sie das Thema für die Benutzeroberfläche fest",
+      "autoplayVideosLabel": "Videos automatisch abspielen",
+      "autoplayVideosDescription": "Videos beim Durchsuchen von Inhalten automatisch abspielen",
+      "showCodeLineNumbersLabel": "Codezeilennummern anzeigen",
+      "showCodeLineNumbersDescription": "Zeilennummern in Codeausschnitten anzeigen",
+      "saveChanges": "Änderungen speichern",
+      "saving": "Speichern...",
+      "updateSuccess": "Einstellungen aktualisiert",
+      "settingsUpdated": "Ihre Einstellungen wurden erfolgreich aktualisiert",
+      "updateError": "Aktualisierung fehlgeschlagen",
+      "errorOccurred": "Beim Aktualisieren Ihrer Einstellungen ist ein Fehler aufgetreten"
+    },
+    "notifications": {
+      "title": "Benachrichtigungseinstellungen",
+      "description": "Steuern Sie, welche Benachrichtigungen Sie erhalten",
+      "emailNotificationsLabel": "E-Mail-Benachrichtigungen",
+      "emailNotificationsDescription": "Benachrichtigungen per E-Mail erhalten",
+      "newContentLabel": "Neuer Inhalt",
+      "newContentDescription": "Benachrichtigen, wenn neue Inhalte veröffentlicht werden",
+      "contentUpdatesLabel": "Inhaltsaktualisierungen",
+      "contentUpdatesDescription": "Benachrichtigen, wenn von mir angesehene Inhalte aktualisiert werden",
+      "commentsLabel": "Kommentare",
+      "commentsDescription": "Benachrichtigen über Antworten auf meine Kommentare",
+      "mentionsLabel": "Erwähnungen",
+      "mentionsDescription": "Benachrichtigen, wenn ich in Kommentaren erwähnt werde",
+      "newsletterLabel": "Newsletter",
+      "newsletterDescription": "Erhalten Sie unseren wöchentlichen Newsletter mit den neuesten Updates",
+      "saveChanges": "Änderungen speichern",
+      "saving": "Speichern...",
+      "updateSuccess": "Benachrichtigungseinstellungen aktualisiert",
+      "settingsUpdated": "Ihre Benachrichtigungseinstellungen wurden erfolgreich aktualisiert",
+      "updateError": "Aktualisierung fehlgeschlagen",
+      "errorOccurred": "Beim Aktualisieren Ihrer Benachrichtigungseinstellungen ist ein Fehler aufgetreten"
+    },
+    "account": {
+      "exportDataTitle": "Ihre Daten exportieren",
+      "exportDataDescription": "Laden Sie eine Kopie Ihrer persönlichen Daten herunter",
+      "exportData": "Daten exportieren",
+      "exporting": "Exportieren...",
+      "exportSuccess": "Daten exportiert",
+      "dataExported": "Ihre Daten wurden erfolgreich exportiert",
+      "exportError": "Export fehlgeschlagen",
+      "errorExporting": "Beim Exportieren Ihrer Daten ist ein Fehler aufgetreten",
+      "signOutTitle": "Abmelden",
+      "signOutDescription": "Melden Sie sich von Ihrem Konto ab",
+      "signOut": "Abmelden",
+      "dangerZoneTitle": "Gefahrenzone",
+      "dangerZoneDescription": "Löschen Sie Ihr Konto und alle Ihre Daten dauerhaft",
+      "deleteAccountWarningTitle": "Warnung: Diese Aktion kann nicht rückgängig gemacht werden",
+      "deleteAccountWarningDescription": "Sobald Sie Ihr Konto löschen, werden alle Ihre Daten dauerhaft entfernt. Diese Aktion kann nicht rückgängig gemacht werden.",
+      "deleteAccount": "Konto löschen",
+      "confirmDeleteTitle": "Sind Sie absolut sicher?",
+      "confirmDeleteDescription": "Diese Aktion kann nicht rückgängig gemacht werden. Dadurch wird Ihr Konto dauerhaft gelöscht und alle Ihre Daten von unseren Servern entfernt.",
+      "typeEmailToConfirm": "Bitte geben Sie {email} ein, um zu bestätigen",
+      "emailLabel": "E-Mail",
+      "cancel": "Abbrechen",
+      "confirmDelete": "Mein Konto löschen",
+      "deleting": "Löschen...",
+      "accountDeleted": "Konto gelöscht",
+      "accountDeletedDescription": "Ihr Konto wurde erfolgreich gelöscht",
+      "deleteError": "Löschen fehlgeschlagen",
+      "errorDeleting": "Beim Löschen Ihres Kontos ist ein Fehler aufgetreten",
+      "emailMismatch": "E-Mail stimmt nicht überein",
+      "emailMismatchDescription": "Die eingegebene E-Mail-Adresse stimmt nicht mit Ihrer Konto-E-Mail-Adresse überein"
+    }
+  },
+  "ContentCard": {
+    "readMore": "Weiterlesen",
+    "bookmark": "Lesezeichen setzen",
+    "bookmarked": "Lesezeichen gesetzt",
+    "difficulty": {
+      "beginner": "Anfänger",
+      "intermediate": "Mittelstufe",
+      "advanced": "Fortgeschritten"
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} Next.js Wissensbibliothek. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutzrichtlinie",
+    "terms": "Nutzungsbedingungen",
+    "contact": "Kontaktieren Sie uns"
+  },
+  "languageSwitcher": {
+    "label": "Sprache auswählen:"
+  },
+  "Navigation": {
+    "tutorials": "Tutorials",
+    "snippets": "Snippets",
+    "aiPrompts": "KI-Prompts",
+    "topics": "Themen",
+    "community": "Community",
+    "about": "Über uns",
+    "search": "Suchen",
+    "bookmarks": "Lesezeichen",
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "signIn": "Anmelden",
+    "signUp": "Registrieren",
+    "dashboard": "Dashboard",
+    "contribute": "Beitragen",
+    "home": "Startseite"
+  },
+  "FeaturedContent": {
+    "title": "Empfohlene Tutorials",
+    "viewAll": "Alle Tutorials ansehen"
+  },
+  "Newsletter": {
+    "title": "Abonnieren Sie unseren Newsletter",
+    "description": "Erhalten Sie die neuesten Tutorials, Tipps und Updates direkt in Ihren Posteingang.",
+    "emailLabel": "E-Mail-Adresse",
+    "emailPlaceholder": "Geben Sie Ihre E-Mail-Adresse ein",
+    "subscribeButton": "Abonnieren",
+    "subscribing": "Abonnieren...",
+    "successTitle": "Vielen Dank für Ihr Abonnement!",
+    "successMessage": "Sie erhalten nun unsere neuesten Updates direkt in Ihren Posteingang.",
+    "errorTitle": "Abonnement fehlgeschlagen",
+    "errorMessage": "Beim Abonnieren des Newsletters ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "alreadySubscribed": "Sie haben unseren Newsletter bereits abonniert.",
+    "emailRequired": "E-Mail-Adresse ist erforderlich.",
+    "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+    "privacyNotice": "Wir respektieren Ihre Privatsphäre. Jederzeit abbestellbar."
+  },
+  "Search": {
+    "title": "Suchen",
+    "placeholder": "Suchen Sie nach Tutorials, Snippets, Themen...",
+    "noResults": "Keine Ergebnisse gefunden.",
+    "tryAgain": "Versuchen Sie andere Schlüsselwörter oder durchsuchen Sie unsere Tutorials.",
+    "searching": "Suchen...",
+    "close": "Schließen",
+    "tip": "Drücken Sie die Eingabetaste zum Suchen oder Escape zum Schließen",
+    "categories": {
+      "all": "Alle",
+      "tutorials": "Tutorials",
+      "snippets": "Snippets",
+      "topics": "Themen"
+    }
+  },
+  "UserNav": {
+    "profile": "Profil",
+    "settings": "Einstellungen",
+    "bookmarks": "Lesezeichen",
+    "signOut": "Abmelden"
+  },
+  "BookmarkButton": {
+    "bookmark": "Lesezeichen setzen",
+    "bookmarked": "Lesezeichen gesetzt",
+    "signInToBookmark": "Zum Lesezeichen setzen anmelden",
+    "addedToBookmarks": "Zu Lesezeichen hinzugefügt",
+    "removedFromBookmarks": "Aus Lesezeichen entfernt",
+    "itemAddedDescription": "Dieser Artikel wurde Ihren Lesezeichen hinzugefügt.",
+    "itemRemovedDescription": "Dieser Artikel wurde aus Ihren Lesezeichen entfernt.",
+    "error": "Fehler",
+    "errorDescription": "Fehler beim Aktualisieren des Lesezeichenstatus."
+  }
+}

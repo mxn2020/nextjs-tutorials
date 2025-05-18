@@ -1,54 +1,273 @@
 {
   "Hero": {
-    "title": "Biblioteca de Conhecimento Next.js",
-    "description": "Uma plataforma de aprendizado multilíngue de Next.js com integração de IA e colaboração da comunidade",
-    "browseButton": "Explorar Tutoriais",
+    "title": "Tutoriais e Recursos Next.js",
+    "description": "Guias e tutoriais abrangentes para aprender Next.js",
+    "browseButton": "Procurar Tutoriais",
+    "exploreButton": "Explorar Tópicos",
     "contributeButton": "Contribuir",
-    "newsletterTitle": "Mantenha-se Atualizado",
-    "newsletterDescription": "Inscreva-se em nossa newsletter para receber os últimos tutoriais e atualizações",
+    "newsletterTitle": "Subscreva a nossa Newsletter",
+    "newsletterDescription": "Receba os tutoriais e recursos mais recentes diretamente na sua caixa de entrada",
     "emailPlaceholder": "Digite seu email",
-    "subscribeButton": "Inscrever-se",
-    "privacyNotice": "Ao se inscrever, você concorda com nossa",
+    "subscribeButton": "Subscrever",
+    "subscribedUsers": "Desenvolvedores já subscreveram",
+    "privacyNotice": "Ao subscrever, concorda com a nossa",
     "privacyLink": "Política de Privacidade"
   },
-  "Navigation": {
-    "home": "Início",
-    "tutorials": "Tutoriais",
-    "topics": "Tópicos",
-    "aiPrompts": "Prompts de IA",
-    "snippets": "Snippets",
-    "community": "Comunidade",
-    "contribute": "Contribuir",
-    "about": "Sobre",
-    "signIn": "Entrar",
-    "signOut": "Sair"
+  "ContentMatrix": {
+    "all": "Todos",
+    "title": "Percursos de Aprendizagem",
+    "description": "Explore os nossos tutoriais por tópico e nível de dificuldade",
+    "tabs": {
+      "all": "Todos os Tópicos",
+      "beginner": "Iniciante",
+      "intermediate": "Intermédio",
+      "advanced": "Avançado"
+    },
+    "available": "Disponível",
+    "inProgress": "Em Progresso",
+    "notAvailable": "Não Disponível",
+    "content": "Conteúdo",
+    "topic": "Tópico",
+    "explore": "Explorar",
+    "comingSoon": "Em Breve",
+    "noContent": "Nenhum conteúdo disponível para esta seleção"
+  },
+  "Profile": {
+    "meta": {
+      "title": "O Seu Perfil",
+      "description": "Veja e gira as informações do seu perfil"
+    },
+    "editProfile": "Editar Perfil",
+    "noBio": "Nenhuma biografia fornecida ainda",
+    "tabs": {
+      "profile": "Perfil",
+      "activity": "Atividade"
+    },
+    "profileForm": {
+      "title": "Informações do Perfil",
+      "description": "Atualize as suas informações pessoais e como os outros o veem na plataforma",
+      "nameLabel": "Nome",
+      "namePlaceholder": "O seu nome",
+      "nameDescription": "Este é o seu nome de exibição público",
+      "nameRequired": "O nome deve ter pelo menos 2 caracteres",
+      "bioLabel": "Biografia",
+      "bioPlaceholder": "Conte-nos um pouco sobre si",
+      "bioDescription": "Breve descrição para o seu perfil. URLs são hiperligados.",
+      "bioTooLong": "A biografia deve ter menos de 160 caracteres",
+      "locationLabel": "Localização",
+      "locationPlaceholder": "A sua localização",
+      "locationTooLong": "A localização deve ter menos de 100 caracteres",
+      "websiteLabel": "Website",
+      "websitePlaceholder": "https://o-seu-website.com",
+      "invalidUrl": "Por favor, insira um URL válido",
+      "saveChanges": "Guardar Alterações",
+      "saving": "A guardar...",
+      "updateSuccess": "Perfil Atualizado",
+      "profileUpdated": "O seu perfil foi atualizado com sucesso",
+      "updateError": "Falha na Atualização",
+      "errorOccurred": "Ocorreu um erro ao atualizar o seu perfil"
+    },
+    "activity": {
+      "title": "Atividade Recente",
+      "description": "Veja as suas interações recentes com o conteúdo",
+      "noActivity": "Nenhuma atividade recente encontrada",
+      "viewedContent": "Você visualizou",
+      "bookmarkedContent": "Você marcou como favorito",
+      "likedContent": "Você gostou de",
+      "commentedContent": "Você comentou em"
+    }
+  },
+  "Bookmarks": {
+    "meta": {
+      "title": "Os Seus Favoritos",
+      "description": "Veja e gira o seu conteúdo guardado"
+    },
+    "title": "Os Seus Favoritos",
+    "description": "Conteúdo que guardou para mais tarde",
+    "noBookmarks": "Ainda não há favoritos",
+    "startBookmarking": "Comece a marcar conteúdo como favorito para o ver aqui",
+    "exploreTutorials": "Explorar Tutoriais",
+    "viewContent": "Ver Conteúdo",
+    "remove": "Remover",
+    "removed": "Favorito Removido",
+    "bookmarkRemoved": "O favorito foi removido da sua coleção",
+    "error": "Erro",
+    "errorRemoving": "Ocorreu um erro ao remover o favorito"
+  },
+  "Settings": {
+    "meta": {
+      "title": "Configurações da Conta",
+      "description": "Gira as preferências e configurações da sua conta"
+    },
+    "title": "Configurações da Conta",
+    "tabs": {
+      "general": "Geral",
+      "notifications": "Notificações",
+      "account": "Conta"
+    },
+    "general": {
+      "title": "Configurações Gerais",
+      "description": "Gira as preferências da sua conta",
+      "languageLabel": "Idioma",
+      "selectLanguage": "Selecione um idioma",
+      "languageDescription": "O idioma usado em toda a plataforma",
+      "themeLabel": "Tema",
+      "selectTheme": "Selecione um tema",
+      "lightTheme": "Claro",
+      "darkTheme": "Escuro",
+      "systemTheme": "Sistema",
+      "themeDescription": "Defina o tema para a interface do utilizador",
+      "autoplayVideosLabel": "Reprodução Automática de Vídeos",
+      "autoplayVideosDescription": "Reproduzir vídeos automaticamente ao navegar pelo conteúdo",
+      "showCodeLineNumbersLabel": "Mostrar Números de Linha de Código",
+      "showCodeLineNumbersDescription": "Exibir números de linha em trechos de código",
+      "saveChanges": "Guardar Alterações",
+      "saving": "A guardar...",
+      "updateSuccess": "Configurações Atualizadas",
+      "settingsUpdated": "As suas configurações foram atualizadas com sucesso",
+      "updateError": "Falha na Atualização",
+      "errorOccurred": "Ocorreu um erro ao atualizar as suas configurações"
+    },
+    "notifications": {
+      "title": "Configurações de Notificação",
+      "description": "Controle quais notificações recebe",
+      "emailNotificationsLabel": "Notificações por Email",
+      "emailNotificationsDescription": "Receber notificações por email",
+      "newContentLabel": "Novo Conteúdo",
+      "newContentDescription": "Notificar-me quando novo conteúdo for publicado",
+      "contentUpdatesLabel": "Atualizações de Conteúdo",
+      "contentUpdatesDescription": "Notificar-me quando o conteúdo que visualizei for atualizado",
+      "commentsLabel": "Comentários",
+      "commentsDescription": "Notificar-me sobre respostas aos meus comentários",
+      "mentionsLabel": "Menções",
+      "mentionsDescription": "Notificar-me quando for mencionado em comentários",
+      "newsletterLabel": "Newsletter",
+      "newsletterDescription": "Receba a nossa newsletter semanal com as últimas atualizações",
+      "saveChanges": "Guardar Alterações",
+      "saving": "A guardar...",
+      "updateSuccess": "Configurações de Notificação Atualizadas",
+      "settingsUpdated": "As suas configurações de notificação foram atualizadas com sucesso",
+      "updateError": "Falha na Atualização",
+      "errorOccurred": "Ocorreu um erro ao atualizar as suas configurações de notificação"
+    },
+    "account": {
+      "exportDataTitle": "Exportar os Seus Dados",
+      "exportDataDescription": "Descarregue uma cópia dos seus dados pessoais",
+      "exportData": "Exportar Dados",
+      "exporting": "A exportar...",
+      "exportSuccess": "Dados Exportados",
+      "dataExported": "Os seus dados foram exportados com sucesso",
+      "exportError": "Falha na Exportação",
+      "errorExporting": "Ocorreu um erro ao exportar os seus dados",
+      "signOutTitle": "Terminar Sessão",
+      "signOutDescription": "Termine a sessão da sua conta",
+      "signOut": "Terminar Sessão",
+      "dangerZoneTitle": "Zona de Perigo",
+      "dangerZoneDescription": "Elimine permanentemente a sua conta e todos os seus dados",
+      "deleteAccountWarningTitle": "Aviso: Esta ação não pode ser desfeita",
+      "deleteAccountWarningDescription": "Depois de eliminar a sua conta, todos os seus dados serão removidos permanentemente. Esta ação não pode ser desfeita.",
+      "deleteAccount": "Eliminar Conta",
+      "confirmDeleteTitle": "Tem a certeza absoluta?",
+      "confirmDeleteDescription": "Esta ação não pode ser desfeita. Isto eliminará permanentemente a sua conta e removerá todos os seus dados dos nossos servidores.",
+      "typeEmailToConfirm": "Por favor, digite {email} para confirmar",
+      "emailLabel": "Email",
+      "cancel": "Cancelar",
+      "confirmDelete": "Eliminar a Minha Conta",
+      "deleting": "A eliminar...",
+      "accountDeleted": "Conta Eliminada",
+      "accountDeletedDescription": "A sua conta foi eliminada com sucesso",
+      "deleteError": "Falha na Eliminação",
+      "errorDeleting": "Ocorreu um erro ao eliminar a sua conta",
+      "emailMismatch": "Email Incompatível",
+      "emailMismatchDescription": "O email que inseriu não corresponde ao email da sua conta"
+    }
+  },
+  "ContentCard": {
+    "readMore": "Ler mais",
+    "bookmark": "Favorito",
+    "bookmarked": "Guardado",
+    "difficulty": {
+      "beginner": "Iniciante",
+      "intermediate": "Intermédio",
+      "advanced": "Avançado"
+    }
   },
   "Footer": {
     "copyright": "© {year} Biblioteca de Conhecimento Next.js. Todos os direitos reservados.",
     "privacy": "Política de Privacidade",
     "terms": "Termos de Serviço",
-    "contact": "Contato"
+    "contact": "Contacte-nos"
+  },
+  "languageSwitcher": {
+    "label": "Selecionar idioma:"
+  },
+  "Navigation": {
+    "tutorials": "Tutoriais",
+    "snippets": "Snippets",
+    "aiPrompts": "Prompts de IA",
+    "topics": "Tópicos",
+    "community": "Comunidade",
+    "about": "Sobre",
+    "search": "Pesquisar",
+    "bookmarks": "Favoritos",
+    "profile": "Perfil",
+    "settings": "Configurações",
+    "signIn": "Iniciar Sessão",
+    "signUp": "Registar",
+    "dashboard": "Painel de Controlo",
+    "contribute": "Contribuir",
+    "home": "Início"
+  },
+  "FeaturedContent": {
+    "title": "Tutoriais em Destaque",
+    "viewAll": "Ver todos os tutoriais"
+  },
+  "Newsletter": {
+    "title": "Subscreva a nossa Newsletter",
+    "description": "Receba os tutoriais, dicas e atualizações mais recentes diretamente na sua caixa de entrada.",
+    "emailLabel": "Endereço de email",
+    "emailPlaceholder": "Digite seu email",
+    "subscribeButton": "Subscrever",
+    "subscribing": "A subscrever...",
+    "successTitle": "Obrigado por subscrever!",
+    "successMessage": "Receberá agora as nossas últimas atualizações diretamente na sua caixa de entrada.",
+    "errorTitle": "Falha na subscrição",
+    "errorMessage": "Ocorreu um erro ao subscrever a newsletter. Por favor, tente novamente.",
+    "alreadySubscribed": "Já está subscrito na nossa newsletter.",
+    "emailRequired": "O endereço de email é obrigatório.",
+    "invalidEmail": "Por favor, insira um endereço de email válido.",
+    "privacyNotice": "Respeitamos a sua privacidade. Cancele a subscrição a qualquer momento."
+  },
+  "Search": {
+    "title": "Pesquisar",
+    "placeholder": "Pesquisar tutoriais, snippets, tópicos...",
+    "noResults": "Nenhum resultado encontrado.",
+    "tryAgain": "Tente palavras-chave diferentes ou navegue nos nossos tutoriais.",
+    "searching": "A pesquisar...",
+    "close": "Fechar",
+    "tip": "Pressione Enter para pesquisar ou Escape para fechar",
+    "categories": {
+      "all": "Todos",
+      "tutorials": "Tutoriais",
+      "snippets": "Snippets",
+      "topics": "Tópicos"
+    }
   },
   "UserNav": {
     "profile": "Perfil",
-    "bookmarks": "Favoritos",
     "settings": "Configurações",
-    "signOut": "Sair"
+    "bookmarks": "Favoritos",
+    "signOut": "Terminar Sessão"
   },
-  "FeaturedContent": {
-    "title": "Conteúdo em Destaque",
-    "viewAll": "Ver Todos"
-  },
-  "ContentCard": {
-    "readMore": "Leia Mais"
-  },
-  "ContentMatrix": {
-    "title": "Matriz de Conteúdo",
-    "topic": "Tópico",
-    "all": "Todos",
-    "available": "Disponível",
-    "inProgress": "Em Progresso",
-    "notAvailable": "Não Disponível",
-    "content": "Conteúdo"
+  "BookmarkButton": {
+    "bookmark": "Favorito",
+    "bookmarked": "Guardado",
+    "signInToBookmark": "Inicie sessão para adicionar aos favoritos",
+    "addedToBookmarks": "Adicionado aos favoritos",
+    "removedFromBookmarks": "Removido dos favoritos",
+    "itemAddedDescription": "Este item foi adicionado aos seus favoritos.",
+    "itemRemovedDescription": "Este item foi removido dos seus favoritos.",
+    "error": "Erro",
+    "errorDescription": "Falha ao atualizar o estado do favorito."
   }
 }

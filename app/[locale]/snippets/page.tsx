@@ -1,25 +1,35 @@
+import { getDictionary } from "@/lib/i18n/server"
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
+
 
 export async function generateMetadata({
   params: { locale },
 }: {
   params: { locale: string }
 }): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "Snippets" })
+  const dictionary = await getDictionary(locale)
+  const termsDictionary = dictionary.Snippets || {
+    title: "Snippets",
+    description: "Explore our collection of code snippets and examples.",
+  }
+
   return {
-    title: t("title"),
-    description: t("description"),
+    title: termsDictionary.title,
+    description: termsDictionary.description,
   }
 }
 
-export default async function SnippetsPage() {
-  const t = await getTranslations("Snippets")
+export default async function SnippetsPage({ params }: { params: { locale: string } }) {
+  const dictionary = await getDictionary(params.locale)
+  const termsDictionary = dictionary.Snippets || {
+    title: "Snippets",
+    description: "Explore our collection of code snippets and examples.",
+  }
 
   return (
     <div className="container py-10">
-      <h1 className="text-4xl font-bold mb-6">{t("title")}</h1>
-      <p className="text-xl text-muted-foreground mb-10">{t("description")}</p>
+      <h1 className="text-4xl font-bold mb-6">{termsDictionary.title}</h1>
+      <p className="text-xl text-muted-foreground mb-10">{termsDictionary.description}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="border rounded-lg p-6 bg-card">

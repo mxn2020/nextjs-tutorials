@@ -1,0 +1,273 @@
+{
+  "Hero": {
+    "title": "Next.js チュートリアルとリソース",
+    "description": "Next.js を学ぶための包括的なガイドとチュートリアル",
+    "browseButton": "チュートリアルを閲覧",
+    "exploreButton": "トピックを探索",
+    "contributeButton": "貢献する",
+    "newsletterTitle": "ニュースレターを購読する",
+    "newsletterDescription": "最新のチュートリアルとリソースをあなたの受信箱に直接お届けします",
+    "emailPlaceholder": "メールアドレスを入力してください",
+    "subscribeButton": "購読する",
+    "subscribedUsers": "人の開発者が既に購読しています",
+    "privacyNotice": "購読することにより、あなたは私たちの",
+    "privacyLink": "プライバシーポリシーに同意したことになります"
+  },
+  "ContentMatrix": {
+    "all": "すべて",
+    "title": "学習パス",
+    "description": "トピックと難易度別にチュートリアルを探索する",
+    "tabs": {
+      "all": "すべてのトピック",
+      "beginner": "初心者",
+      "intermediate": "中級者",
+      "advanced": "上級者"
+    },
+    "available": "利用可能",
+    "inProgress": "進行中",
+    "notAvailable": "利用不可",
+    "content": "コンテンツ",
+    "topic": "トピック",
+    "explore": "探索する",
+    "comingSoon": "近日公開",
+    "noContent": "この選択には利用可能なコンテンツがありません"
+  },
+  "Profile": {
+    "meta": {
+      "title": "あなたのプロフィール",
+      "description": "プロフィール情報を表示および管理します"
+    },
+    "editProfile": "プロフィールを編集",
+    "noBio": "自己紹介はまだ提供されていません",
+    "tabs": {
+      "profile": "プロフィール",
+      "activity": "アクティビティ"
+    },
+    "profileForm": {
+      "title": "プロフィール情報",
+      "description": "個人情報を更新し、プラットフォーム上で他の人にどのように表示されるかを変更します",
+      "nameLabel": "名前",
+      "namePlaceholder": "あなたの名前",
+      "nameDescription": "これはあなたの公開表示名です",
+      "nameRequired": "名前は2文字以上である必要があります",
+      "bioLabel": "自己紹介",
+      "bioPlaceholder": "あなた自身について少し教えてください",
+      "bioDescription": "プロフィールの簡単な説明。URLはハイパーリンクされます。",
+      "bioTooLong": "自己紹介は160文字未満である必要があります",
+      "locationLabel": "場所",
+      "locationPlaceholder": "あなたの場所",
+      "locationTooLong": "場所は100文字未満である必要があります",
+      "websiteLabel": "ウェブサイト",
+      "websitePlaceholder": "https://your-website.com",
+      "invalidUrl": "有効なURLを入力してください",
+      "saveChanges": "変更を保存",
+      "saving": "保存中...",
+      "updateSuccess": "プロフィールが更新されました",
+      "profileUpdated": "あなたのプロフィールは正常に更新されました",
+      "updateError": "更新に失敗しました",
+      "errorOccurred": "プロフィールの更新中にエラーが発生しました"
+    },
+    "activity": {
+      "title": "最近のアクティビティ",
+      "description": "コンテンツとの最近のやり取りを表示します",
+      "noActivity": "最近のアクティビティは見つかりませんでした",
+      "viewedContent": "あなたが閲覧しました",
+      "bookmarkedContent": "あなたがブックマークしました",
+      "likedContent": "あなたが「いいね！」しました",
+      "commentedContent": "あなたがコメントしました"
+    }
+  },
+  "Bookmarks": {
+    "meta": {
+      "title": "あなたのブックマーク",
+      "description": "保存したコンテンツを表示および管理します"
+    },
+    "title": "あなたのブックマーク",
+    "description": "後で見るために保存したコンテンツ",
+    "noBookmarks": "まだブックマークはありません",
+    "startBookmarking": "コンテンツをブックマークして、ここに表示します",
+    "exploreTutorials": "チュートリアルを探索",
+    "viewContent": "コンテンツを表示",
+    "remove": "削除",
+    "removed": "ブックマークを削除しました",
+    "bookmarkRemoved": "ブックマークがコレクションから削除されました",
+    "error": "エラー",
+    "errorRemoving": "ブックマークの削除中にエラーが発生しました"
+  },
+  "Settings": {
+    "meta": {
+      "title": "アカウント設定",
+      "description": "アカウントの環境設定と設定を管理します"
+    },
+    "title": "アカウント設定",
+    "tabs": {
+      "general": "一般",
+      "notifications": "通知",
+      "account": "アカウント"
+    },
+    "general": {
+      "title": "一般設定",
+      "description": "アカウントの環境設定を管理します",
+      "languageLabel": "言語",
+      "selectLanguage": "言語を選択してください",
+      "languageDescription": "プラットフォーム全体で使用される言語",
+      "themeLabel": "テーマ",
+      "selectTheme": "テーマを選択してください",
+      "lightTheme": "ライト",
+      "darkTheme": "ダーク",
+      "systemTheme": "システム",
+      "themeDescription": "ユーザーインターフェースのテーマを設定します",
+      "autoplayVideosLabel": "ビデオの自動再生",
+      "autoplayVideosDescription": "コンテンツ閲覧時にビデオを自動的に再生します",
+      "showCodeLineNumbersLabel": "コード行番号を表示",
+      "showCodeLineNumbersDescription": "コードスニペットに行番号を表示します",
+      "saveChanges": "変更を保存",
+      "saving": "保存中...",
+      "updateSuccess": "設定が更新されました",
+      "settingsUpdated": "設定は正常に更新されました",
+      "updateError": "更新に失敗しました",
+      "errorOccurred": "設定の更新中にエラーが発生しました"
+    },
+    "notifications": {
+      "title": "通知設定",
+      "description": "受信する通知を制御します",
+      "emailNotificationsLabel": "メール通知",
+      "emailNotificationsDescription": "メールで通知を受信します",
+      "newContentLabel": "新しいコンテンツ",
+      "newContentDescription": "新しいコンテンツが公開されたときに通知します",
+      "contentUpdatesLabel": "コンテンツの更新",
+      "contentUpdatesDescription": "閲覧したコンテンツが更新されたときに通知します",
+      "commentsLabel": "コメント",
+      "commentsDescription": "自分のコメントへの返信について通知します",
+      "mentionsLabel": "メンション",
+      "mentionsDescription": "コメントでメンションされたときに通知します",
+      "newsletterLabel": "ニュースレター",
+      "newsletterDescription": "最新情報を含む週刊ニュースレターを受信します",
+      "saveChanges": "変更を保存",
+      "saving": "保存中...",
+      "updateSuccess": "通知設定が更新されました",
+      "settingsUpdated": "通知設定は正常に更新されました",
+      "updateError": "更新に失敗しました",
+      "errorOccurred": "通知設定の更新中にエラーが発生しました"
+    },
+    "account": {
+      "exportDataTitle": "データをエクスポート",
+      "exportDataDescription": "個人データのコピーをダウンロードします",
+      "exportData": "データをエクスポート",
+      "exporting": "エクスポート中...",
+      "exportSuccess": "データがエクスポートされました",
+      "dataExported": "データは正常にエクスポートされました",
+      "exportError": "エクスポートに失敗しました",
+      "errorExporting": "データのエクスポート中にエラーが発生しました",
+      "signOutTitle": "サインアウト",
+      "signOutDescription": "アカウントからサインアウトします",
+      "signOut": "サインアウト",
+      "dangerZoneTitle": "危険ゾーン",
+      "dangerZoneDescription": "アカウントとすべてのデータを完全に削除します",
+      "deleteAccountWarningTitle": "警告：この操作は元に戻せません",
+      "deleteAccountWarningDescription": "アカウントを削除すると、すべてのデータが完全に削除されます。この操作は元に戻せません。",
+      "deleteAccount": "アカウントを削除",
+      "confirmDeleteTitle": "本当に実行しますか？",
+      "confirmDeleteDescription": "この操作は元に戻せません。これにより、アカウントが完全に削除され、すべてのデータがサーバーから削除されます。",
+      "typeEmailToConfirm": "確認のため {email} と入力してください",
+      "emailLabel": "メールアドレス",
+      "cancel": "キャンセル",
+      "confirmDelete": "マイアカウントを削除",
+      "deleting": "削除中...",
+      "accountDeleted": "アカウントが削除されました",
+      "accountDeletedDescription": "アカウントは正常に削除されました",
+      "deleteError": "削除に失敗しました",
+      "errorDeleting": "アカウントの削除中にエラーが発生しました",
+      "emailMismatch": "メールアドレスの不一致",
+      "emailMismatchDescription": "入力されたメールアドレスがアカウントのメールアドレスと一致しません"
+    }
+  },
+  "ContentCard": {
+    "readMore": "続きを読む",
+    "bookmark": "ブックマーク",
+    "bookmarked": "ブックマーク済み",
+    "difficulty": {
+      "beginner": "初心者",
+      "intermediate": "中級者",
+      "advanced": "上級者"
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} Next.js ナレッジライブラリ. All rights reserved.",
+    "privacy": "プライバシーポリシー",
+    "terms": "利用規約",
+    "contact": "お問い合わせ"
+  },
+  "languageSwitcher": {
+    "label": "言語を選択:"
+  },
+  "Navigation": {
+    "tutorials": "チュートリアル",
+    "snippets": "スニペット",
+    "aiPrompts": "AI プロンプト",
+    "topics": "トピック",
+    "community": "コミュニティ",
+    "about": "概要",
+    "search": "検索",
+    "bookmarks": "ブックマーク",
+    "profile": "プロフィール",
+    "settings": "設定",
+    "signIn": "サインイン",
+    "signUp": "サインアップ",
+    "dashboard": "ダッシュボード",
+    "contribute": "貢献する",
+    "home": "ホーム"
+  },
+  "FeaturedContent": {
+    "title": "注目のチュートリアル",
+    "viewAll": "すべてのチュートリアルを表示"
+  },
+  "Newsletter": {
+    "title": "ニュースレターを購読する",
+    "description": "最新のチュートリアル、ヒント、更新情報をあなたの受信箱に直接お届けします。",
+    "emailLabel": "メールアドレス",
+    "emailPlaceholder": "メールアドレスを入力してください",
+    "subscribeButton": "購読する",
+    "subscribing": "購読中...",
+    "successTitle": "ご購読ありがとうございます！",
+    "successMessage": "最新の更新情報があなたの受信箱に直接届きます。",
+    "errorTitle": "購読に失敗しました",
+    "errorMessage": "ニュースレターの購読中にエラーが発生しました。もう一度お試しください。",
+    "alreadySubscribed": "あなたは既にニュースレターを購読しています。",
+    "emailRequired": "メールアドレスは必須です。",
+    "invalidEmail": "有効なメールアドレスを入力してください。",
+    "privacyNotice": "私たちはあなたのプライバシーを尊重します。いつでも購読を解除できます。"
+  },
+  "Search": {
+    "title": "検索",
+    "placeholder": "チュートリアル、スニペット、トピックを検索...",
+    "noResults": "結果は見つかりませんでした。",
+    "tryAgain": "別のキーワードで試すか、チュートリアルを閲覧してください。",
+    "searching": "検索中...",
+    "close": "閉じる",
+    "tip": "Enterキーを押して検索するか、Escapeキーを押して閉じます",
+    "categories": {
+      "all": "すべて",
+      "tutorials": "チュートリアル",
+      "snippets": "スニペット",
+      "topics": "トピック"
+    }
+  },
+  "UserNav": {
+    "profile": "プロフィール",
+    "settings": "設定",
+    "bookmarks": "ブックマーク",
+    "signOut": "サインアウト"
+  },
+  "BookmarkButton": {
+    "bookmark": "ブックマーク",
+    "bookmarked": "ブックマーク済み",
+    "signInToBookmark": "ブックマークするにはサインインしてください",
+    "addedToBookmarks": "ブックマークに追加しました",
+    "removedFromBookmarks": "ブックマークから削除しました",
+    "itemAddedDescription": "このアイテムはブックマークに追加されました。",
+    "itemRemovedDescription": "このアイテムはブックマークから削除されました。",
+    "error": "エラー",
+    "errorDescription": "ブックマークのステータスの更新に失敗しました。"
+  }
+}

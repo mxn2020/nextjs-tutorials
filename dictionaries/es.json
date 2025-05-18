@@ -1,27 +1,196 @@
 {
   "Hero": {
-    "title": "Biblioteca de Conocimiento de Next.js",
-    "description": "Una plataforma de aprendizaje multilingüe de Next.js con integración de IA y colaboración comunitaria",
+    "title": "Tutoriales y Recursos de Next.js",
+    "description": "Guías y tutoriales completos para aprender Next.js",
     "browseButton": "Explorar Tutoriales",
+    "exploreButton": "Explorar Temas",
     "contributeButton": "Contribuir",
-    "newsletterTitle": "Mantente Actualizado",
-    "newsletterDescription": "Suscríbete a nuestro boletín para recibir los últimos tutoriales y actualizaciones",
+    "newsletterTitle": "Suscríbete a nuestro Boletín",
+    "newsletterDescription": "Recibe los últimos tutoriales y recursos directamente en tu bandeja de entrada",
     "emailPlaceholder": "Ingresa tu correo electrónico",
     "subscribeButton": "Suscribirse",
+    "subscribedUsers": "Desarrolladores ya se han suscrito",
     "privacyNotice": "Al suscribirte, aceptas nuestra",
     "privacyLink": "Política de Privacidad"
   },
-  "Navigation": {
-    "home": "Inicio",
-    "tutorials": "Tutoriales",
-    "topics": "Temas",
-    "aiPrompts": "Prompts de IA",
-    "snippets": "Fragmentos",
-    "community": "Comunidad",
-    "contribute": "Contribuir",
-    "about": "Acerca de",
-    "signIn": "Iniciar Sesión",
-    "signOut": "Cerrar Sesión"
+  "ContentMatrix": {
+    "all": "Todo",
+    "title": "Rutas de Aprendizaje",
+    "description": "Explora nuestros tutoriales por tema y nivel de dificultad",
+    "tabs": {
+      "all": "Todos los Temas",
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    },
+    "available": "Disponible",
+    "inProgress": "En Progreso",
+    "notAvailable": "No Disponible",
+    "content": "Contenido",
+    "topic": "Tema",
+    "explore": "Explorar",
+    "comingSoon": "Próximamente",
+    "noContent": "No hay contenido disponible para esta selección"
+  },
+  "Profile": {
+    "meta": {
+      "title": "Tu Perfil",
+      "description": "Ver y gestionar la información de tu perfil"
+    },
+    "editProfile": "Editar Perfil",
+    "noBio": "Aún no se ha proporcionado biografía",
+    "tabs": {
+      "profile": "Perfil",
+      "activity": "Actividad"
+    },
+    "profileForm": {
+      "title": "Información del Perfil",
+      "description": "Actualiza tu información personal y cómo te ven los demás en la plataforma",
+      "nameLabel": "Nombre",
+      "namePlaceholder": "Tu nombre",
+      "nameDescription": "Este es tu nombre público",
+      "nameRequired": "El nombre debe tener al menos 2 caracteres",
+      "bioLabel": "Biografía",
+      "bioPlaceholder": "Cuéntanos un poco sobre ti",
+      "bioDescription": "Breve descripción para tu perfil. Las URLs se hipervinculan.",
+      "bioTooLong": "La biografía debe tener menos de 160 caracteres",
+      "locationLabel": "Ubicación",
+      "locationPlaceholder": "Tu ubicación",
+      "locationTooLong": "La ubicación debe tener menos de 100 caracteres",
+      "websiteLabel": "Sitio Web",
+      "websitePlaceholder": "https://tu-sitio-web.com",
+      "invalidUrl": "Por favor, introduce una URL válida",
+      "saveChanges": "Guardar Cambios",
+      "saving": "Guardando...",
+      "updateSuccess": "Perfil Actualizado",
+      "profileUpdated": "Tu perfil se ha actualizado correctamente",
+      "updateError": "Error al Actualizar",
+      "errorOccurred": "Ocurrió un error al actualizar tu perfil"
+    },
+    "activity": {
+      "title": "Actividad Reciente",
+      "description": "Consulta tus interacciones recientes con el contenido",
+      "noActivity": "No se encontró actividad reciente",
+      "viewedContent": "Viste",
+      "bookmarkedContent": "Marcaste como favorito",
+      "likedContent": "Te gustó",
+      "commentedContent": "Comentaste en"
+    }
+  },
+  "Bookmarks": {
+    "meta": {
+      "title": "Tus Marcadores",
+      "description": "Ver y gestionar tu contenido guardado"
+    },
+    "title": "Tus Marcadores",
+    "description": "Contenido que has guardado para más tarde",
+    "noBookmarks": "Aún no hay marcadores",
+    "startBookmarking": "Empieza a marcar contenido para verlo aquí",
+    "exploreTutorials": "Explorar Tutoriales",
+    "viewContent": "Ver Contenido",
+    "remove": "Eliminar",
+    "removed": "Marcador Eliminado",
+    "bookmarkRemoved": "El marcador ha sido eliminado de tu colección",
+    "error": "Error",
+    "errorRemoving": "Hubo un error al eliminar el marcador"
+  },
+  "Settings": {
+    "meta": {
+      "title": "Configuración de la Cuenta",
+      "description": "Gestiona las preferencias y configuraciones de tu cuenta"
+    },
+    "title": "Configuración de la Cuenta",
+    "tabs": {
+      "general": "General",
+      "notifications": "Notificaciones",
+      "account": "Cuenta"
+    },
+    "general": {
+      "title": "Configuración General",
+      "description": "Gestiona las preferencias de tu cuenta",
+      "languageLabel": "Idioma",
+      "selectLanguage": "Selecciona un idioma",
+      "languageDescription": "El idioma utilizado en toda la plataforma",
+      "themeLabel": "Tema",
+      "selectTheme": "Selecciona un tema",
+      "lightTheme": "Claro",
+      "darkTheme": "Oscuro",
+      "systemTheme": "Sistema",
+      "themeDescription": "Establece el tema para la interfaz de usuario",
+      "autoplayVideosLabel": "Reproducir Videos Automáticamente",
+      "autoplayVideosDescription": "Reproducir videos automáticamente al navegar por el contenido",
+      "showCodeLineNumbersLabel": "Mostrar Números de Línea de Código",
+      "showCodeLineNumbersDescription": "Mostrar números de línea en fragmentos de código",
+      "saveChanges": "Guardar Cambios",
+      "saving": "Guardando...",
+      "updateSuccess": "Configuración Actualizada",
+      "settingsUpdated": "Tu configuración se ha actualizado correctamente",
+      "updateError": "Error al Actualizar",
+      "errorOccurred": "Ocurrió un error al actualizar tu configuración"
+    },
+    "notifications": {
+      "title": "Configuración de Notificaciones",
+      "description": "Controla qué notificaciones recibes",
+      "emailNotificationsLabel": "Notificaciones por Correo Electrónico",
+      "emailNotificationsDescription": "Recibir notificaciones por correo electrónico",
+      "newContentLabel": "Nuevo Contenido",
+      "newContentDescription": "Notificarme cuando se publique nuevo contenido",
+      "contentUpdatesLabel": "Actualizaciones de Contenido",
+      "contentUpdatesDescription": "Notificarme cuando se actualice el contenido que he visto",
+      "commentsLabel": "Comentarios",
+      "commentsDescription": "Notificarme sobre respuestas a mis comentarios",
+      "mentionsLabel": "Menciones",
+      "mentionsDescription": "Notificarme cuando me mencionen en comentarios",
+      "newsletterLabel": "Boletín",
+      "newsletterDescription": "Recibe nuestro boletín semanal con las últimas actualizaciones",
+      "saveChanges": "Guardar Cambios",
+      "saving": "Guardando...",
+      "updateSuccess": "Configuración de Notificaciones Actualizada",
+      "settingsUpdated": "Tu configuración de notificaciones se ha actualizado correctamente",
+      "updateError": "Error al Actualizar",
+      "errorOccurred": "Ocurrió un error al actualizar tu configuración de notificaciones"
+    },
+    "account": {
+      "exportDataTitle": "Exportar Tus Datos",
+      "exportDataDescription": "Descarga una copia de tus datos personales",
+      "exportData": "Exportar Datos",
+      "exporting": "Exportando...",
+      "exportSuccess": "Datos Exportados",
+      "dataExported": "Tus datos se han exportado correctamente",
+      "exportError": "Error al Exportar",
+      "errorExporting": "Ocurrió un error al exportar tus datos",
+      "signOutTitle": "Cerrar Sesión",
+      "signOutDescription": "Cerrar sesión de tu cuenta",
+      "signOut": "Cerrar Sesión",
+      "dangerZoneTitle": "Zona de Peligro",
+      "dangerZoneDescription": "Elimina permanentemente tu cuenta y todos tus datos",
+      "deleteAccountWarningTitle": "Advertencia: Esta acción no se puede deshacer",
+      "deleteAccountWarningDescription": "Una vez que elimines tu cuenta, todos tus datos se eliminarán permanentemente. Esta acción no se puede deshacer.",
+      "deleteAccount": "Eliminar Cuenta",
+      "confirmDeleteTitle": "¿Estás absolutamente seguro?",
+      "confirmDeleteDescription": "Esta acción no se puede deshacer. Esto eliminará permanentemente tu cuenta y eliminará todos tus datos de nuestros servidores.",
+      "typeEmailToConfirm": "Por favor, escribe {email} para confirmar",
+      "emailLabel": "Correo Electrónico",
+      "cancel": "Cancelar",
+      "confirmDelete": "Eliminar Mi Cuenta",
+      "deleting": "Eliminando...",
+      "accountDeleted": "Cuenta Eliminada",
+      "accountDeletedDescription": "Tu cuenta ha sido eliminada correctamente",
+      "deleteError": "Error al Eliminar",
+      "errorDeleting": "Ocurrió un error al eliminar tu cuenta",
+      "emailMismatch": "El Correo Electrónico no coincide",
+      "emailMismatchDescription": "El correo electrónico que ingresaste no coincide con el correo electrónico de tu cuenta"
+    }
+  },
+  "ContentCard": {
+    "readMore": "Leer más",
+    "bookmark": "Marcar",
+    "bookmarked": "Marcado",
+    "difficulty": {
+      "beginner": "Principiante",
+      "intermediate": "Intermedio",
+      "advanced": "Avanzado"
+    }
   },
   "Footer": {
     "copyright": "© {year} Biblioteca de Conocimiento de Next.js. Todos los derechos reservados.",
@@ -29,26 +198,76 @@
     "terms": "Términos de Servicio",
     "contact": "Contáctanos"
   },
-  "UserNav": {
-    "profile": "Perfil",
+  "languageSwitcher": {
+    "label": "Seleccionar idioma:"
+  },
+  "Navigation": {
+    "tutorials": "Tutoriales",
+    "snippets": "Fragmentos",
+    "aiPrompts": "Prompts de IA",
+    "topics": "Temas",
+    "community": "Comunidad",
+    "about": "Acerca de",
+    "search": "Buscar",
     "bookmarks": "Marcadores",
+    "profile": "Perfil",
     "settings": "Configuración",
-    "signOut": "Cerrar Sesión"
+    "signIn": "Iniciar Sesión",
+    "signUp": "Registrarse",
+    "dashboard": "Panel de Control",
+    "contribute": "Contribuir",
+    "home": "Inicio"
   },
   "FeaturedContent": {
-    "title": "Contenido Destacado",
-    "viewAll": "Ver Todo"
+    "title": "Tutoriales Destacados",
+    "viewAll": "Ver todos los tutoriales"
   },
-  "ContentCard": {
-    "readMore": "Leer Más"
+  "Newsletter": {
+    "title": "Suscríbete a nuestro Boletín",
+    "description": "Recibe los últimos tutoriales, consejos y actualizaciones directamente en tu bandeja de entrada.",
+    "emailLabel": "Dirección de correo electrónico",
+    "emailPlaceholder": "Ingresa tu correo electrónico",
+    "subscribeButton": "Suscribirse",
+    "subscribing": "Suscribiendo...",
+    "successTitle": "¡Gracias por suscribirte!",
+    "successMessage": "Ahora recibirás nuestras últimas actualizaciones directamente en tu bandeja de entrada.",
+    "errorTitle": "Suscripción fallida",
+    "errorMessage": "Hubo un error al suscribirse al boletín. Por favor, inténtalo de nuevo.",
+    "alreadySubscribed": "Ya estás suscrito a nuestro boletín.",
+    "emailRequired": "La dirección de correo electrónico es obligatoria.",
+    "invalidEmail": "Por favor, introduce una dirección de correo electrónico válida.",
+    "privacyNotice": "Respetamos tu privacidad. Cancela la suscripción en cualquier momento."
   },
-  "ContentMatrix": {
-    "title": "Matriz de Contenido",
-    "topic": "Tema",
-    "all": "Todos",
-    "available": "Disponible",
-    "inProgress": "En Progreso",
-    "notAvailable": "No Disponible",
-    "content": "Contenido"
+  "Search": {
+    "title": "Buscar",
+    "placeholder": "Buscar tutoriales, fragmentos, temas...",
+    "noResults": "No se encontraron resultados.",
+    "tryAgain": "Prueba con diferentes palabras clave o explora nuestros tutoriales.",
+    "searching": "Buscando...",
+    "close": "Cerrar",
+    "tip": "Presiona Enter para buscar o Escape para cerrar",
+    "categories": {
+      "all": "Todo",
+      "tutorials": "Tutoriales",
+      "snippets": "Fragmentos",
+      "topics": "Temas"
+    }
+  },
+  "UserNav": {
+    "profile": "Perfil",
+    "settings": "Configuración",
+    "bookmarks": "Marcadores",
+    "signOut": "Cerrar Sesión"
+  },
+  "BookmarkButton": {
+    "bookmark": "Marcar",
+    "bookmarked": "Marcado",
+    "signInToBookmark": "Inicia sesión para marcar",
+    "addedToBookmarks": "Añadido a marcadores",
+    "removedFromBookmarks": "Eliminado de marcadores",
+    "itemAddedDescription": "Este elemento ha sido añadido a tus marcadores.",
+    "itemRemovedDescription": "Este elemento ha sido eliminado de tus marcadores.",
+    "error": "Error",
+    "errorDescription": "Error al actualizar el estado del marcador."
   }
 }

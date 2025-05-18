@@ -1,6 +1,4 @@
 import { Suspense } from "react"
-import { SiteHeader } from "@/components/site-header"
-import { SiteFooter } from "@/components/site-footer"
 import { getLatestContent } from "@/lib/content"
 import { TutorialsList } from "@/components/tutorials-list"
 import { TutorialsFilter } from "@/components/tutorials-filter"
@@ -15,9 +13,6 @@ export default async function TutorialsPage() {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Suspense fallback={<div className="h-16 border-b"></div>}>
-        <SiteHeader />
-      </Suspense>
       <main className="flex-1 container py-12">
         <div className="flex flex-col gap-8">
           <div>
@@ -35,9 +30,6 @@ export default async function TutorialsPage() {
           </div>
         </div>
       </main>
-      <Suspense fallback={<div className="h-24 border-t"></div>}>
-        <SiteFooter />
-      </Suspense>
     </div>
   )
 }

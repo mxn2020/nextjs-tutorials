@@ -1,24 +1,22 @@
+import { getDictionary } from "@/lib/i18n/server"
 import type { Metadata } from "next"
-import { getTranslations } from "next-intl/server"
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string }
-}): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "Privacy" })
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  const dictionary = await getDictionary(locale)
+  const privacyDict = dictionary.Privacy || { title: "Privacy Policy", description: "Read our privacy policy." }
   return {
-    title: t("title"),
-    description: t("description"),
+    title: privacyDict.title,
+    description: privacyDict.description,
   }
 }
 
-export default async function PrivacyPage() {
-  const t = await getTranslations("Privacy")
+export default async function PrivacyPage({ params }: { params: { locale: string } }) {
+  const dictionary = await getDictionary(params.locale)
+  const privacyDict = dictionary.Privacy || { title: "Privacy Policy", description: "Read our privacy policy." }
 
   return (
     <div className="container py-10">
-      <h1 className="text-4xl font-bold mb-6">{t("title")}</h1>
+      <h1 className="text-4xl font-bold mb-6">{privacyDict.title}</h1>
       <div className="prose dark:prose-invert max-w-none">
         <p className="text-xl text-muted-foreground mb-10">Effective Date: May 18, 2024</p>
 

@@ -1,27 +1,196 @@
 {
   "Hero": {
-    "title": "مكتبة معرفة Next.js",
-    "description": "منصة تعليمية متعددة اللغات لـ Next.js مع تكامل الذكاء الاصطناعي والتعاون المجتمعي",
-    "browseButton": "تصفح البرامج التعليمية",
-    "contributeButton": "المساهمة",
-    "newsletterTitle": "ابق على اطلاع",
-    "newsletterDescription": "اشترك في نشرتنا الإخبارية للحصول على أحدث البرامج التعليمية والتحديثات",
+    "title": "دروس وموارد Next.js",
+    "description": "أدلة ودروس شاملة لتعلم Next.js",
+    "browseButton": "تصفح الدروس",
+    "exploreButton": "استكشف المواضيع",
+    "contributeButton": "ساهم",
+    "newsletterTitle": "اشترك في نشرتنا الإخبارية",
+    "newsletterDescription": "احصل على أحدث الدروس والموارد مباشرة في بريدك الوارد",
     "emailPlaceholder": "أدخل بريدك الإلكتروني",
     "subscribeButton": "اشتراك",
-    "privacyNotice": "بالاشتراك، فإنك توافق على",
+    "subscribedUsers": "المطورون قد اشتركوا بالفعل",
+    "privacyNotice": "بالاشتراك، أنت توافق على",
     "privacyLink": "سياسة الخصوصية"
   },
-  "Navigation": {
-    "home": "الرئيسية",
-    "tutorials": "البرامج التعليمية",
-    "topics": "المواضيع",
-    "aiPrompts": "موجهات الذكاء الاصطناعي",
-    "snippets": "مقتطفات",
-    "community": "المجتمع",
-    "contribute": "المساهمة",
-    "about": "حول",
-    "signIn": "تسجيل الدخول",
-    "signOut": "تسجيل الخروج"
+  "ContentMatrix": {
+    "all": "الكل",
+    "title": "مسارات التعلم",
+    "description": "استكشف دروسنا حسب الموضوع ومستوى الصعوبة",
+    "tabs": {
+      "all": "جميع المواضيع",
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "advanced": "متقدم"
+    },
+    "available": "متاح",
+    "inProgress": "قيد التنفيذ",
+    "notAvailable": "غير متاح",
+    "content": "المحتوى",
+    "topic": "الموضوع",
+    "explore": "استكشف",
+    "comingSoon": "قريباً",
+    "noContent": "لا يوجد محتوى متاح لهذا التحديد"
+  },
+  "Profile": {
+    "meta": {
+      "title": "ملفك الشخصي",
+      "description": "عرض وإدارة معلومات ملفك الشخصي"
+    },
+    "editProfile": "تعديل الملف الشخصي",
+    "noBio": "لم يتم تقديم سيرة ذاتية بعد",
+    "tabs": {
+      "profile": "الملف الشخصي",
+      "activity": "النشاط"
+    },
+    "profileForm": {
+      "title": "معلومات الملف الشخصي",
+      "description": "قم بتحديث معلوماتك الشخصية وكيف يراك الآخرون على المنصة",
+      "nameLabel": "الاسم",
+      "namePlaceholder": "اسمك",
+      "nameDescription": "هذا هو اسم العرض العام الخاص بك",
+      "nameRequired": "يجب أن يتكون الاسم من حرفين على الأقل",
+      "bioLabel": "السيرة الذاتية",
+      "bioPlaceholder": "أخبرنا قليلاً عن نفسك",
+      "bioDescription": "وصف موجز لملفك الشخصي. يتم ربط عناوين URL بشكل تشعبي.",
+      "bioTooLong": "يجب أن تكون السيرة الذاتية أقل من 160 حرفًا",
+      "locationLabel": "الموقع",
+      "locationPlaceholder": "موقعك",
+      "locationTooLong": "يجب أن يكون الموقع أقل من 100 حرف",
+      "websiteLabel": "الموقع الإلكتروني",
+      "websitePlaceholder": "https://your-website.com",
+      "invalidUrl": "الرجاء إدخال عنوان URL صالح",
+      "saveChanges": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ...",
+      "updateSuccess": "تم تحديث الملف الشخصي",
+      "profileUpdated": "تم تحديث ملفك الشخصي بنجاح",
+      "updateError": "فشل التحديث",
+      "errorOccurred": "حدث خطأ أثناء تحديث ملفك الشخصي"
+    },
+    "activity": {
+      "title": "النشاط الأخير",
+      "description": "اطلع على تفاعلاتك الأخيرة مع المحتوى",
+      "noActivity": "لم يتم العثور على نشاط حديث",
+      "viewedContent": "لقد شاهدت",
+      "bookmarkedContent": "لقد أضفت إلى الإشارات المرجعية",
+      "likedContent": "لقد أعجبك",
+      "commentedContent": "لقد علقت على"
+    }
+  },
+  "Bookmarks": {
+    "meta": {
+      "title": "إشاراتك المرجعية",
+      "description": "عرض وإدارة المحتوى المحفوظ الخاص بك"
+    },
+    "title": "إشاراتك المرجعية",
+    "description": "المحتوى الذي حفظته لوقت لاحق",
+    "noBookmarks": "لا توجد إشارات مرجعية بعد",
+    "startBookmarking": "ابدأ في إضافة إشارات مرجعية للمحتوى لرؤيته هنا",
+    "exploreTutorials": "استكشف الدروس",
+    "viewContent": "عرض المحتوى",
+    "remove": "إزالة",
+    "removed": "تمت إزالة الإشارة المرجعية",
+    "bookmarkRemoved": "تمت إزالة الإشارة المرجعية من مجموعتك",
+    "error": "خطأ",
+    "errorRemoving": "حدث خطأ أثناء إزالة الإشارة المرجعية"
+  },
+  "Settings": {
+    "meta": {
+      "title": "إعدادات الحساب",
+      "description": "إدارة تفضيلات حسابك وإعداداته"
+    },
+    "title": "إعدادات الحساب",
+    "tabs": {
+      "general": "عام",
+      "notifications": "الإشعارات",
+      "account": "الحساب"
+    },
+    "general": {
+      "title": "الإعدادات العامة",
+      "description": "إدارة تفضيلات حسابك",
+      "languageLabel": "اللغة",
+      "selectLanguage": "اختر لغة",
+      "languageDescription": "اللغة المستخدمة في جميع أنحاء المنصة",
+      "themeLabel": "المظهر",
+      "selectTheme": "اختر مظهرًا",
+      "lightTheme": "فاتح",
+      "darkTheme": "داكن",
+      "systemTheme": "النظام",
+      "themeDescription": "قم بتعيين المظهر لواجهة المستخدم",
+      "autoplayVideosLabel": "تشغيل مقاطع الفيديو تلقائيًا",
+      "autoplayVideosDescription": "تشغيل مقاطع الفيديو تلقائيًا عند تصفح المحتوى",
+      "showCodeLineNumbersLabel": "إظهار أرقام أسطر الكود",
+      "showCodeLineNumbersDescription": "عرض أرقام الأسطر في مقتطفات الكود",
+      "saveChanges": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ...",
+      "updateSuccess": "تم تحديث الإعدادات",
+      "settingsUpdated": "تم تحديث إعداداتك بنجاح",
+      "updateError": "فشل التحديث",
+      "errorOccurred": "حدث خطأ أثناء تحديث إعداداتك"
+    },
+    "notifications": {
+      "title": "إعدادات الإشعارات",
+      "description": "تحكم في الإشعارات التي تتلقاها",
+      "emailNotificationsLabel": "إشعارات البريد الإلكتروني",
+      "emailNotificationsDescription": "تلقي الإشعارات عبر البريد الإلكتروني",
+      "newContentLabel": "محتوى جديد",
+      "newContentDescription": "أعلمني عند نشر محتوى جديد",
+      "contentUpdatesLabel": "تحديثات المحتوى",
+      "contentUpdatesDescription": "أعلمني عند تحديث المحتوى الذي شاهدته",
+      "commentsLabel": "التعليقات",
+      "commentsDescription": "أعلمني بالردود على تعليقاتي",
+      "mentionsLabel": "الإشارات",
+      "mentionsDescription": "أعلمني عندما يتم ذكري في التعليقات",
+      "newsletterLabel": "النشرة الإخبارية",
+      "newsletterDescription": "تلقي نشرتنا الإخبارية الأسبوعية بآخر التحديثات",
+      "saveChanges": "حفظ التغييرات",
+      "saving": "جارٍ الحفظ...",
+      "updateSuccess": "تم تحديث إعدادات الإشعارات",
+      "settingsUpdated": "تم تحديث إعدادات الإشعارات الخاصة بك بنجاح",
+      "updateError": "فشل التحديث",
+      "errorOccurred": "حدث خطأ أثناء تحديث إعدادات الإشعارات الخاصة بك"
+    },
+    "account": {
+      "exportDataTitle": "تصدير بياناتك",
+      "exportDataDescription": "قم بتنزيل نسخة من بياناتك الشخصية",
+      "exportData": "تصدير البيانات",
+      "exporting": "جارٍ التصدير...",
+      "exportSuccess": "تم تصدير البيانات",
+      "dataExported": "تم تصدير بياناتك بنجاح",
+      "exportError": "فشل التصدير",
+      "errorExporting": "حدث خطأ أثناء تصدير بياناتك",
+      "signOutTitle": "تسجيل الخروج",
+      "signOutDescription": "تسجيل الخروج من حسابك",
+      "signOut": "تسجيل الخروج",
+      "dangerZoneTitle": "منطقة الخطر",
+      "dangerZoneDescription": "احذف حسابك وجميع بياناتك بشكل دائم",
+      "deleteAccountWarningTitle": "تحذير: لا يمكن التراجع عن هذا الإجراء",
+      "deleteAccountWarningDescription": "بمجرد حذف حسابك، ستتم إزالة جميع بياناتك بشكل دائم. لا يمكن التراجع عن هذا الإجراء.",
+      "deleteAccount": "حذف الحساب",
+      "confirmDeleteTitle": "هل أنت متأكد تمامًا؟",
+      "confirmDeleteDescription": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف حسابك بشكل دائم وإزالة جميع بياناتك من خوادمنا.",
+      "typeEmailToConfirm": "الرجاء كتابة {email} للتأكيد",
+      "emailLabel": "البريد الإلكتروني",
+      "cancel": "إلغاء",
+      "confirmDelete": "حذف حسابي",
+      "deleting": "جارٍ الحذف...",
+      "accountDeleted": "تم حذف الحساب",
+      "accountDeletedDescription": "تم حذف حسابك بنجاح",
+      "deleteError": "فشل الحذف",
+      "errorDeleting": "حدث خطأ أثناء حذف حسابك",
+      "emailMismatch": "عدم تطابق البريد الإلكتروني",
+      "emailMismatchDescription": "البريد الإلكتروني الذي أدخلته لا يتطابق مع بريد حسابك الإلكتروني"
+    }
+  },
+  "ContentCard": {
+    "readMore": "اقرأ المزيد",
+    "bookmark": "إشارة مرجعية",
+    "bookmarked": "تمت الإشارة إليه",
+    "difficulty": {
+      "beginner": "مبتدئ",
+      "intermediate": "متوسط",
+      "advanced": "متقدم"
+    }
   },
   "Footer": {
     "copyright": "© {year} مكتبة معرفة Next.js. جميع الحقوق محفوظة.",
@@ -29,26 +198,76 @@
     "terms": "شروط الخدمة",
     "contact": "اتصل بنا"
   },
-  "UserNav": {
-    "profile": "الملف الشخصي",
+  "languageSwitcher": {
+    "label": "اختر اللغة:"
+  },
+  "Navigation": {
+    "tutorials": "الدروس",
+    "snippets": "المقتطفات",
+    "aiPrompts": "مطالبات الذكاء الاصطناعي",
+    "topics": "المواضيع",
+    "community": "المجتمع",
+    "about": "حول",
+    "search": "بحث",
     "bookmarks": "الإشارات المرجعية",
+    "profile": "الملف الشخصي",
     "settings": "الإعدادات",
-    "signOut": "تسجيل الخروج"
+    "signIn": "تسجيل الدخول",
+    "signUp": "تسجيل",
+    "dashboard": "لوحة التحكم",
+    "contribute": "ساهم",
+    "home": "الرئيسية"
   },
   "FeaturedContent": {
-    "title": "المحتوى المميز",
-    "viewAll": "عرض الكل"
+    "title": "دروس مميزة",
+    "viewAll": "عرض جميع الدروس"
   },
-  "ContentCard": {
-    "readMore": "قراءة المزيد"
+  "Newsletter": {
+    "title": "اشترك في نشرتنا الإخبارية",
+    "description": "احصل على أحدث الدروس والنصائح والتحديثات مباشرة في بريدك الوارد.",
+    "emailLabel": "عنوان البريد الإلكتروني",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "subscribeButton": "اشتراك",
+    "subscribing": "جارٍ الاشتراك...",
+    "successTitle": "شكرا لاشتراكك!",
+    "successMessage": "ستتلقى الآن آخر تحديثاتنا مباشرة في بريدك الوارد.",
+    "errorTitle": "فشل الاشتراك",
+    "errorMessage": "حدث خطأ أثناء الاشتراك في النشرة الإخبارية. يرجى المحاولة مرة أخرى.",
+    "alreadySubscribed": "أنت مشترك بالفعل في نشرتنا الإخبارية.",
+    "emailRequired": "عنوان البريد الإلكتروني مطلوب.",
+    "invalidEmail": "الرجاء إدخال عنوان بريد إلكتروني صالح.",
+    "privacyNotice": "نحن نحترم خصوصيتك. يمكنك إلغاء الاشتراك في أي وقت."
   },
-  "ContentMatrix": {
-    "title": "مصفوفة المحتوى",
-    "topic": "الموضوع",
-    "all": "الكل",
-    "available": "متاح",
-    "inProgress": "قيد التقدم",
-    "notAvailable": "غير متاح",
-    "content": "المحتوى"
+  "Search": {
+    "title": "بحث",
+    "placeholder": "ابحث عن الدروس، المقتطفات، المواضيع...",
+    "noResults": "لم يتم العثور على نتائج.",
+    "tryAgain": "جرب كلمات رئيسية مختلفة أو تصفح دروسنا.",
+    "searching": "جارٍ البحث...",
+    "close": "إغلاق",
+    "tip": "اضغط على Enter للبحث أو Escape للإغلاق",
+    "categories": {
+      "all": "الكل",
+      "tutorials": "الدروس",
+      "snippets": "المقتطفات",
+      "topics": "المواضيع"
+    }
+  },
+  "UserNav": {
+    "profile": "الملف الشخصي",
+    "settings": "الإعدادات",
+    "bookmarks": "الإشارات المرجعية",
+    "signOut": "تسجيل الخروج"
+  },
+  "BookmarkButton": {
+    "bookmark": "إشارة مرجعية",
+    "bookmarked": "تمت الإشارة إليه",
+    "signInToBookmark": "تسجيل الدخول للإشارة المرجعية",
+    "addedToBookmarks": "أضيف إلى الإشارات المرجعية",
+    "removedFromBookmarks": "أزيل من الإشارات المرجعية",
+    "itemAddedDescription": "تمت إضافة هذا العنصر إلى إشاراتك المرجعية.",
+    "itemRemovedDescription": "تمت إزالة هذا العنصر من إشاراتك المرجعية.",
+    "error": "خطأ",
+    "errorDescription": "فشل تحديث حالة الإشارة المرجعية."
   }
 }
