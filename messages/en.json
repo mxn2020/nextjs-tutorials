@@ -1,106 +1,152 @@
 {
-  "Hero": {
-    "title": "Next.js Knowledge Library",
-    "description": "A multilingual Next.js learning platform with AI integration and community collaboration",
-    "browseButton": "Browse Tutorials",
-    "contributeButton": "Contribute",
-    "newsletterTitle": "Stay Updated",
-    "newsletterDescription": "Subscribe to our newsletter for the latest tutorials and updates",
-    "emailPlaceholder": "Enter your email",
-    "subscribeButton": "Subscribe",
-    "privacyNotice": "By subscribing, you agree to our",
-    "privacyLink": "Privacy Policy"
-  },
-  "Navigation": {
-    "home": "Home",
-    "tutorials": "Tutorials",
-    "references": "References",
-    "explanations": "Explanations",
-    "snippets": "Snippets",
-    "topics": "Topics",
-    "aiPrompts": "AI Prompts",
-    "about": "About",
-    "community": "Community",
-    "contribute": "Contribute",
-    "signIn": "Sign In",
-    "signOut": "Sign Out"
-  },
-  "Footer": {
-    "copyright": "© {year} Next.js Knowledge Library. All rights reserved.",
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Service",
-    "contact": "Contact"
-  },
-  "UserNav": {
-    "profile": "Profile",
-    "bookmarks": "Bookmarks",
-    "settings": "Settings",
-    "signOut": "Sign Out"
-  },
-  "FeaturedContent": {
-    "title": "Featured Content",
-    "viewAll": "View All"
-  },
-  "ContentCard": {
-    "readMore": "Read More"
-  },
-  "ContentMatrix": {
-    "title": "Content Matrix",
-    "topic": "Topic",
-    "all": "All",
-    "available": "Available",
-    "inProgress": "In Progress",
-    "notAvailable": "Not Available",
-    "content": "Content"
-  },
-  "Snippets": {
-    "title": "Code Snippets",
-    "description": "Reusable code snippets for common Next.js patterns and utilities."
-  },
-  "Topics": {
-    "title": "Topics",
-    "description": "Explore Next.js topics by category and find relevant resources."
-  },
-  "About": {
-    "title": "About Us",
-    "description": "Learn about the Next.js Knowledge Library project and our team."
-  },
-  "Community": {
-    "title": "Community",
-    "description": "Join our community and connect with other Next.js developers."
-  },
-  "Privacy": {
-    "title": "Privacy Policy",
-    "description": "Learn about how we collect and use your data."
-  },
-  "Terms": {
-    "title": "Terms of Service",
-    "description": "The terms and conditions for using our website."
-  },
-  "Contact": {
-    "title": "Contact Us",
-    "description": "Get in touch with our team for questions, feedback, or support."
-  },
-  "Search": {
-    "title": "Search",
-    "description": "Search for tutorials, references, and other content.",
-    "placeholder": "Search for tutorials, references, and more...",
-    "tip": "Press Enter to search",
-    "searchResults": "Search Results",
-    "resultCount": {
-      "one": "Found 1 result for '{query}'",
-      "other": "Found {count} results for '{query}'"
+  "Profile": {
+    "meta": {
+      "title": "Your Profile",
+      "description": "View and manage your profile information"
     },
-    "enterQuery": "Enter a search query to find content",
-    "noResults": "No results found",
-    "tryDifferentQuery": "Try a different search term or browse our categories"
+    "editProfile": "Edit Profile",
+    "noBio": "No bio provided yet",
+    "tabs": {
+      "profile": "Profile",
+      "activity": "Activity"
+    },
+    "profileForm": {
+      "title": "Profile Information",
+      "description": "Update your personal information and how others see you on the platform",
+      "nameLabel": "Name",
+      "namePlaceholder": "Your name",
+      "nameDescription": "This is your public display name",
+      "nameRequired": "Name must be at least 2 characters",
+      "bioLabel": "Bio",
+      "bioPlaceholder": "Tell us a bit about yourself",
+      "bioDescription": "Brief description for your profile. URLs are hyperlinked.",
+      "bioTooLong": "Bio must be less than 160 characters",
+      "locationLabel": "Location",
+      "locationPlaceholder": "Your location",
+      "locationTooLong": "Location must be less than 100 characters",
+      "websiteLabel": "Website",
+      "websitePlaceholder": "https://your-website.com",
+      "invalidUrl": "Please enter a valid URL",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "updateSuccess": "Profile Updated",
+      "profileUpdated": "Your profile has been successfully updated",
+      "updateError": "Update Failed",
+      "errorOccurred": "An error occurred while updating your profile"
+    },
+    "activity": {
+      "title": "Recent Activity",
+      "description": "See your recent interactions with content",
+      "noActivity": "No recent activity found",
+      "viewedContent": "You viewed",
+      "bookmarkedContent": "You bookmarked",
+      "likedContent": "You liked",
+      "commentedContent": "You commented on"
+    }
   },
-  "Newsletter": {
-    "title": "Subscribe to our newsletter",
-    "description": "Get the latest updates and resources delivered to your inbox.",
-    "emailPlaceholder": "your.email@example.com",
-    "buttonText": "Subscribe",
-    "successMessage": "Thanks for subscribing!",
-    "errorMessage": "Failed to subscribe. Please try again."
+  "Bookmarks": {
+    "meta": {
+      "title": "Your Bookmarks",
+      "description": "View and manage your saved content"
+    },
+    "title": "Your Bookmarks",
+    "description": "Content you've saved for later",
+    "noBookmarks": "No bookmarks yet",
+    "startBookmarking": "Start bookmarking content to see it here",
+    "exploreTutorials": "Explore Tutorials",
+    "viewContent": "View Content",
+    "remove": "Remove",
+    "removed": "Bookmark Removed",
+    "bookmarkRemoved": "The bookmark has been removed from your collection",
+    "error": "Error",
+    "errorRemoving": "There was an error removing the bookmark"
+  },
+  "Settings": {
+    "meta": {
+      "title": "Account Settings",
+      "description": "Manage your account preferences and settings"
+    },
+    "title": "Account Settings",
+    "tabs": {
+      "general": "General",
+      "notifications": "Notifications",
+      "account": "Account"
+    },
+    "general": {
+      "title": "General Settings",
+      "description": "Manage your account preferences",
+      "languageLabel": "Language",
+      "selectLanguage": "Select a language",
+      "languageDescription": "The language used throughout the platform",
+      "themeLabel": "Theme",
+      "selectTheme": "Select a theme",
+      "lightTheme": "Light",
+      "darkTheme": "Dark",
+      "systemTheme": "System",
+      "themeDescription": "Set the theme for the user interface",
+      "autoplayVideosLabel": "Autoplay Videos",
+      "autoplayVideosDescription": "Automatically play videos when browsing content",
+      "showCodeLineNumbersLabel": "Show Code Line Numbers",
+      "showCodeLineNumbersDescription": "Display line numbers in code snippets",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "updateSuccess": "Settings Updated",
+      "settingsUpdated": "Your settings have been successfully updated",
+      "updateError": "Update Failed",
+      "errorOccurred": "An error occurred while updating your settings"
+    },
+    "notifications": {
+      "title": "Notification Settings",
+      "description": "Control which notifications you receive",
+      "emailNotificationsLabel": "Email Notifications",
+      "emailNotificationsDescription": "Receive notifications via email",
+      "newContentLabel": "New Content",
+      "newContentDescription": "Notify me when new content is published",
+      "contentUpdatesLabel": "Content Updates",
+      "contentUpdatesDescription": "Notify me when content I've viewed is updated",
+      "commentsLabel": "Comments",
+      "commentsDescription": "Notify me about replies to my comments",
+      "mentionsLabel": "Mentions",
+      "mentionsDescription": "Notify me when I'm mentioned in comments",
+      "newsletterLabel": "Newsletter",
+      "newsletterDescription": "Receive our weekly newsletter with the latest updates",
+      "saveChanges": "Save Changes",
+      "saving": "Saving...",
+      "updateSuccess": "Notification Settings Updated",
+      "settingsUpdated": "Your notification settings have been successfully updated",
+      "updateError": "Update Failed",
+      "errorOccurred": "An error occurred while updating your notification settings"
+    },
+    "account": {
+      "exportDataTitle": "Export Your Data",
+      "exportDataDescription": "Download a copy of your personal data",
+      "exportData": "Export Data",
+      "exporting": "Exporting...",
+      "exportSuccess": "Data Exported",
+      "dataExported": "Your data has been exported successfully",
+      "exportError": "Export Failed",
+      "errorExporting": "An error occurred while exporting your data",
+      "signOutTitle": "Sign Out",
+      "signOutDescription": "Sign out of your account",
+      "signOut": "Sign Out",
+      "dangerZoneTitle": "Danger Zone",
+      "dangerZoneDescription": "Permanently delete your account and all your data",
+      "deleteAccountWarningTitle": "Warning: This action cannot be undone",
+      "deleteAccountWarningDescription": "Once you delete your account, all of your data will be permanently removed. This action cannot be undone.",
+      "deleteAccount": "Delete Account",
+      "confirmDeleteTitle": "Are you absolutely sure?",
+      "confirmDeleteDescription": "This action cannot be undone. This will permanently delete your account and remove all your data from our servers.",
+      "typeEmailToConfirm": "Please type {email} to confirm",
+      "emailLabel": "Email",
+      "cancel": "Cancel",
+      "confirmDelete": "Delete My Account",
+      "deleting": "Deleting...",
+      "accountDeleted": "Account Deleted",
+      "accountDeletedDescription": "Your account has been successfully deleted",
+      "deleteError": "Deletion Failed",
+      "errorDeleting": "An error occurred while deleting your account",
+      "emailMismatch": "Email Mismatch",
+      "emailMismatchDescription": "The email you entered doesn't match your account email"
+    }
   }
 }

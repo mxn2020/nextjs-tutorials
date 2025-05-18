@@ -68,19 +68,19 @@ export function UserNav({ user }: UserNavProps) {
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
           <DropdownMenuItem asChild>
-            <Link href="/profile">
+            <Link href="/profile" onClick={() => setIsOpen(false)}>
               <User className="mr-2 h-4 w-4" />
               <span>{t("profile")}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/bookmarks">
+            <Link href="/bookmarks" onClick={() => setIsOpen(false)}>
               <BookmarkIcon className="mr-2 h-4 w-4" />
               <span>{t("bookmarks")}</span>
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem asChild>
-            <Link href="/settings">
+            <Link href="/settings" onClick={() => setIsOpen(false)}>
               <Settings className="mr-2 h-4 w-4" />
               <span>{t("settings")}</span>
             </Link>
