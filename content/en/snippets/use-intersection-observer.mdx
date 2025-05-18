@@ -1,0 +1,345 @@
+---
+title: "useIntersectionObserver Hook for React"
+slug: "use-intersection-observer"
+description: "A custom React hook that uses the Intersection Observer API to detect when an element enters or exits the viewport."
+author: "Next.js Knowledge Team"
+authorGithub: "nextjs-knowledge"
+date: "2024-01-25"
+lastUpdated: "2024-05-18"
+language: "en"
+tags: ["react", "hooks", "intersection observer", "lazy loading", "typescript"]
+framework: "React"
+version: "React 18+"
+prompts: [
+  {
+    intent: "modify",
+    output_format: "code",
+    target_language: "typescript",
+    ai_level: "intermediate",
+    prompt: "How can I modify this useIntersectionObserver hook to also track the percentage of the element that is visible in the viewport?"
+  },
+  {
+    intent: "explain",
+    output_format: "explanation",
+    target_language: "javascript",
+    ai_level: "beginner",
+    prompt: "Can you explain how this useIntersectionObserver hook works and what the Intersection Observer API is used for?"
+  },
+  {
+    intent: "optimize",
+    output_format: "code",
+    target_language: "typescript",
+    ai_level: "advanced",
+    prompt: "How can I optimize this useIntersectionObserver hook for better performance, especially when tracking multiple elements on a page?"
+  }
+]
+---
+
+# useIntersectionObserver Hook for React
+
+## Purpose
+
+The `useIntersectionObserver` hook provides an easy way to detect when an element enters or exits the viewport using the Intersection Observer API. This is useful for:
+
+- Implementing lazy loading of images or components
+- Creating infinite scroll functionality
+- Triggering animations when elements come into view
+- Implementing analytics tracking for viewability
+
+## Code
+
+\`\`\`tsx
+import { useState, useEffect, useRef, RefObject } from 'react'
+
+interface UseIntersectionObserverProps {
+  threshold?: number | number[]
+  root?: Element | null
+  rootMargin?: string
+  freezeOnceVisible?: boolean
+}
+
+/**
+ * Custom hook that observes when an element enters or exits the viewport
+ * @param options Configuration options for the intersection observer
+ * @returns [ref, isIntersecting] - A ref to attach to the element and a boolean indicating if the element is visible
+ */
+export function useIntersectionObserver({
+  threshold = 0,
+  root = null,
+  rootMargin = '0%',
+  freezeOnceVisible = false,
+}: UseIntersectionObserverProps = {}): [RefObject<HTMLElement>, boolean] {
+  const [isIntersecting, setIsIntersecting] = useState<boolean>(false)
+  const ref = useRef<HTMLElement>(null)
+  
+  useEffect(() => {
+    const node = ref.current
+    
+    // If there's no element to observe, or if it's already visible and we want to freeze it, return early
+    if (!node || (freezeOnceVisible && isIntersecting)) return
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // Update state when the element enters/exits the viewport
+        setIsIntersecting(entry.isIntersecting)
+      },
+      { threshold, root, rootMargin }
+    )
+    
+    observer.observe(node)
+    
+    return () => {
+      observer.disconnect()
+    }
+  }, [threshold, root, rootMargin, freezeOnceVisible, isIntersecting])
+  
+  return [ref, isIntersecting]
+}
+\`\`\`
+
+## Usage
+
+### Basic Example
+
+\`\`\`tsx
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+
+function LazyComponent() {
+  const [ref, isVisible] = useIntersectionObserver()
+  
+  return (
+    <div ref={ref}>
+      {isVisible ? (
+        <div>This content is now visible!</div>
+      ) : (
+        <div>Loading...</div>
+      )}
+    </div>
+  )
+}
+\`\`\`
+
+### Lazy Loading Images
+
+\`\`\`tsx
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import Image from 'next/image'
+
+function LazyImage({ src, alt, width, height }) {
+  const [ref, isVisible] = useIntersectionObserver({
+    threshold: 0.1,
+    freezeOnceVisible: true,
+  })
+  
+  return (
+    <div ref={ref} className="relative h-[300px]">
+      {isVisible ? (
+        <Image
+          src={src || "/placeholder.svg"}
+          alt={alt}
+          width={width}
+          height={height}
+          className="object-cover"
+        />
+      ) : (
+        <div className="w-full h-full bg-gray-200 animate-pulse" />
+      )}
+    </div>
+  )
+}
+\`\`\`
+
+### Infinite Scroll
+
+\`\`\`tsx
+import { useState, useEffect } from 'react'
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+
+function InfiniteScroll() {
+  const [items, setItems] = useState([...Array(20).keys()])
+  const [page, setPage] = useState(1)
+  const [loading, setLoading] = useState(false)
+  const [ref, isVisible] = useIntersectionObserver()
+  
+  useEffect(() => {
+    if (isVisible && !loading) {
+      loadMoreItems()
+    }
+  }, [isVisible])
+  
+  const loadMoreItems = async () => {
+    setLoading(true)
+    
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000))
+    
+    const newItems = [...Array(20).keys()].map(i => i + items.length)
+    setItems(prevItems => [...prevItems, ...newItems])
+    setPage(prevPage => prevPage + 1)
+    setLoading(false)
+  }
+  
+  return (
+    <div className="space-y-4">
+      {items.map(item => (
+        <div key={item} className="p-4 border rounded">
+          Item {item + 1}
+        </div>
+      ))}
+      
+      <div ref={ref} className="h-10 flex items-center justify-center">
+        {loading ? 'Loading more items...' : 'Load more'}
+      </div>
+    </div>
+  )
+}
+\`\`\`
+
+### Triggering Animations
+
+\`\`\`tsx
+import { useIntersectionObserver } from '@/hooks/useIntersectionObserver'
+import { motion } from 'framer-motion'
+
+function AnimatedSection() {
+  const [ref, isVisible] = useIntersectionObserver({
+    threshold: 0.2,
+    freezeOnceVisible: true,
+  })
+  
+  return (
+    <div ref={ref}>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        animate={isVisible ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+        transition={{ duration: 0.5 }}
+        className="p-6 bg-blue-100 rounded-lg"
+      >
+        <h2 className="text-2xl font-bold">Animated Content</h2>
+        <p>This content animates when it enters the viewport.</p>
+      </motion.div>
+    </div>
+  )
+}
+\`\`\`
+
+## Explanation
+
+The `useIntersectionObserver` hook works by:
+
+1. Creating a ref that you attach to the element you want to observe
+2. Setting up an Intersection Observer that watches for when the element enters or exits the viewport
+3. Updating state when the element's visibility changes
+4. Cleaning up the observer when the component unmounts
+
+The hook accepts several options:
+
+- `threshold`: How much of the element needs to be visible to trigger the callback (0 to 1)
+- `root`: The element that is used as the viewport for checking visibility
+- `rootMargin`: Margin around the root element
+- `freezeOnceVisible`: Whether to stop observing once the element becomes visible
+
+## Variations
+
+### With Callback Function
+
+\`\`\`tsx
+import { useEffect, useRef, RefObject } from 'react'
+
+interface UseIntersectionObserverProps {
+  callback: (isIntersecting: boolean, entry?: IntersectionObserverEntry) => void
+  threshold?: number | number[]
+  root?: Element | null
+  rootMargin?: string
+}
+
+export function useIntersectionObserverWithCallback({
+  callback,
+  threshold = 0,
+  root = null,
+  rootMargin = '0%',
+}: UseIntersectionObserverProps): RefObject<HTMLElement> {
+  const ref = useRef<HTMLElement>(null)
+  
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        callback(entry.isIntersecting, entry)
+      },
+      { threshold, root, rootMargin }
+    )
+    
+    observer.observe(node)
+    
+    return () => {
+      observer.disconnect()
+    }
+  }, [callback, threshold, root, rootMargin])
+  
+  return ref
+}
+\`\`\`
+
+### With Intersection Ratio
+
+\`\`\`tsx
+import { useState, useEffect, useRef, RefObject } from 'react'
+
+interface UseIntersectionObserverWithRatioProps {
+  threshold?: number | number[]
+  root?: Element | null
+  rootMargin?: string
+}
+
+interface IntersectionResult {
+  isIntersecting: boolean
+  intersectionRatio: number
+}
+
+export function useIntersectionObserverWithRatio({
+  threshold = [0, 0.25, 0.5, 0.75, 1],
+  root = null,
+  rootMargin = '0%',
+}: UseIntersectionObserverWithRatioProps = {}): [RefObject<HTMLElement>, IntersectionResult] {
+  const [result, setResult] = useState<IntersectionResult>({
+    isIntersecting: false,
+    intersectionRatio: 0,
+  })
+  const ref = useRef<HTMLElement>(null)
+  
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return
+    
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setResult({
+          isIntersecting: entry.isIntersecting,
+          intersectionRatio: entry.intersectionRatio,
+        })
+      },
+      { threshold, root, rootMargin }
+    )
+    
+    observer.observe(node)
+    
+    return () => {
+      observer.disconnect()
+    }
+  }, [threshold, root, rootMargin])
+  
+  return [ref, result]
+}
+\`\`\`
+
+## Related Snippets
+
+- [useLocalStorage Hook](../use-local-storage-hook) - Persist state in localStorage
+- [useMediaQuery Hook](../use-media-query-hook) - Detect media query matches
+- [useElementSize Hook](../use-element-size-hook) - Track an element's dimensions
+\`\`\`
+
+\`\`\`

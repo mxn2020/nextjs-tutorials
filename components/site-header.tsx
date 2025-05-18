@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
@@ -12,16 +13,20 @@ import { UserNav } from "@/components/user-nav"
 import { useSession } from "next-auth/react"
 import { SidebarToggle } from "@/components/sidebar-toggle"
 import { Search } from "lucide-react"
+import { SearchDialog } from "@/components/search-dialog"
 
 export function SiteHeader() {
   const pathname = usePathname()
   const t = useTranslations("Navigation")
   const { data: session } = useSession()
+  const [searchOpen, setSearchOpen] = useState(false)
 
   const navItems = [
     { href: "/tutorials", label: t("tutorials") },
-    { href: "/topics", label: t("topics") },
+    { href: "/snippets", label: t("snippets") },
     { href: "/ai-prompts", label: t("aiPrompts") },
+    { href: "/topics", label: t("topics") },
+    { href: "/community", label: t("community") },
     { href: "/about", label: t("about") },
   ]
 
@@ -61,10 +66,11 @@ export function SiteHeader() {
         </div>
         <div className="flex-1" />
         <div className="flex items-center space-x-4">
-          <Button variant="outline" size="icon" className="hidden md:flex">
+          <Button variant="outline" size="icon" className="hidden md:flex" onClick={() => setSearchOpen(true)}>
             <Search className="h-4 w-4" />
             <span className="sr-only">Search</span>
           </Button>
+          <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
           <LanguageSelector />
           <ThemeToggle />
           {session ? (

@@ -1,0 +1,335 @@
+---
+title: "Next.js Font Optimization Reference"
+slug: "next-font-optimization"
+description: "Complete reference for Next.js font optimization features, including the next/font module, configuration options, and best practices."
+author: "Next.js Knowledge Team"
+authorGithub: "nextjs-knowledge"
+date: "2024-03-15"
+lastUpdated: "2024-05-18"
+language: "en"
+tags: ["next.js", "fonts", "optimization", "performance"]
+version: "Next.js 14.0.0+"
+prompts: [
+  {
+    intent: "usage",
+    output_format: "code",
+    target_language: "javascript",
+    ai_level: "intermediate",
+    prompt: "Show me how to use next/font with Google Fonts and apply the font to specific components rather than the entire application."
+  },
+  {
+    intent: "compare",
+    output_format: "explanation",
+    target_language: "javascript",
+    ai_level: "intermediate",
+    prompt: "How does Next.js font optimization compare to traditional font loading approaches? What are the performance benefits?"
+  },
+  {
+    intent: "troubleshoot",
+    output_format: "explanation",
+    target_language: "javascript",
+    ai_level: "advanced",
+    prompt: "I'm having an issue with font loading in my Next.js application. The fonts appear to flash or change after the page loads. How can I resolve this FOUT (Flash of Unstyled Text) issue?"
+  }
+]
+---
+
+# Next.js Font Optimization Reference
+
+## Overview
+
+Next.js provides built-in font optimization to help you achieve better performance and user experience when loading fonts in your application. The `next/font` module allows you to load fonts with zero layout shift, eliminate external network requests, and implement best practices for font loading.
+
+## API Reference
+
+### Google Fonts
+
+\`\`\`tsx
+import { Inter, Roboto_Mono } from 'next/font/google'
+
+// Initialize the font with options
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  weight: ['400', '700'],
+})
+
+// For variable fonts
+const roboto_mono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-mono',
+})
+\`\`\`
+
+#### Options
+
+- `subsets` (string[]): Font subsets to preload (e.g., 'latin', 'cyrillic')
+- `weight` (string | string[]): Font weights to load
+- `style` (string | string[]): Font styles to load (e.g., 'normal', 'italic')
+- `display` (string): Font display strategy ('auto', 'block', 'swap', 'fallback', 'optional')
+- `preload` (boolean): Whether to preload the font (default: true)
+- `fallback` (string[]): Fallback font families
+- `adjustFontFallback` (boolean | string): Whether to adjust the font fallback
+- `variable` (string): CSS variable name for the font
+- `declarations` (Array<{prop: string, value: string}>): Additional font-face declarations
+
+### Local Fonts
+
+\`\`\`tsx
+import localFont from 'next/font/local'
+
+// Single font file
+const myFont = localFont({
+  src: './my-font.woff2',
+  display: 'swap',
+})
+
+// Multiple font files for different weights/styles
+const myFont = localFont({
+  src: [
+    {
+      path: './my-font-regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: './my-font-bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+})
+\`\`\`
+
+#### Options
+
+- `src` (string | Array<{path: string, weight?: string, style?: string}>): Path to font file(s)
+- `display` (string): Font display strategy
+- `preload` (boolean): Whether to preload the font
+- `fallback` (string[]): Fallback font families
+- `adjustFontFallback` (boolean | string): Whether to adjust the font fallback
+- `variable` (string): CSS variable name for the font
+- `declarations` (Array<{prop: string, value: string}>): Additional font-face declarations
+
+## Examples
+
+### Basic Usage with Google Fonts
+
+\`\`\`tsx
+// app/layout.tsx
+import { Inter } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body className={inter.className}>{children}</body>
+    </html>
+  )
+}
+\`\`\`
+
+### Using CSS Variables with Multiple Fonts
+
+\`\`\`tsx
+// app/layout.tsx
+import { Inter, Roboto_Mono } from 'next/font/google'
+import './globals.css'
+
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-inter',
+})
+
+const roboto_mono = Roboto_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-mono',
+})
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className={`${inter.variable} ${roboto_mono.variable}`}>
+      <body>{children}</body>
+    </html>
+  )
+}
+\`\`\`
+
+Then in your CSS:
+
+\`\`\`css
+/* globals.css */
+:root {
+  --font-inter: 'Inter', sans-serif;
+  --font-roboto-mono: 'Roboto Mono', monospace;
+}
+
+body {
+  font-family: var(--font-inter);
+}
+
+code {
+  font-family: var(--font-roboto-mono);
+}
+\`\`\`
+
+### Using Local Fonts
+
+\`\`\`tsx
+// app/layout.tsx
+import localFont from 'next/font/local'
+import './globals.css'
+
+const myFont = localFont({
+  src: [
+    {
+      path: '../fonts/my-font-regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/my-font-bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-my-font',
+})
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className={myFont.variable}>
+      <body>{children}</body>
+    </html>
+  )
+}
+\`\`\`
+
+### Applying Fonts to Specific Components
+
+\`\`\`tsx
+// components/heading.tsx
+'use client'
+
+import { Playfair_Display } from 'next/font/google'
+
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+export default function Heading({ children }) {
+  return (
+    <h1 className={playfair.className}>
+      {children}
+    </h1>
+  )
+}
+\`\`\`
+
+## Best Practices
+
+### Choose the Right Display Strategy
+
+The `display` option determines how the font is displayed during loading:
+
+- `swap`: Shows a fallback font until the custom font is loaded (can cause layout shift)
+- `block`: Briefly hides text until the font is loaded (can cause flash of invisible text)
+- `fallback`: Short block period and then fallback to system font if loading takes too long
+- `optional`: Like fallback, but browser can decide not to use the custom font
+- `auto`: Browser default (usually `block`)
+
+For most cases, `swap` is recommended for text content, while `optional` might be better for less critical text.
+
+### Preload Only What You Need
+
+Limit the number of font weights and styles you load to improve performance:
+
+\`\`\`tsx
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '700'], // Only load regular and bold
+  style: ['normal'], // Only load normal style
+})
+\`\`\`
+
+### Use Font Variables for Consistent Typography
+
+Using CSS variables makes it easier to maintain consistent typography:
+
+\`\`\`tsx
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
+})
+
+// In your CSS
+:root {
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+\`\`\`
+
+### Optimize for Different Languages
+
+If your application supports multiple languages, load the appropriate subsets:
+
+\`\`\`tsx
+const notoSans = Noto_Sans({
+  subsets: ['latin', 'cyrillic', 'greek'],
+  weight: ['400', '700'],
+})
+\`\`\`
+
+## Common Pitfalls
+
+### Loading Too Many Font Variations
+
+Loading too many weights and styles can impact performance. Only load what you need.
+
+### Not Specifying Subsets
+
+Always specify the subsets you need to reduce the font file size.
+
+### Inconsistent Font Usage
+
+Use CSS variables and a design system to ensure consistent font usage throughout your application.
+
+### Ignoring Font Display Strategy
+
+Choose the appropriate `display` strategy based on your application's needs.
+
+## Related Resources
+
+- [Next.js Font Optimization Documentation](https://nextjs.org/docs/app/building-your-application/optimizing/fonts)
+- [Google Fonts](https://fonts.google.com/)
+- [Web Font Performance](https://web.dev/font-best-practices/)
+- [CSS Font Loading API](https://developer.mozilla.org/en-US/docs/Web/API/CSS_Font_Loading_API)
+\`\`\`
+
+\`\`\`

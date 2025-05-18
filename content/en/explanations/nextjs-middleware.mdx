@@ -1,0 +1,411 @@
+---
+title: "Understanding Next.js Middleware"
+slug: "nextjs-middleware"
+description: "A comprehensive explanation of Next.js Middleware, how it works, and common use cases like authentication, localization, and redirects."
+author: "Next.js Knowledge Team"
+authorGithub: "nextjs-knowledge"
+date: "2024-02-05"
+lastUpdated: "2024-05-18"
+language: "en"
+difficulty: "intermediate"
+tags: ["next.js", "middleware", "authentication", "localization", "edge"]
+prompts: [
+  {
+    intent: "simplify",
+    output_format: "explanation",
+    target_language: "javascript",
+    ai_level: "beginner",
+    prompt: "Can you explain Next.js Middleware in simpler terms? I'm finding the concept confusing."
+  },
+  {
+    intent: "compare",
+    output_format: "explanation",
+    target_language: "javascript",
+    ai_level: "intermediate",
+    prompt: "How does Next.js Middleware compare to traditional Express middleware? What are the key differences and limitations?"
+  },
+  {
+    intent: "deep_dive",
+    output_format: "explanation",
+    target_language: "javascript",
+    ai_level: "advanced",
+    prompt: "Can you provide a more in-depth explanation of how Next.js Middleware works under the hood? How does it interact with the Edge Runtime and what are its performance characteristics?"
+  }
+]
+---
+
+# Understanding Next.js Middleware
+
+## Introduction
+
+Next.js Middleware is a powerful feature that allows you to run code before a request is completed. It enables you to modify responses, redirect users, rewrite URLs, set headers, and more—all before the page is rendered. This makes it perfect for implementing cross-cutting concerns like authentication, localization, analytics, and A/B testing.
+
+## Core Concept
+
+Middleware in Next.js executes on the Edge Runtime, which means it runs closer to the user (at the edge of the network) rather than on the origin server. This provides several benefits:
+
+- **Performance**: Faster response times due to reduced latency
+- **Security**: Protect routes and resources before they're accessed
+- **Flexibility**: Modify requests and responses on the fly
+
+### Key Aspects
+
+Middleware runs before the cache and before the routes are matched, giving you the ability to intercept and modify requests at the earliest possible point in the request lifecycle.
+
+\`\`\`tsx
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  // This code runs before the request reaches your pages or API routes
+  console.log('Middleware executed for:', request.nextUrl.pathname)
+  
+  // You can return the response as is
+  return NextResponse.next()
+  
+  // Or modify it
+  // return NextResponse.redirect(new URL('/new-page', request.url))
+}
+
+// Optional: Configure which paths Middleware will run on
+export const config = {
+  matcher: ['/api/:path*', '/dashboard/:path*'],
+}
+\`\`\`
+
+## How It Works
+
+When a request comes in to your Next.js application:
+
+1. The request first hits the Edge Runtime
+2. Next.js executes your Middleware function
+3. Based on your Middleware logic, Next.js either:
+   - Continues to the requested route (with potentially modified request/response)
+   - Redirects to a different route
+   - Rewrites the URL internally
+   - Returns a response directly from Middleware
+
+This happens before any page rendering or API route execution, making it ideal for global logic that should apply across multiple routes.
+
+### The Request-Response Cycle
+
+\`\`\`
+Client Request → Edge (Middleware) → [Redirect/Rewrite/Continue] → Page/API Route → Response
+\`\`\`
+
+## Use Cases
+
+### Authentication and Authorization
+
+One of the most common use cases for Middleware is protecting routes:
+
+\`\`\`tsx
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  // Get the pathname
+  const path = request.nextUrl.pathname
+  
+  // Define public paths that don't require authentication
+  const isPublicPath = path === '/login' || path === '/register' || path === '/'
+  
+  // Get the token from cookies
+  const token = request.cookies.get('auth-token')?.value
+  
+  // Redirect logic
+  if (!isPublicPath && !token) {
+    // Redirect to login if trying to access a protected route without a token
+    return NextResponse.redirect(new URL('/login', request.url))
+  }
+  
+  if (isPublicPath && token) {
+    // Redirect to dashboard if user is already logged in and trying to access public routes
+    return NextResponse.redirect(new URL('/dashboard', request.url))
+  }
+  
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+}
+\`\`\`
+
+### Internationalization (i18n)
+
+Middleware is perfect for implementing language detection and routing:
+
+\`\`\`tsx
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+import { match } from '@formatjs/intl-localematcher'
+import Negotiator from 'negotiator'
+
+// List of supported locales
+const locales = ['en', 'fr', 'de', 'es']
+const defaultLocale = 'en'
+
+function getLocale(request: NextRequest) {
+  // Negotiator expects plain object so we need to transform headers
+  const negotiatorHeaders: Record<string, string> = {}
+  request.headers.forEach((value, key) => (negotiatorHeaders[key] = value))
+  
+  // Use negotiator and intl-localematcher to get the best locale
+  const languages = new Negotiator({ headers: negotiatorHeaders }).languages()
+  return match(languages, locales, defaultLocale)
+}
+
+export function middleware(request: NextRequest) {
+  const pathname = request.nextUrl.pathname
+  
+  // Check if the pathname already has a locale
+  const pathnameHasLocale = locales.some(
+    locale => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  )
+  
+  if (pathnameHasLocale) return NextResponse.next()
+  
+  // Redirect if there is no locale in the pathname
+  const locale = getLocale(request)
+  const newUrl = new URL(`/${locale}${pathname}`, request.url)
+  
+  // Copy all search params
+  request.nextUrl.searchParams.forEach((value, key) => {
+    newUrl.searchParams.set(key, value)
+  })
+  
+  return NextResponse.redirect(newUrl)
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+}
+\`\`\`
+
+### A/B Testing
+
+Middleware can be used to implement A/B testing by randomly assigning users to different variants:
+
+\`\`\`tsx
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+// A/B test variants
+const variants = ['control', 'test-a', 'test-b']
+
+export function middleware(request: NextRequest) {
+  // Check if the user already has a variant assigned
+  let variant = request.cookies.get('ab-test-variant')?.value
+  
+  // If not, assign a random variant
+  if (!variant) {
+    variant = variants[Math.floor(Math.random() * variants.length)]
+    
+    // Create a response that will be modified
+    const response = NextResponse.next()
+    
+    // Set the variant cookie
+    response.cookies.set('ab-test-variant', variant, {
+      maxAge: 60 * 60 * 24 * 7, // 1 week
+      path: '/',
+    })
+    
+    return response
+  }
+  
+  // For specific pages, rewrite to the variant
+  if (request.nextUrl.pathname === '/feature') {
+    return NextResponse.rewrite(new URL(`/feature/${variant}`, request.url))
+  }
+  
+  return NextResponse.next()
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+}
+\`\`\`
+
+### Custom Headers and Security
+
+Add security headers to all responses:
+
+\`\`\`tsx
+// middleware.ts
+import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
+
+export function middleware(request: NextRequest) {
+  // Clone the response
+  const response = NextResponse.next()
+  
+  // Add security headers
+  response.headers.set('X-Frame-Options', 'DENY')
+  response.headers.set('X-Content-Type-Options', 'nosniff')
+  response.headers.set('Referrer-Policy', 'origin-when-cross-origin')
+  response.headers.set(
+    'Content-Security-Policy',
+    "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+  )
+  
+  return response
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+}
+\`\`\`
+
+## Comparison with Alternatives
+
+### Middleware vs. getServerSideProps/Page Component
+
+| Aspect | Middleware | getServerSideProps/Page Component |
+|--------|------------|----------------------------------|
+| Execution Timing | Before routing, at the edge | After routing, on the server |
+| Scope | Global or specific routes | Specific page only |
+| Use Case | Cross-cutting concerns (auth, i18n) | Page-specific data fetching |
+| Performance | Very fast (edge) | Server-dependent |
+| Access to Request | Yes | Yes (in getServerSideProps) |
+| Can Modify Response | Yes | Limited |
+| Can Redirect | Yes | Yes |
+| Can Rewrite | Yes | No |
+
+### Middleware vs. API Routes
+
+| Aspect | Middleware | API Routes |
+|--------|------------|------------|
+| Purpose | Request interception | Dedicated endpoints |
+| Execution | Before routing | After routing |
+| Response Type | Typically passes through | Typically returns data |
+| Use Case | Global logic | Specific API functionality |
+
+## Best Practices
+
+### Keep Middleware Light
+
+Since Middleware runs on every request that matches your configuration, it's important to keep it lightweight:
+
+- Avoid heavy computations
+- Minimize dependencies
+- Keep logic simple and focused
+
+### Use the Matcher Configuration
+
+Instead of adding conditional logic inside your Middleware function, use the `matcher` configuration to specify exactly which routes should trigger Middleware:
+
+\`\`\`tsx
+export const config = {
+  matcher: [
+    // Match all paths except for:
+    // 1. /api routes
+    // 2. /_next (Next.js internals)
+    // 3. /static (public files)
+    // 4. All files in the public folder
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ],
+}
+\`\`\`
+
+You can use more specific matchers for better performance:
+
+\`\`\`tsx
+export const config = {
+  matcher: [
+    // Match specific paths
+    '/dashboard/:path*',
+    '/profile/:path*',
+    
+    // Use regex for complex patterns
+    {
+      source: '/((?!api|_next/static|_next/image|favicon.ico).*)',
+      missing: [
+        { type: 'header', key: 'next-router-prefetch' },
+        { type: 'header', key: 'purpose', value: 'prefetch' },
+      ],
+    },
+  ],
+}
+\`\`\`
+
+### Handle Cookies Carefully
+
+When working with cookies in Middleware, remember:
+
+- Cookies set in Middleware are available immediately in the same request
+- Use the `NextResponse` API to set cookies
+- Be mindful of cookie size limits
+
+\`\`\`tsx
+// Setting a cookie
+const response = NextResponse.next()
+response.cookies.set('my-cookie', 'my-value', {
+  path: '/',
+  maxAge: 60 * 60 * 24, // 1 day
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'strict',
+})
+\`\`\`
+
+### Error Handling
+
+Implement proper error handling in your Middleware to prevent unexpected behavior:
+
+\`\`\`tsx
+export function middleware(request: NextRequest) {
+  try {
+    // Your middleware logic
+    return NextResponse.next()
+  } catch (error) {
+    console.error('Middleware error:', error)
+    
+    // Return a fallback response or redirect to an error page
+    return NextResponse.redirect(new URL('/error', request.url))
+  }
+}
+\`\`\`
+
+## Common Misconceptions
+
+### "Middleware Can Access the Database"
+
+Middleware runs on the Edge Runtime, which has limitations. It cannot:
+- Connect directly to databases
+- Use Node.js-specific APIs
+- Import packages that use Node.js APIs
+
+Instead, for database access, use API routes or Server Components.
+
+### "Middleware Replaces API Routes"
+
+Middleware and API routes serve different purposes:
+- Middleware: Intercept and modify requests
+- API routes: Handle specific API functionality
+
+They complement each other rather than replace one another.
+
+### "Middleware Always Runs on Every Request"
+
+Middleware only runs on requests that match your configured matchers. Use the `matcher` configuration to limit where Middleware executes.
+
+## Conclusion
+
+Next.js Middleware is a powerful tool for implementing cross-cutting concerns in your application. By running code at the edge before requests reach your pages or API routes, you can implement authentication, localization, A/B testing, and more in a clean, centralized way.
+
+The key to using Middleware effectively is understanding its execution context, limitations, and best practices. By keeping your Middleware lightweight, using the matcher configuration appropriately, and handling errors properly, you can leverage this feature to build more robust and performant Next.js applications.
+
+## Further Reading
+
+- [Next.js Middleware Documentation](https://nextjs.org/docs/app/building-your-application/routing/middleware)
+- [Edge Runtime Documentation](https://nextjs.org/docs/app/api-reference/edge)
+- [Next.js Authentication Patterns](https://nextjs.org/docs/app/building-your-application/authentication)
+- [Internationalization in Next.js](https://nextjs.org/docs/app/building-your-application/routing/internationalization)
+\`\`\`
+
+\`\`\`

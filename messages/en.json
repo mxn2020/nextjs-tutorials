@@ -14,12 +14,14 @@
   "Navigation": {
     "home": "Home",
     "tutorials": "Tutorials",
+    "references": "References",
+    "explanations": "Explanations",
+    "snippets": "Snippets",
     "topics": "Topics",
     "aiPrompts": "AI Prompts",
-    "snippets": "Snippets",
+    "about": "About",
     "community": "Community",
     "contribute": "Contribute",
-    "about": "About",
     "signIn": "Sign In",
     "signOut": "Sign Out"
   },
@@ -27,7 +29,7 @@
     "copyright": "© {year} Next.js Knowledge Library. All rights reserved.",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
-    "contact": "Contact Us"
+    "contact": "Contact"
   },
   "UserNav": {
     "profile": "Profile",
@@ -50,5 +52,55 @@
     "inProgress": "In Progress",
     "notAvailable": "Not Available",
     "content": "Content"
+  },
+  "Snippets": {
+    "title": "Code Snippets",
+    "description": "Reusable code snippets for common Next.js patterns and utilities."
+  },
+  "Topics": {
+    "title": "Topics",
+    "description": "Explore Next.js topics by category and find relevant resources."
+  },
+  "About": {
+    "title": "About Us",
+    "description": "Learn about the Next.js Knowledge Library project and our team."
+  },
+  "Community": {
+    "title": "Community",
+    "description": "Join our community and connect with other Next.js developers."
+  },
+  "Privacy": {
+    "title": "Privacy Policy",
+    "description": "Learn about how we collect and use your data."
+  },
+  "Terms": {
+    "title": "Terms of Service",
+    "description": "The terms and conditions for using our website."
+  },
+  "Contact": {
+    "title": "Contact Us",
+    "description": "Get in touch with our team for questions, feedback, or support."
+  },
+  "Search": {
+    "title": "Search",
+    "description": "Search for tutorials, references, and other content.",
+    "placeholder": "Search for tutorials, references, and more...",
+    "tip": "Press Enter to search",
+    "searchResults": "Search Results",
+    "resultCount": {
+      "one": "Found 1 result for '{query}'",
+      "other": "Found {count} results for '{query}'"
+    },
+    "enterQuery": "Enter a search query to find content",
+    "noResults": "No results found",
+    "tryDifferentQuery": "Try a different search term or browse our categories"
+  },
+  "Newsletter": {
+    "title": "Subscribe to our newsletter",
+    "description": "Get the latest updates and resources delivered to your inbox.",
+    "emailPlaceholder": "your.email@example.com",
+    "buttonText": "Subscribe",
+    "successMessage": "Thanks for subscribing!",
+    "errorMessage": "Failed to subscribe. Please try again."
   }
 }

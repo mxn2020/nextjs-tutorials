@@ -1,0 +1,597 @@
+---
+title: "Optimizing Next.js Performance"
+slug: "optimizing-nextjs-performance"
+description: "Learn how to optimize your Next.js application for better performance, including code splitting, image optimization, and caching strategies."
+author: "Next.js Knowledge Team"
+authorGithub: "nextjs-knowledge"
+date: "2024-03-20"
+lastUpdated: "2024-05-18"
+language: "en"
+difficulty: "advanced"
+tags: ["next.js", "performance", "optimization", "core web vitals"]
+prerequisites: ["Working knowledge of Next.js", "Understanding of React components"]
+prompts: [
+  {
+    intent: "practice",
+    output_format: "code",
+    target_language: "typescript",
+    ai_level: "advanced",
+    prompt: "Create a practice exercise for implementing a performance optimization technique in Next.js that uses dynamic imports and React.lazy for code splitting."
+  },
+  {
+    intent: "debug",
+    output_format: "explanation",
+    target_language: "javascript",
+    ai_level: "intermediate",
+    prompt: "I've implemented image optimization in my Next.js app, but I'm still seeing poor Largest Contentful Paint (LCP) scores. Here's my code: [CODE]. What might be causing this and how can I fix it?"
+  },
+  {
+    intent: "extend",
+    output_format: "code",
+    target_language: "typescript",
+    ai_level: "advanced",
+    prompt: "How can I extend my Next.js application to implement a service worker for offline support and improved performance?"
+  }
+]
+---
+
+# Optimizing Next.js Performance
+
+## Introduction
+
+Performance is a critical aspect of web applications that directly impacts user experience, conversion rates, and search engine rankings. Next.js provides several built-in optimizations, but knowing how to leverage these features and implement additional optimizations can significantly improve your application's performance.
+
+This tutorial will guide you through various techniques to optimize your Next.js application, focusing on:
+
+1. Core Web Vitals optimization
+2. Code splitting and bundle optimization
+3. Image and font optimization
+4. Caching strategies
+5. Server-side rendering optimizations
+
+## Prerequisites
+
+- Working knowledge of Next.js
+- Understanding of React components
+- Familiarity with web performance metrics
+
+## Step 1: Understanding Performance Metrics
+
+Before optimizing, it's important to understand what we're measuring. The Core Web Vitals are a set of specific factors that Google considers important for user experience:
+
+- **Largest Contentful Paint (LCP)**: Measures loading performance. To provide a good user experience, LCP should occur within 2.5 seconds of when the page first starts loading.
+- **First Input Delay (FID)**: Measures interactivity. Pages should have a FID of less than 100 milliseconds.
+- **Cumulative Layout Shift (CLS)**: Measures visual stability. Pages should maintain a CLS of less than 0.1.
+
+Let's set up tools to measure these metrics:
+
+\`\`\`tsx
+// pages/_app.tsx or app/layout.tsx
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+
+// Web Vitals reporting function
+export function reportWebVitals(metric) {
+  console.log(metric)
+  
+  // You can send the metrics to your analytics service
+  // Example: sendToAnalytics(metric)
+}
+
+function MyApp({ Component, pageProps }) {
+  const router = useRouter()
+  
+  useEffect(() => {
+    // This logs performance metrics in development
+    if (process.env.NODE_ENV !== 'production') {
+      import('web-vitals').then(({ getCLS, getFID, getLCP }) => {
+        getCLS(console.log)
+        getFID(console.log)
+        getLCP(console.log)
+      })
+    }
+  }, [])
+  
+  return <Component {...pageProps} />
+}
+
+export default MyApp
+\`\`\`
+
+## Step 2: Code Splitting and Bundle Optimization
+
+Next.js automatically code-splits your application by pages, but you can further optimize by:
+
+### Dynamic Imports
+
+Use dynamic imports to split code at the component level:
+
+\`\`\`tsx
+// components/heavy-component.tsx
+import dynamic from 'next/dynamic'
+import { Suspense } from 'react'
+
+// Instead of importing directly
+// import HeavyChart from './heavy-chart'
+
+// Use dynamic import
+const HeavyChart = dynamic(() => import('./heavy-chart'), {
+  loading: () => <div>Loading chart...</div>,
+  ssr: false, // Disable Server-Side Rendering if not needed
+})
+
+export default function Dashboard() {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <Suspense fallback={<div>Loading...</div>}>
+        <HeavyChart />
+      </Suspense>
+    </div>
+  )
+}
+\`\`\`
+
+### Bundle Analysis
+
+Use the `@next/bundle-analyzer` to identify large dependencies:
+
+\`\`\`bash
+npm install --save-dev @next/bundle-analyzer
+\`\`\`
+
+\`\`\`js
+// next.config.js
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+
+module.exports = withBundleAnalyzer({
+  // Your Next.js config
+})
+\`\`\`
+
+Run the analysis with:
+
+\`\`\`bash
+ANALYZE=true npm run build
+\`\`\`
+
+### Tree Shaking Optimization
+
+Ensure your imports are specific to enable better tree shaking:
+
+\`\`\`tsx
+// Bad: Imports the entire library
+import lodash from 'lodash'
+
+// Good: Imports only what's needed
+import { debounce } from 'lodash/debounce'
+\`\`\`
+
+## Step 3: Image Optimization
+
+Next.js provides an Image component that automatically optimizes images:
+
+\`\`\`tsx
+// components/optimized-image.tsx
+import Image from 'next/image'
+
+export default function OptimizedImage() {
+  return (
+    <div className="relative h-[300px]">
+      <Image
+        src="/large-image.jpg"
+        alt="Description"
+        fill
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        priority={true} // For LCP images
+        quality={85} // Adjust quality (default is 75)
+        placeholder="blur" // Optional blur-up
+        blurDataURL="data:image/jpeg;base64,/9j..." // Base64 encoded small image
+        style={{ objectFit: 'cover' }}
+      />
+    </div>
+  )
+}
+\`\`\`
+
+### Optimizing for LCP
+
+For images that are the Largest Contentful Paint element:
+
+1. Use the `priority` prop
+2. Preload critical images
+3. Consider using AVIF format for better compression
+
+\`\`\`tsx
+// next.config.js
+module.exports = {
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
+}
+\`\`\`
+
+## Step 4: Font Optimization
+
+Next.js 13+ includes automatic font optimization:
+
+\`\`\`tsx
+// app/layout.tsx
+import { Inter } from 'next/font/google'
+
+// Initialize the font object
+const inter = Inter({
+  subsets: ['latin'],
+  display: 'swap',
+  preload: true,
+})
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className={inter.className}>
+      <body>{children}</body>
+    </html>
+  )
+}
+\`\`\`
+
+For local fonts:
+
+\`\`\`tsx
+// app/layout.tsx
+import localFont from 'next/font/local'
+
+const myFont = localFont({
+  src: [
+    {
+      path: '../fonts/font-regular.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../fonts/font-bold.woff2',
+      weight: '700',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+})
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en" className={myFont.className}>
+      <body>{children}</body>
+    </html>
+  )
+}
+\`\`\`
+
+## Step 5: Caching Strategies
+
+### Fetch Caching
+
+Next.js 13+ provides automatic fetch request deduplication and caching:
+
+\`\`\`tsx
+// app/products/page.tsx
+async function getProducts() {
+  // This fetch request is automatically cached
+  const res = await fetch('https://api.example.com/products')
+  
+  if (!res.ok) {
+    throw new Error('Failed to fetch products')
+  }
+  
+  return res.json()
+}
+
+// To control caching behavior:
+async function getProductsWithOptions() {
+  // Revalidate every 60 seconds
+  const res = await fetch('https://api.example.com/products', {
+    next: { revalidate: 60 }
+  })
+  
+  // Or disable cache
+  const freshData = await fetch('https://api.example.com/real-time-data', {
+    cache: 'no-store'
+  })
+  
+  return res.json()
+}
+
+export default async function ProductsPage() {
+  const products = await getProducts()
+  
+  return (
+    <div>
+      <h1>Products</h1>
+      <ul>
+        {products.map(product => (
+          <li key={product.id}>{product.name}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+\`\`\`
+
+### React Cache
+
+Use React's `cache` function to deduplicate requests:
+
+\`\`\`tsx
+// utils/data.ts
+import { cache } from 'react'
+
+export const getUser = cache(async (id: string) => {
+  const res = await fetch(`https://api.example.com/users/${id}`)
+  return res.json()
+})
+\`\`\`
+
+### Route Segment Config
+
+Configure caching behavior at the route level:
+
+\`\`\`tsx
+// app/products/[id]/page.tsx
+export const revalidate = 3600 // Revalidate every hour
+
+// Or disable caching for this route
+export const dynamic = 'force-dynamic'
+
+// Or make this route completely static
+export const dynamic = 'force-static'
+\`\`\`
+
+## Step 6: Server-Side Rendering Optimizations
+
+### Streaming and Suspense
+
+Use streaming to improve Time to First Byte (TTFB) and interactivity:
+
+\`\`\`tsx
+// app/dashboard/page.tsx
+import { Suspense } from 'react'
+import UserProfile from './user-profile'
+import LatestActivity from './latest-activity'
+import RecommendedItems from './recommended-items'
+
+export default function Dashboard() {
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      
+      {/* Critical UI renders first */}
+      <Suspense fallback={<div>Loading profile...</div>}>
+        <UserProfile />
+      </Suspense>
+      
+      {/* Less critical components stream in */}
+      <div className="grid grid-cols-2 gap-4">
+        <Suspense fallback={<div>Loading activity...</div>}>
+          <LatestActivity />
+        </Suspense>
+        
+        <Suspense fallback={<div>Loading recommendations...</div>}>
+          <RecommendedItems />
+        </Suspense>
+      </div>
+    </div>
+  )
+}
+\`\`\`
+
+### Parallel Data Fetching
+
+Fetch data in parallel to reduce waterfall requests:
+
+\`\`\`tsx
+// app/dashboard/page.tsx
+async function Dashboard() {
+  // Fetch data in parallel
+  const [userData, activityData, recommendationsData] = await Promise.all([
+    fetch('https://api.example.com/user').then(res => res.json()),
+    fetch('https://api.example.com/activity').then(res => res.json()),
+    fetch('https://api.example.com/recommendations').then(res => res.json()),
+  ])
+  
+  return (
+    <div>
+      <UserProfile data={userData} />
+      <LatestActivity data={activityData} />
+      <Recommendations data={recommendationsData} />
+    </div>
+  )
+}
+\`\`\`
+
+## Step 7: Third-Party Script Optimization
+
+Use the Next.js Script component to optimize third-party scripts:
+
+\`\`\`tsx
+// app/layout.tsx
+import Script from 'next/script'
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        
+        {/* Load analytics after page load */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXX"
+          strategy="afterInteractive"
+        />
+        
+        {/* Load chat widget when user is idle */}
+        <Script
+          src="https://chat-widget.com/script.js"
+          strategy="lazyOnload"
+        />
+        
+        {/* Inline script */}
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-XXXXXXXX');
+          `}
+        </Script>
+      </body>
+    </html>
+  )
+}
+\`\`\`
+
+## Step 8: Measuring and Monitoring
+
+Set up continuous performance monitoring:
+
+### Lighthouse CI
+
+\`\`\`bash
+npm install -g @lhci/cli
+\`\`\`
+
+Create a `lighthouserc.js` file:
+
+\`\`\`js
+// lighthouserc.js
+module.exports = {
+  ci: {
+    collect: {
+      startServerCommand: 'npm run start',
+      url: ['http://localhost:3000/', 'http://localhost:3000/products'],
+    },
+    upload: {
+      target: 'temporary-public-storage',
+    },
+    assert: {
+      preset: 'lighthouse:recommended',
+    },
+  },
+}
+\`\`\`
+
+Run Lighthouse CI:
+
+\`\`\`bash
+lhci autorun
+\`\`\`
+
+### Real User Monitoring
+
+Implement real user monitoring with the Web Vitals library:
+
+\`\`\`tsx
+// lib/vitals.ts
+import { getCLS, getFID, getLCP, getFCP, getTTFB } from 'web-vitals'
+
+const vitalsUrl = 'https://vitals.vercel-analytics.com/v1/vitals'
+
+function getConnectionSpeed() {
+  return 'connection' in navigator &&
+    navigator['connection'] &&
+    'effectiveType' in navigator['connection']
+    ? navigator['connection']['effectiveType']
+    : ''
+}
+
+export function sendVitals({ id, name, label, value }) {
+  const body = {
+    id,
+    page: window.location.pathname,
+    href: window.location.href,
+    event_name: name,
+    value: Math.round(name === 'CLS' ? value * 1000 : value),
+    speed: getConnectionSpeed(),
+  }
+
+  const blob = new Blob([JSON.stringify(body)], { type: 'application/json' })
+  if (navigator.sendBeacon) {
+    navigator.sendBeacon(vitalsUrl, blob)
+  } else {
+    fetch(vitalsUrl, {
+      body: blob,
+      method: 'POST',
+      keepalive: true,
+    })
+  }
+}
+
+export function reportWebVitals(metric) {
+  sendVitals(metric)
+}
+\`\`\`
+
+## Common Issues and Troubleshooting
+
+### Layout Shifts (CLS)
+
+If you're experiencing layout shifts:
+
+1. Always specify width and height for images
+2. Use CSS aspect ratio boxes
+3. Avoid inserting content above existing content
+4. Use font display swap and preload critical fonts
+
+### Slow LCP
+
+If your Largest Contentful Paint is slow:
+
+1. Ensure the LCP element has `priority` if it's an image
+2. Reduce server response time (TTFB)
+3. Eliminate render-blocking resources
+4. Use Server Components for faster initial HTML
+
+### JavaScript Execution Time
+
+If JavaScript is taking too long to execute:
+
+1. Split large components with dynamic imports
+2. Defer non-critical JavaScript
+3. Minimize polyfills
+4. Use Web Workers for CPU-intensive tasks
+
+## Conclusion
+
+In this tutorial, you've learned various techniques to optimize your Next.js application's performance, including:
+
+1. Understanding and measuring Core Web Vitals
+2. Implementing code splitting and bundle optimization
+3. Optimizing images and fonts
+4. Implementing effective caching strategies
+5. Using streaming and Suspense for better user experience
+6. Optimizing third-party scripts
+7. Setting up continuous performance monitoring
+
+By applying these techniques, you can significantly improve your application's performance, providing a better user experience and potentially improving your search engine rankings.
+
+## Further Reading
+
+- [Next.js Documentation on Optimization](https://nextjs.org/docs/app/building-your-application/optimizing)
+- [Web Vitals](https://web.dev/vitals/)
+- [Lighthouse Performance Scoring](https://developer.chrome.com/docs/lighthouse/performance/performance-scoring/)
+- [React Server Components](https://nextjs.org/docs/app/building-your-application/rendering/server-components)
+- [Next.js Image Optimization](https://nextjs.org/docs/app/building-your-application/optimizing/images)
+\`\`\`
+\`\`\`

@@ -1,0 +1,368 @@
+---
+title: "Data Fetching in Next.js"
+slug: "data-fetching-in-nextjs"
+description: "Learn the different methods for fetching data in Next.js applications, including Server Components, Client Components, and API Routes."
+author: "Next.js Knowledge Team"
+authorGithub: "nextjs-knowledge"
+date: "2024-04-10"
+lastUpdated: "2024-05-18"
+language: "en"
+difficulty: "intermediate"
+tags: ["next.js", "data fetching", "server components", "api"]
+prerequisites: ["Basic knowledge of Next.js", "Understanding of React components"]
+prompts: [
+  {
+    intent: "practice",
+    output_format: "code",
+    target_language: "typescript",
+    ai_level: "intermediate",
+    prompt: "Create a practice exercise for fetching data from an external API in a Next.js Server Component and displaying it in a table."
+  },
+  {
+    intent: "debug",
+    output_format: "explanation",
+    target_language: "javascript",
+    ai_level: "beginner",
+    prompt: "I'm getting an error 'Error: Objects are not valid as a React child' when trying to display data fetched in my Next.js component. Here's my code: [CODE]. What might be causing this?"
+  },
+  {
+    intent: "extend",
+    output_format: "code",
+    target_language: "typescript",
+    ai_level: "advanced",
+    prompt: "How can I extend my data fetching implementation to include caching, revalidation, and error handling?"
+  }
+]
+---
+
+# Data Fetching in Next.js
+
+## Introduction
+
+Data fetching is a critical part of most web applications. Next.js provides several powerful methods for fetching data, each with its own use cases and benefits. This tutorial will guide you through the different data fetching approaches in Next.js and help you choose the right one for your needs.
+
+## Prerequisites
+
+- Basic knowledge of Next.js
+- Understanding of React components
+- Familiarity with async/await and Promises
+
+## Step 1: Understanding Data Fetching Options in Next.js
+
+Next.js offers several ways to fetch data:
+
+1. **Server Components**: Fetch data directly on the server
+2. **Route Handlers**: Create API endpoints within your Next.js app
+3. **Client Components**: Fetch data on the client side
+4. **Server Actions**: Perform data mutations with form submissions
+
+Let's explore each approach.
+
+## Step 2: Fetching Data in Server Components
+
+Server Components are the recommended way to fetch data in Next.js. They allow you to fetch data directly on the server, keeping sensitive information like API keys secure.
+
+\`\`\`tsx
+// app/users/page.tsx
+async function getUsers() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users')
+  
+  if (!res.ok) {
+    throw new Error('Failed to fetch users')
+  }
+  
+  return res.json()
+}
+
+export default async function UsersPage() {
+  const users = await getUsers()
+  
+  return (
+    <div>
+      <h1>Users</h1>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+\`\`\`
+
+Key benefits of Server Components for data fetching:
+
+- No need to expose API keys or secrets to the client
+- Reduced client-side JavaScript
+- Automatic caching of fetch requests
+- Parallel data fetching
+
+## Step 3: Creating and Using Route Handlers
+
+Route Handlers allow you to create API endpoints within your Next.js application.
+
+\`\`\`tsx
+// app/api/users/route.ts
+import { NextResponse } from 'next/server'
+
+export async function GET() {
+  const res = await fetch('https://jsonplaceholder.typicode.com/users')
+  const data = await res.json()
+  
+  return NextResponse.json(data)
+}
+\`\`\`
+
+You can then fetch data from your own API:
+
+\`\`\`tsx
+// app/users/client-page.tsx
+'use client'
+
+import { useState, useEffect } from 'react'
+
+export default function ClientUsersPage() {
+  const [users, setUsers] = useState([])
+  const [loading, setLoading] = useState(true)
+  
+  useEffect(() => {
+    async function fetchUsers() {
+      try {
+        const res = await fetch('/api/users')
+        const data = await res.json()
+        setUsers(data)
+      } catch (error) {
+        console.error('Error fetching users:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+    
+    fetchUsers()
+  }, [])
+  
+  if (loading) return <div>Loading...</div>
+  
+  return (
+    <div>
+      <h1>Users (Client-side)</h1>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  )
+}
+\`\`\`
+
+## Step 4: Fetching Data in Client Components
+
+Sometimes you need to fetch data on the client side, especially for data that depends on user interactions or needs to be fetched after the initial page load.
+
+\`\`\`tsx
+// app/components/user-search.tsx
+'use client'
+
+import { useState } from 'react'
+
+export default function UserSearch() {
+  const [query, setQuery] = useState('')
+  const [results, setResults] = useState([])
+  const [loading, setLoading] = useState(false)
+  
+  async function handleSearch(e) {
+    e.preventDefault()
+    
+    if (!query) return
+    
+    setLoading(true)
+    
+    try {
+      const res = await fetch(`/api/users/search?q=${encodeURIComponent(query)}`)
+      const data = await res.json()
+      setResults(data)
+    } catch (error) {
+      console.error('Error searching users:', error)
+    } finally {
+      setLoading(false)
+    }
+  }
+  
+  return (
+    <div>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search users..."
+        />
+        <button type="submit" disabled={loading}>
+          {loading ? 'Searching...' : 'Search'}
+        </button>
+      </form>
+      
+      {results.length > 0 && (
+        <ul>
+          {results.map(user => (
+            <li key={user.id}>{user.name}</li>
+          ))}
+        </ul>
+      )}
+    </div>
+  )
+}
+\`\`\`
+
+## Step 5: Using Server Actions for Data Mutations
+
+Server Actions are a new feature in Next.js that allow you to perform data mutations directly from client components.
+
+\`\`\`tsx
+// app/actions.ts
+'use server'
+
+export async function createUser(formData: FormData) {
+  const name = formData.get('name')
+  const email = formData.get('email')
+  
+  // Validate the data
+  if (!name || !email) {
+    return { error: 'Name and email are required' }
+  }
+  
+  try {
+    // In a real app, you would save to a database
+    const res = await fetch('https://jsonplaceholder.typicode.com/users', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ name, email }),
+    })
+    
+    const data = await res.json()
+    return { success: true, user: data }
+  } catch (error) {
+    return { error: 'Failed to create user' }
+  }
+}
+\`\`\`
+
+Using the Server Action in a form:
+
+\`\`\`tsx
+// app/users/new/page.tsx
+'use client'
+
+import { useState } from 'react'
+import { createUser } from '@/app/actions'
+
+export default function NewUserPage() {
+  const [result, setResult] = useState(null)
+  
+  async function handleSubmit(formData) {
+    const result = await createUser(formData)
+    setResult(result)
+  }
+  
+  return (
+    <div>
+      <h1>Create New User</h1>
+      
+      <form action={handleSubmit}>
+        <div>
+          <label htmlFor="name">Name:</label>
+          <input type="text" id="name" name="name" required />
+        </div>
+        
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+        
+        <button type="submit">Create User</button>
+      </form>
+      
+      {result?.success && (
+        <div>
+          <p>User created successfully!</p>
+          <pre>{JSON.stringify(result.user, null, 2)}</pre>
+        </div>
+      )}
+      
+      {result?.error && (
+        <div>
+          <p>Error: {result.error}</p>
+        </div>
+      )}
+    </div>
+  )
+}
+\`\`\`
+
+## Common Issues and Troubleshooting
+
+### CORS Issues
+
+If you're fetching data from an external API, you might encounter CORS issues. You can solve this by:
+
+1. Using a Route Handler as a proxy
+2. Ensuring your API allows requests from your domain
+3. Using the `next.config.js` rewrites feature
+
+### Caching Issues
+
+Next.js automatically caches fetch requests in Server Components. If you need fresh data, you can:
+
+\`\`\`tsx
+// Disable cache for this request
+const res = await fetch('https://api.example.com/data', { cache: 'no-store' })
+
+// Revalidate cache every 60 seconds
+const res = await fetch('https://api.example.com/data', { next: { revalidate: 60 } })
+\`\`\`
+
+### Error Handling
+
+Always implement proper error handling in your data fetching logic:
+
+\`\`\`tsx
+async function getData() {
+  try {
+    const res = await fetch('https://api.example.com/data')
+    
+    if (!res.ok) {
+      throw new Error(`Failed to fetch data: ${res.status}`)
+    }
+    
+    return res.json()
+  } catch (error) {
+    console.error('Error fetching data:', error)
+    // You might want to return a default value or re-throw the error
+    throw error
+  }
+}
+\`\`\`
+
+## Conclusion
+
+In this tutorial, you've learned the different methods for fetching data in Next.js:
+
+- Server Components for server-side data fetching
+- Route Handlers for creating API endpoints
+- Client Components for client-side data fetching
+- Server Actions for data mutations
+
+Each approach has its own use cases and benefits. Server Components are generally recommended for initial data fetching, while Client Components and Server Actions are useful for interactive features and data mutations.
+
+## Further Reading
+
+- [Next.js Data Fetching Documentation](https://nextjs.org/docs/app/building-your-application/data-fetching)
+- [Server Actions Documentation](https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions)
+- [Route Handlers Documentation](https://nextjs.org/docs/app/building-your-application/routing/route-handlers)
+- [Caching in Next.js](https://nextjs.org/docs/app/building-your-application/caching)
+\`\`\`
+
+\`\`\`
