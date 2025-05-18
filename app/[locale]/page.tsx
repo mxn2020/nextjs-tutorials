@@ -1,3 +1,4 @@
+import { getDictionary } from "@/lib/i18n/server"
 import Link from "next/link"
 import { Suspense } from "react"
 import { Button } from "@/components/ui/button"
@@ -14,7 +15,9 @@ export const metadata = {
   description: "A multilingual Next.js learning platform with AI integration and community collaboration",
 }
 
-export default async function HomePage() {
+export default async function HomePage({ params }: { params: { locale: string } }) {
+  const { locale } = params
+  const dictionary = await getDictionary(locale)
   const latestContent = await getLatestContent(6)
 
   return (
