@@ -1,67 +1,33 @@
-import type { DefaultSession, DefaultUser } from "next-auth"
-
-// Define user role type
-export type UserRole = "admin" | "editor" | "viewer" | "user"
-
-// Define user profile type
-export interface UserProfile {
-  bio?: string
-  location?: string
-  website?: string
-  joinedAt: Date
-  lastActive: Date
-  displayName?: string
-  avatar?: string
-}
-
-// Define user settings type
-export interface UserSettings {
-  theme: "light" | "dark" | "system"
-  emailNotifications: boolean
-  contentUpdateNotifications: boolean
-  weeklyDigest: boolean
-  language: string
-  timezone: string
-}
-
-// Define bookmark type
-export interface UserBookmark {
-  id: string
-  contentId: string
-  contentType: "tutorial" | "reference" | "explanation" | "snippet" | "video" | "prompt"
-  title: string
-  description?: string
-  createdAt: Date
-}
+// Types for Next-Auth
+import { DefaultSession } from "next-auth";
+import { JWT } from "next-auth/jwt";
 
 // Extend the built-in session types
 declare module "next-auth" {
   interface Session {
     user: {
-      id: string
-      role: UserRole
-      profile?: UserProfile
-      settings?: UserSettings
-      bookmarks?: string[]
-    } & DefaultSession["user"]
+      id: string;
+      role: string;
+      email?: string | null;
+      name?: string | null;
+      image?: string | null;
+    } & DefaultSession["user"];
   }
 
-  // Extend the built-in user types
-  interface User extends DefaultUser {
-    role?: UserRole
-    profile?: UserProfile
-    settings?: UserSettings
-    bookmarks?: string[]
+  interface User {
+    id: string;
+    email?: string | null;
+    name?: string | null;
+    image?: string | null;
+    role?: string;
+    emailVerified?: Date | null;
   }
 }
 
-// Extend the JWT types
+// Extend the JWT type
 declare module "next-auth/jwt" {
   interface JWT {
-    id: string
-    role?: UserRole
-    profile?: UserProfile
-    settings?: UserSettings
-    bookmarks?: string[]
+    id?: string;
+    role?: string;
   }
 }

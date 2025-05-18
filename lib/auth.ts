@@ -20,15 +20,18 @@ const debugLog = (message: string, data?: any) => {
 const getMongoDBAdapter = async () => {
   try {
     debugLog("Initializing MongoDB adapter")
-    const { db } = await connectToDatabase()
-
-    // Important: Return the adapter with the db instance
-    return MongoDBAdapter({
-      db,
-    })
+    const { client } = await connectToDatabase()
+    
+    if (!client) {
+      throw new Error("MongoDB connection failed - client instance is undefined")
+    }
+    
+    debugLog("MongoDB connection successful, creating adapter")
+    // Return the adapter with the MongoDB client as per the docs
+    return MongoDBAdapter(client)
   } catch (error) {
     debugLog("Error initializing MongoDB adapter", error)
-    return null
+    return undefined // Return undefined instead of null to match expected type
   }
 }
 
@@ -183,9 +186,6 @@ export const authOptions: NextAuthOptions = {
         provider: message.account.provider,
         user: message.user.email,
       })
-    },
-    async error(message) {
-      debugLog("NextAuth error event", message)
     },
   },
   logger: {
