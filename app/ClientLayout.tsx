@@ -8,14 +8,12 @@ import { NextIntlClientProvider } from "next-intl"
 import { Analytics } from "@/components/analytics"
 import { SidebarProvider } from "@/components/sidebar-provider"
 import { MotionConfig } from "framer-motion"
-import { useSearchParams } from "next/navigation"
 import { Suspense } from "react"
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" })
 
 export default function ClientLayout({ children, params, messages }) {
-  const searchParams = useSearchParams()
   const locale = params?.locale || "en"
 
   // Check if the current language is RTL

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useRouter, useSearchParams } from "next/navigation"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -12,13 +12,29 @@ import { Filter } from "lucide-react"
 
 export function TutorialsFilter() {
   const router = useRouter()
-  const searchParams = useSearchParams()
 
-  const [difficulty, setDifficulty] = useState(searchParams.get("difficulty") || "")
-  const [selectedTags, setSelectedTags] = useState<string[]>(searchParams.get("tags")?.split(",").filter(Boolean) || [])
-  const [selectedTypes, setSelectedTypes] = useState<string[]>(
-    searchParams.get("types")?.split(",").filter(Boolean) || [],
-  )
+  // Get search params from URL in a client-safe way
+  const [difficulty, setDifficulty] = useState("")
+  const [selectedTags, setSelectedTags] = useState<string[]>([])
+  const [selectedTypes, setSelectedTypes] = useState<string[]>([])
+
+  // Initialize from URL on client side
+  if (typeof window !== "undefined") {
+    const searchParams = new URLSearchParams(window.location.search)
+
+    // Only set these once on initial load
+    if (difficulty === "" && searchParams.has("difficulty")) {
+      setDifficulty(searchParams.get("difficulty") || "")
+    }
+
+    if (selectedTags.length === 0 && searchParams.has("tags")) {
+      setSelectedTags(searchParams.get("tags")?.split(",").filter(Boolean) || [])
+    }
+
+    if (selectedTypes.length === 0 && searchParams.has("types")) {
+      setSelectedTypes(searchParams.get("types")?.split(",").filter(Boolean) || [])
+    }
+  }
 
   const handleApplyFilters = () => {
     const params = new URLSearchParams()
