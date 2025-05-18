@@ -21,12 +21,6 @@ export async function connectToDatabase() {
     maxPoolSize: 10, // Maintain up to 10 socket connections
     serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
     socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-    // Force TLS version to TLS 1.2
-    tls: true,
-    tlsAllowInvalidCertificates: false,
-    tlsAllowInvalidHostnames: false,
-    // Use the Node.js native DNS module for DNS resolution
-    directConnection: false,
   }
 
   try {
@@ -67,17 +61,5 @@ export async function disconnectFromDatabase() {
     } catch (error) {
       console.error("Error disconnecting from MongoDB:", error)
     }
-  }
-}
-
-// Helper function to check if a collection exists
-export async function collectionExists(collectionName: string) {
-  try {
-    const { db } = await connectToDatabase()
-    const collections = await db.listCollections({ name: collectionName }).toArray()
-    return collections.length > 0
-  } catch (error) {
-    console.error(`Error checking if collection ${collectionName} exists:`, error)
-    return false
   }
 }

@@ -20,49 +20,13 @@ const getMongoDBAdapter = async () => {
     debugLog("Initializing MongoDB adapter")
     const { db } = await connectToDatabase()
 
-    // Verify required collections exist
-    const collections = await db.listCollections().toArray()
-    const collectionNames = collections.map((c) => c.name)
-
-    debugLog(`Found collections: ${collectionNames.join(", ")}`)
-
-    // Create collections if they don't exist
-    if (!collectionNames.includes("users")) {
-      await db.createCollection("users")
-      debugLog("Created users collection")
-    }
-
-    if (!collectionNames.includes("accounts")) {
-      await db.createCollection("accounts")
-      debugLog("Created accounts collection")
-    }
-
-    if (!collectionNames.includes("sessions")) {
-      await db.createCollection("sessions")
-      debugLog("Created sessions collection")
-    }
-
-    if (!collectionNames.includes("verification_tokens")) {
-      await db.createCollection("verification_tokens")
-      debugLog("Created verification_tokens collection")
-    }
-
-    // Create the adapter with the database
-    const adapter = MongoDBAdapter(db)
-
-    // Verify adapter has required methods
-    const requiredMethods = ["createVerificationToken", "useVerificationToken", "getUserByEmail"]
-    const missingMethods = requiredMethods.filter((method) => !(method in adapter))
-
-    if (missingMethods.length > 0) {
-      throw new Error(`Adapter missing required methods: ${missingMethods.join(", ")}`)
-    }
-
-    debugLog("MongoDB adapter initialized successfully")
-    return adapter
+    // Important: Return the adapter with the db instance
+    return MongoDBAdapter({
+      db,
+    })
   } catch (error) {
     debugLog("Error initializing MongoDB adapter", error)
-    throw error
+    return null
   }
 }
 
@@ -128,8 +92,18 @@ export const authOptions: NextAuthOptions = {
       return true
     },
     async redirect({ url, baseUrl }) {
-      debugLog("Redirect callback", { url, baseUrl })
-      return url.startsWith(baseUrl) ? url : baseUrl
+      // Make sure we're using the correct baseUrl in production
+      const productionUrl = "https://tutorials.coder-verse.io"
+      const effectiveBaseUrl = process.env.NODE_ENV === "production" ? productionUrl : baseUrl
+
+      debugLog("Redirect callback", { url, baseUrl, effectiveBaseUrl })
+
+      // Check if the URL starts with the base URL or is a relative URL
+      if (url.startsWith(effectiveBaseUrl) || url.startsWith("/")) {
+        return url
+      }
+
+      return effectiveBaseUrl
     },
     async session({ session, user, token }) {
       debugLog("Session callback", {
