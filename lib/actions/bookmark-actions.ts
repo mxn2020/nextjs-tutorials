@@ -44,7 +44,35 @@ export async function toggleBookmark(contentId: string) {
   }
 }
 
-export async function getUserBookmarks() {
+// Add the missing getUserBookmarks export
+export async function getUserBookmarks(userId?: string) {
+  const session = await getServerSession(authOptions)
+
+  if (!userId && !session?.user?.email) {
+    return []
+  }
+
+  // Use provided userId or fall back to session user email
+  const userIdentifier = userId || session?.user?.email
+
+  try {
+    const { db } = await connectToDatabase()
+
+    const bookmarks = await db
+      .collection("bookmarks")
+      .find({ userId: userIdentifier })
+      .sort({ createdAt: -1 })
+      .toArray()
+
+    // Return just the content IDs for compatibility with existing code
+    return bookmarks.map((bookmark) => bookmark.contentId)
+  } catch (error) {
+    console.error("Error getting user bookmarks:", error)
+    return []
+  }
+}
+
+export async function getBookmarks() {
   const session = await getServerSession(authOptions)
 
   if (!session?.user?.email) {
@@ -79,5 +107,30 @@ export async function getUserBookmarks() {
   } catch (error) {
     console.error("Error getting user bookmarks:", error)
     return []
+  }
+}
+
+export async function removeUserBookmark(bookmarkId: string) {
+  const session = await getServerSession(authOptions)
+
+  if (!session?.user?.email) {
+    return { success: false, message: "You must be logged in to remove bookmarks" }
+  }
+
+  try {
+    const { db } = await connectToDatabase()
+
+    // Remove from bookmarks collection
+    const result = await db.collection("bookmarks").deleteOne({
+      userId: session.user.email,
+      contentId: bookmarkId,
+    })
+
+    const success = result.deletedCount > 0
+
+    return { success, message: success ? "Bookmark removed" : "Failed to remove bookmark" }
+  } catch (error) {
+    console.error("Error removing user bookmark:", error)
+    return { success: false, message: "Failed to remove bookmark" }
   }
 }

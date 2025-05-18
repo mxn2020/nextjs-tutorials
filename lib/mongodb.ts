@@ -7,8 +7,23 @@ if (!MONGODB_URI) {
   throw new Error("Please define the MONGODB_URI environment variable")
 }
 
+// Connection options
+const options: MongoClientOptions = {
+  maxPoolSize: 10,
+  serverSelectionTimeoutMS: 5000,
+  socketTimeoutMS: 45000,
+}
+
+// Global variable to cache the MongoDB connection
 let cachedClient: MongoClient | null = null
 let cachedDb: any = null
+
+// Create a new MongoClient
+const client = new MongoClient(MONGODB_URI, options)
+const clientPromise = client.connect()
+
+// Export a module-scoped MongoClient promise
+export default clientPromise
 
 export async function connectToDatabase() {
   // If we already have a connection, use it
@@ -16,23 +31,11 @@ export async function connectToDatabase() {
     return { client: cachedClient, db: cachedDb }
   }
 
-  // Set up connection options with proper timeouts and retry settings
-  const options: MongoClientOptions = {
-    maxPoolSize: 10, // Maintain up to 10 socket connections
-    serverSelectionTimeoutMS: 5000, // Keep trying to send operations for 5 seconds
-    socketTimeoutMS: 45000, // Close sockets after 45 seconds of inactivity
-  }
-
   try {
     console.log("Connecting to MongoDB...")
 
-    // Create a new MongoClient
-    const client = new MongoClient(MONGODB_URI, options)
-
     // Connect to the MongoDB server
-    await client.connect()
-    console.log("Successfully connected to MongoDB")
-
+    const client = await clientPromise
     const db = client.db(MONGODB_DB)
 
     // Cache the client and db connection

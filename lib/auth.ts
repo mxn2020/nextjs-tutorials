@@ -5,6 +5,8 @@ import GoogleProvider from "next-auth/providers/google"
 import EmailProvider from "next-auth/providers/email"
 import { Resend } from "resend"
 import { connectToDatabase } from "@/lib/mongodb"
+import clientPromise from "@/lib/mongodb"
+import { getServerSession } from "next-auth"
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -30,6 +32,8 @@ const getMongoDBAdapter = async () => {
   }
 }
 
+// Export authOptions as a named export with default configuration
+// This is needed for compatibility with existing imports
 export const authOptions: NextAuthOptions = {
   providers: [
     GitHubProvider({
@@ -195,11 +199,69 @@ export const authOptions: NextAuthOptions = {
       debugLog(`Debug: ${code}`, metadata)
     },
   },
-  debug: true,
+  debug: process.env.NODE_ENV === "development",
   session: {
-    strategy: "jwt", // Use JWT as the primary strategy for more resilience
+    strategy: "jwt",
   },
   secret: process.env.NEXTAUTH_SECRET,
+}
+
+// Function to create auth options with dynamic configuration
+const createAuthOptions = async (): Promise<NextAuthOptions> => {
+  // Ensure MongoDB client is connected
+  const client = await clientPromise
+  const db = client.db()
+
+  // Verify collections exist
+  const collections = await db.listCollections().toArray()
+  const collectionNames = collections.map((c) => c.name)
+
+  // Create collections if they don't exist
+  if (!collectionNames.includes("users")) {
+    await db.createCollection("users")
+  }
+  if (!collectionNames.includes("accounts")) {
+    await db.createCollection("accounts")
+  }
+  if (!collectionNames.includes("sessions")) {
+    await db.createCollection("sessions")
+  }
+  if (!collectionNames.includes("verification_tokens")) {
+    await db.createCollection("verification_tokens")
+  }
+
+  // Create MongoDB adapter with proper type assertion
+  const adapter = MongoDBAdapter(clientPromise) as any
+
+  // Verify adapter methods
+  const requiredMethods = [
+    "createUser",
+    "getUser",
+    "getUserByEmail",
+    "getUserByAccount",
+    "updateUser",
+    "linkAccount",
+    "createSession",
+    "getSessionAndUser",
+    "updateSession",
+    "deleteSession",
+  ]
+
+  const missingMethods = requiredMethods.filter((method) => !(method in adapter))
+  if (missingMethods.length > 0) {
+    console.error(`MongoDB adapter missing methods: ${missingMethods.join(", ")}`)
+  }
+
+  return {
+    ...authOptions,
+    adapter,
+  }
+}
+
+// Helper function to get the server session
+export async function getAuthSession() {
+  const authOptions = await createAuthOptions()
+  return getServerSession(authOptions)
 }
 
 // Dynamically add the adapter to authOptions
