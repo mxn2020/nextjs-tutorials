@@ -14,32 +14,59 @@ const debugLog = (message: string, data?: any) => {
   console.log(`[NextAuth Debug] ${message}`, data ? JSON.stringify(data, null, 2) : "")
 }
 
-// Create a more resilient MongoDB adapter
+// Create a properly initialized MongoDB adapter
 const getMongoDBAdapter = async () => {
   try {
     debugLog("Initializing MongoDB adapter")
     const { db } = await connectToDatabase()
-    debugLog("MongoDB connection successful for adapter")
-    return MongoDBAdapter({
-      db,
-    })
+
+    // Verify required collections exist
+    const collections = await db.listCollections().toArray()
+    const collectionNames = collections.map((c) => c.name)
+
+    debugLog(`Found collections: ${collectionNames.join(", ")}`)
+
+    // Create collections if they don't exist
+    if (!collectionNames.includes("users")) {
+      await db.createCollection("users")
+      debugLog("Created users collection")
+    }
+
+    if (!collectionNames.includes("accounts")) {
+      await db.createCollection("accounts")
+      debugLog("Created accounts collection")
+    }
+
+    if (!collectionNames.includes("sessions")) {
+      await db.createCollection("sessions")
+      debugLog("Created sessions collection")
+    }
+
+    if (!collectionNames.includes("verification_tokens")) {
+      await db.createCollection("verification_tokens")
+      debugLog("Created verification_tokens collection")
+    }
+
+    // Create the adapter with the database
+    const adapter = MongoDBAdapter(db)
+
+    // Verify adapter has required methods
+    const requiredMethods = ["createVerificationToken", "useVerificationToken", "getUserByEmail"]
+    const missingMethods = requiredMethods.filter((method) => !(method in adapter))
+
+    if (missingMethods.length > 0) {
+      throw new Error(`Adapter missing required methods: ${missingMethods.join(", ")}`)
+    }
+
+    debugLog("MongoDB adapter initialized successfully")
+    return adapter
   } catch (error) {
     debugLog("Error initializing MongoDB adapter", error)
-    // Return null to fall back to JWT
-    return null
+    throw error
   }
 }
 
 export const authOptions: NextAuthOptions = {
-  // Use a function to get the adapter to handle connection issues gracefully
-  adapter: (async () => {
-    try {
-      return await getMongoDBAdapter()
-    } catch (error) {
-      debugLog("Failed to initialize MongoDB adapter, falling back to JWT only", error)
-      return null
-    }
-  })(),
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -199,4 +226,18 @@ export const authOptions: NextAuthOptions = {
     strategy: "jwt", // Use JWT as the primary strategy for more resilience
   },
   secret: process.env.NEXTAUTH_SECRET,
+}
+
+// Dynamically add the adapter to authOptions
+export async function getAuthOptions(): Promise<NextAuthOptions> {
+  try {
+    const adapter = await getMongoDBAdapter()
+    return {
+      ...authOptions,
+      adapter,
+    }
+  } catch (error) {
+    debugLog("Failed to get MongoDB adapter, using JWT only", error)
+    return authOptions
+  }
 }
