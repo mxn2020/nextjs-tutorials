@@ -1,0 +1,54 @@
+{
+  "Hero": {
+    "title": "Biblioteca de Conhecimento Next.js",
+    "description": "Uma plataforma de aprendizado multilíngue de Next.js com integração de IA e colaboração da comunidade",
+    "browseButton": "Explorar Tutoriais",
+    "contributeButton": "Contribuir",
+    "newsletterTitle": "Mantenha-se Atualizado",
+    "newsletterDescription": "Inscreva-se em nossa newsletter para receber os últimos tutoriais e atualizações",
+    "emailPlaceholder": "Digite seu email",
+    "subscribeButton": "Inscrever-se",
+    "privacyNotice": "Ao se inscrever, você concorda com nossa",
+    "privacyLink": "Política de Privacidade"
+  },
+  "Navigation": {
+    "home": "Início",
+    "tutorials": "Tutoriais",
+    "topics": "Tópicos",
+    "aiPrompts": "Prompts de IA",
+    "snippets": "Snippets",
+    "community": "Comunidade",
+    "contribute": "Contribuir",
+    "about": "Sobre",
+    "signIn": "Entrar",
+    "signOut": "Sair"
+  },
+  "Footer": {
+    "copyright": "© {year} Biblioteca de Conhecimento Next.js. Todos os direitos reservados.",
+    "privacy": "Política de Privacidade",
+    "terms": "Termos de Serviço",
+    "contact": "Contato"
+  },
+  "UserNav": {
+    "profile": "Perfil",
+    "bookmarks": "Favoritos",
+    "settings": "Configurações",
+    "signOut": "Sair"
+  },
+  "FeaturedContent": {
+    "title": "Conteúdo em Destaque",
+    "viewAll": "Ver Todos"
+  },
+  "ContentCard": {
+    "readMore": "Leia Mais"
+  },
+  "ContentMatrix": {
+    "title": "Matriz de Conteúdo",
+    "topic": "Tópico",
+    "all": "Todos",
+    "available": "Disponível",
+    "inProgress": "Em Progresso",
+    "notAvailable": "Não Disponível",
+    "content": "Conteúdo"
+  }
+}

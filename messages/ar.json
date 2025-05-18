@@ -1,0 +1,54 @@
+{
+  "Hero": {
+    "title": "مكتبة معرفة Next.js",
+    "description": "منصة تعليمية متعددة اللغات لـ Next.js مع تكامل الذكاء الاصطناعي والتعاون المجتمعي",
+    "browseButton": "تصفح البرامج التعليمية",
+    "contributeButton": "المساهمة",
+    "newsletterTitle": "ابق على اطلاع",
+    "newsletterDescription": "اشترك في نشرتنا الإخبارية للحصول على أحدث البرامج التعليمية والتحديثات",
+    "emailPlaceholder": "أدخل بريدك الإلكتروني",
+    "subscribeButton": "اشتراك",
+    "privacyNotice": "بالاشتراك، فإنك توافق على",
+    "privacyLink": "سياسة الخصوصية"
+  },
+  "Navigation": {
+    "home": "الرئيسية",
+    "tutorials": "البرامج التعليمية",
+    "topics": "المواضيع",
+    "aiPrompts": "موجهات الذكاء الاصطناعي",
+    "snippets": "مقتطفات",
+    "community": "المجتمع",
+    "contribute": "المساهمة",
+    "about": "حول",
+    "signIn": "تسجيل الدخول",
+    "signOut": "تسجيل الخروج"
+  },
+  "Footer": {
+    "copyright": "© {year} مكتبة معرفة Next.js. جميع الحقوق محفوظة.",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الخدمة",
+    "contact": "اتصل بنا"
+  },
+  "UserNav": {
+    "profile": "الملف الشخصي",
+    "bookmarks": "الإشارات المرجعية",
+    "settings": "الإعدادات",
+    "signOut": "تسجيل الخروج"
+  },
+  "FeaturedContent": {
+    "title": "المحتوى المميز",
+    "viewAll": "عرض الكل"
+  },
+  "ContentCard": {
+    "readMore": "قراءة المزيد"
+  },
+  "ContentMatrix": {
+    "title": "مصفوفة المحتوى",
+    "topic": "الموضوع",
+    "all": "الكل",
+    "available": "متاح",
+    "inProgress": "قيد التقدم",
+    "notAvailable": "غير متاح",
+    "content": "المحتوى"
+  }
+}

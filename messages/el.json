@@ -1,0 +1,54 @@
+{
+  "Hero": {
+    "title": "Βιβλιοθήκη Γνώσης Next.js",
+    "description": "Μια πολύγλωσση πλατφόρμα εκμάθησης Next.js με ενσωμάτωση AI και συνεργασία της κοινότητας",
+    "browseButton": "Περιήγηση Οδηγών",
+    "contributeButton": "Συνεισφορά",
+    "newsletterTitle": "Μείνετε Ενημερωμένοι",
+    "newsletterDescription": "Εγγραφείτε στο ενημερωτικό μας δελτίο για τους τελευταίους οδηγούς και ενημερώσεις",
+    "emailPlaceholder": "Εισάγετε το email σας",
+    "subscribeButton": "Εγγραφή",
+    "privacyNotice": "Με την εγγραφή σας, συμφωνείτε με την",
+    "privacyLink": "Πολιτική Απορρήτου"
+  },
+  "Navigation": {
+    "home": "Αρχική",
+    "tutorials": "Οδηγοί",
+    "topics": "Θέματα",
+    "aiPrompts": "Προτροπές AI",
+    "snippets": "Αποσπάσματα",
+    "community": "Κοινότητα",
+    "contribute": "Συνεισφορά",
+    "about": "Σχετικά",
+    "signIn": "Σύνδεση",
+    "signOut": "Αποσύνδεση"
+  },
+  "Footer": {
+    "copyright": "© {year} Βιβλιοθήκη Γνώσης Next.js. Όλα τα δικαιώματα διατηρούνται.",
+    "privacy": "Πολιτική Απορρήτου",
+    "terms": "Όροι Χρήσης",
+    "contact": "Επικοινωνία"
+  },
+  "UserNav": {
+    "profile": "Προφίλ",
+    "bookmarks": "Σελιδοδείκτες",
+    "settings": "Ρυθμίσεις",
+    "signOut": "Αποσύνδεση"
+  },
+  "FeaturedContent": {
+    "title": "Προτεινόμενο Περιεχόμενο",
+    "viewAll": "Προβολή Όλων"
+  },
+  "ContentCard": {
+    "readMore": "Διαβάστε Περισσότερα"
+  },
+  "ContentMatrix": {
+    "title": "Πίνακας Περιεχομένου",
+    "topic": "Θέμα",
+    "all": "Όλα",
+    "available": "Διαθέσιμο",
+    "inProgress": "Σε Εξέλιξη",
+    "notAvailable": "Μη Διαθέσιμο",
+    "content": "Περιεχόμενο"
+  }
+}

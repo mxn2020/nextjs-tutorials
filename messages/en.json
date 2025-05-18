@@ -1,0 +1,54 @@
+{
+  "Hero": {
+    "title": "Next.js Knowledge Library",
+    "description": "A multilingual Next.js learning platform with AI integration and community collaboration",
+    "browseButton": "Browse Tutorials",
+    "contributeButton": "Contribute",
+    "newsletterTitle": "Stay Updated",
+    "newsletterDescription": "Subscribe to our newsletter for the latest tutorials and updates",
+    "emailPlaceholder": "Enter your email",
+    "subscribeButton": "Subscribe",
+    "privacyNotice": "By subscribing, you agree to our",
+    "privacyLink": "Privacy Policy"
+  },
+  "Navigation": {
+    "home": "Home",
+    "tutorials": "Tutorials",
+    "topics": "Topics",
+    "aiPrompts": "AI Prompts",
+    "snippets": "Snippets",
+    "community": "Community",
+    "contribute": "Contribute",
+    "about": "About",
+    "signIn": "Sign In",
+    "signOut": "Sign Out"
+  },
+  "Footer": {
+    "copyright": "© {year} Next.js Knowledge Library. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us"
+  },
+  "UserNav": {
+    "profile": "Profile",
+    "bookmarks": "Bookmarks",
+    "settings": "Settings",
+    "signOut": "Sign Out"
+  },
+  "FeaturedContent": {
+    "title": "Featured Content",
+    "viewAll": "View All"
+  },
+  "ContentCard": {
+    "readMore": "Read More"
+  },
+  "ContentMatrix": {
+    "title": "Content Matrix",
+    "topic": "Topic",
+    "all": "All",
+    "available": "Available",
+    "inProgress": "In Progress",
+    "notAvailable": "Not Available",
+    "content": "Content"
+  }
+}

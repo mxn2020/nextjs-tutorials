@@ -1,0 +1,54 @@
+{
+  "Hero": {
+    "title": "Next.js Kennisbibliotheek",
+    "description": "Een meertalig Next.js leerplatform met AI-integratie en gemeenschapssamenwerking",
+    "browseButton": "Tutorials Verkennen",
+    "contributeButton": "Bijdragen",
+    "newsletterTitle": "Blijf op de Hoogte",
+    "newsletterDescription": "Abonneer je op onze nieuwsbrief voor de nieuwste tutorials en updates",
+    "emailPlaceholder": "Voer je e-mail in",
+    "subscribeButton": "Abonneren",
+    "privacyNotice": "Door je te abonneren, ga je akkoord met ons",
+    "privacyLink": "Privacybeleid"
+  },
+  "Navigation": {
+    "home": "Home",
+    "tutorials": "Tutorials",
+    "topics": "Onderwerpen",
+    "aiPrompts": "AI-prompts",
+    "snippets": "Fragmenten",
+    "community": "Gemeenschap",
+    "contribute": "Bijdragen",
+    "about": "Over",
+    "signIn": "Inloggen",
+    "signOut": "Uitloggen"
+  },
+  "Footer": {
+    "copyright": "© {year} Next.js Kennisbibliotheek. Alle rechten voorbehouden.",
+    "privacy": "Privacybeleid",
+    "terms": "Servicevoorwaarden",
+    "contact": "Contact"
+  },
+  "UserNav": {
+    "profile": "Profiel",
+    "bookmarks": "Bladwijzers",
+    "settings": "Instellingen",
+    "signOut": "Uitloggen"
+  },
+  "FeaturedContent": {
+    "title": "Uitgelichte Content",
+    "viewAll": "Alles Bekijken"
+  },
+  "ContentCard": {
+    "readMore": "Meer Lezen"
+  },
+  "ContentMatrix": {
+    "title": "Contentmatrix",
+    "topic": "Onderwerp",
+    "all": "Alle",
+    "available": "Beschikbaar",
+    "inProgress": "In Uitvoering",
+    "notAvailable": "Niet Beschikbaar",
+    "content": "Content"
+  }
+}
