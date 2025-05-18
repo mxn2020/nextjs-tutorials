@@ -14,7 +14,7 @@ export const metadata = {
   description: "A multilingual Next.js learning platform with AI integration and community collaboration",
 }
 
-export default async function LocaleHomePage() {
+export default async function HomePage() {
   const latestContent = await getLatestContent(6)
 
   return (

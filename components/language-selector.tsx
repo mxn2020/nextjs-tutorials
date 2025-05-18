@@ -1,63 +1,39 @@
 "use client"
 
-import { useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
-import { useLocale } from "next-intl"
-import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Globe } from "lucide-react"
-import { motion } from "framer-motion"
+import { locales, localeNames } from "@/lib/i18n/constants"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 
-const languages = [
-  { code: "en", name: "English" },
-  { code: "es", name: "Español" },
-  { code: "fr", name: "Français" },
-  { code: "de", name: "Deutsch" },
-  { code: "it", name: "Italiano" },
-  { code: "pt", name: "Português" },
-  { code: "ar", name: "العربية" },
-  { code: "el", name: "Ελληνικά" },
-  { code: "nl", name: "Nederlands" },
-  { code: "ja", name: "日本語" },
-]
+interface LanguageSwitcherProps {
+  locale: string
+  label: string
+}
 
-export function LanguageSelector() {
+export default function LanguageSwitcher({ locale, label }: LanguageSwitcherProps) {
   const router = useRouter()
   const pathname = usePathname()
-  const locale = useLocale()
-  const [isOpen, setIsOpen] = useState(false)
 
-  const handleLanguageChange = (languageCode: string) => {
-    // Store the language preference
-    localStorage.setItem("preferredLanguage", languageCode)
-
-    // Navigate to the same page but with the new locale
-    const newPathname = pathname?.replace(`/${locale}`, `/${languageCode}`) || `/${languageCode}`
-    router.push(newPathname)
-    setIsOpen(false)
+  const handleChange = (newLocale: string) => {
+    // Replace the current locale in the path with the new one
+    const newPath = pathname.replace(new RegExp(`^/(${locales.join("|")})`), `/${newLocale}`)
+    router.push(newPath)
   }
 
   return (
-    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon">
-          <motion.div whileHover={{ rotate: 20 }} transition={{ type: "spring", stiffness: 400, damping: 10 }}>
-            <Globe className="h-[1.2rem] w-[1.2rem]" />
-            <span className="sr-only">Select language</span>
-          </motion.div>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end" className="max-h-[300px] overflow-y-auto">
-        {languages.map((language) => (
-          <DropdownMenuItem
-            key={language.code}
-            onClick={() => handleLanguageChange(language.code)}
-            className={locale === language.code ? "bg-muted font-medium" : ""}
-          >
-            {language.name}
-          </DropdownMenuItem>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="flex items-center gap-2">
+      <span className="text-sm font-medium">{label}</span>
+      <Select value={locale} onValueChange={handleChange}>
+        <SelectTrigger className="w-[120px]">
+          <SelectValue placeholder="Select language" />
+        </SelectTrigger>
+        <SelectContent>
+          {locales.map((loc) => (
+            <SelectItem key={loc} value={loc}>
+              {localeNames[loc] || loc}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   )
 }

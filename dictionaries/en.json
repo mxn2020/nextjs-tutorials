@@ -1,4 +1,37 @@
 {
+  "Hero": {
+    "title": "Next.js Tutorials & Resources",
+    "description": "Comprehensive guides and tutorials for learning Next.js",
+    "browseButton": "Browse Tutorials",
+    "exploreButton": "Explore Topics",
+    "contributeButton": "Contribute",
+    "newsletterTitle": "Subscribe to our Newsletter",
+    "newsletterDescription": "Get the latest tutorials and resources straight to your inbox",
+    "emailPlaceholder": "Enter your email",
+    "subscribeButton": "Subscribe",
+    "subscribedUsers": "Developers have already subscribed",
+    "privacyNotice": "By subscribing, you agree to our",
+    "privacyLink": "Privacy Policy"
+  },
+  "ContentMatrix": {
+    "all": "All",
+    "title": "Learning Pathways",
+    "description": "Explore our tutorials by topic and difficulty level",
+    "tabs": {
+      "all": "All Topics",
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    },
+    "available": "Available",
+    "inProgress": "In Progress",
+    "notAvailable": "Not Available",
+    "content": "Content",
+    "topic": "Topic",
+    "explore": "Explore",
+    "comingSoon": "Coming Soon",
+    "noContent": "No content available for this selection"
+  },
   "Profile": {
     "meta": {
       "title": "Your Profile",
@@ -148,5 +181,90 @@
       "emailMismatch": "Email Mismatch",
       "emailMismatchDescription": "The email you entered doesn't match your account email"
     }
+  },
+  "ContentCard": {
+    "readMore": "Read more",
+    "bookmark": "Bookmark",
+    "bookmarked": "Bookmarked",
+    "difficulty": {
+      "beginner": "Beginner",
+      "intermediate": "Intermediate",
+      "advanced": "Advanced"
+    }
+  },
+  "Footer": {
+    "copyright": "© {year} Next.js Knowledge Library. All rights reserved.",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "contact": "Contact Us"
+  },
+  "Navigation": {
+    "tutorials": "Tutorials",
+    "snippets": "Snippets",
+    "aiPrompts": "AI Prompts",
+    "topics": "Topics",
+    "community": "Community",
+    "about": "About",
+    "search": "Search",
+    "bookmarks": "Bookmarks",
+    "profile": "Profile",
+    "settings": "Settings",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "dashboard": "Dashboard",
+    "contribute": "Contribute",
+    "home": "Home"
+  },
+  "FeaturedContent": {
+    "title": "Featured Tutorials",
+    "viewAll": "View all tutorials"
+  },
+  "Newsletter": {
+    "title": "Subscribe to our Newsletter",
+    "description": "Get the latest tutorials, tips and updates straight to your inbox.",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Enter your email",
+    "subscribeButton": "Subscribe",
+    "subscribing": "Subscribing...",
+    "successTitle": "Thank you for subscribing!",
+    "successMessage": "You'll now receive our latest updates straight to your inbox.",
+    "errorTitle": "Subscription failed",
+    "errorMessage": "There was an error subscribing to the newsletter. Please try again.",
+    "alreadySubscribed": "You're already subscribed to our newsletter.",
+    "emailRequired": "Email address is required.",
+    "invalidEmail": "Please enter a valid email address.",
+    "privacyNotice": "We respect your privacy. Unsubscribe at any time."
+  },
+  "Search": {
+    "title": "Search",
+    "placeholder": "Search for tutorials, snippets, topics...",
+    "noResults": "No results found.",
+    "tryAgain": "Try different keywords or browse our tutorials.",
+    "searching": "Searching...",
+    "close": "Close",
+    "tip": "Press Enter to search or Escape to close",
+    "categories": {
+      "all": "All",
+      "tutorials": "Tutorials",
+      "snippets": "Snippets",
+      "topics": "Topics"
+    }
+  },
+  "UserNav": {
+    "profile": "Profile",
+    "settings": "Settings",
+    "bookmarks": "Bookmarks",
+    "signOut": "Sign out"
+  },
+  "BookmarkButton": {
+    "bookmark": "Bookmark",
+    "bookmarked": "Bookmarked",
+    "signInToBookmark": "Sign in to bookmark",
+    "addedToBookmarks": "Added to bookmarks",
+    "removedFromBookmarks": "Removed from bookmarks",
+    "itemAddedDescription": "This item has been added to your bookmarks.",
+    "itemRemovedDescription": "This item has been removed from your bookmarks.",
+    "error": "Error",
+    "errorDescription": "Failed to update bookmark status."
   }
 }

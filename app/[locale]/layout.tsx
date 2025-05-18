@@ -1,5 +1,6 @@
-import type { ReactNode } from "react"
-import { Sidebar } from "@/components/sidebar"
+import { ReactNode } from "react"
+import ClientLayout from "../ClientLayout"
+import { getMessages } from "@/lib/get-messages"
 
 interface LocaleLayoutProps {
   children: ReactNode
@@ -8,11 +9,7 @@ interface LocaleLayoutProps {
   }
 }
 
-export default function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  return (
-    <div className="flex min-h-screen">
-      <Sidebar />
-      <div className="flex-1">{children}</div>
-    </div>
-  )
+export default async function LocaleLayout({ children, params }: LocaleLayoutProps) {
+  const messages = await getMessages(params.locale)
+  return <ClientLayout params={params} messages={messages}>{children}</ClientLayout>
 }
