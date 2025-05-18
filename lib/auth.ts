@@ -1,8 +1,10 @@
 import type { NextAuthOptions } from "next-auth"
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
 import GitHubProvider from "next-auth/providers/github"
 import GoogleProvider from "next-auth/providers/google"
 import EmailProvider from "next-auth/providers/email"
 import { Resend } from "resend"
+import { connectToDatabase } from "@/lib/mongodb"
 
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -12,8 +14,32 @@ const debugLog = (message: string, data?: any) => {
   console.log(`[NextAuth Debug] ${message}`, data ? JSON.stringify(data, null, 2) : "")
 }
 
+// Create a more resilient MongoDB adapter
+const getMongoDBAdapter = async () => {
+  try {
+    debugLog("Initializing MongoDB adapter")
+    const { db } = await connectToDatabase()
+    debugLog("MongoDB connection successful for adapter")
+    return MongoDBAdapter({
+      db,
+    })
+  } catch (error) {
+    debugLog("Error initializing MongoDB adapter", error)
+    // Return null to fall back to JWT
+    return null
+  }
+}
+
 export const authOptions: NextAuthOptions = {
-  // Start with JWT only for simplicity - no MongoDB adapter yet
+  // Use a function to get the adapter to handle connection issues gracefully
+  adapter: (async () => {
+    try {
+      return await getMongoDBAdapter()
+    } catch (error) {
+      debugLog("Failed to initialize MongoDB adapter, falling back to JWT only", error)
+      return null
+    }
+  })(),
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_ID || "",
@@ -25,7 +51,7 @@ export const authOptions: NextAuthOptions = {
     }),
     EmailProvider({
       from: process.env.EMAIL_FROM || "noreply@tutorials.coder-verse.io",
-      // Use Resend directly
+      // Use Resend directly instead of SMTP configuration
       async sendVerificationRequest({ identifier, url, provider }) {
         debugLog(`Sending verification email to ${identifier}`)
         debugLog(`Verification URL: ${url}`)
@@ -66,40 +92,111 @@ export const authOptions: NextAuthOptions = {
     verifyRequest: "/auth/verify-request",
   },
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      debugLog("Sign in callback triggered", {
+        user: user ? { id: user.id, email: user.email } : null,
+        account: account ? { provider: account.provider, type: account.type } : null,
+        emailVerified: user?.emailVerified ? "yes" : "no",
+      })
+      return true
+    },
     async redirect({ url, baseUrl }) {
       debugLog("Redirect callback", { url, baseUrl })
       return url.startsWith(baseUrl) ? url : baseUrl
     },
-    async session({ session, token }) {
+    async session({ session, user, token }) {
       debugLog("Session callback", {
         sessionUser: session.user ? { email: session.user.email } : null,
-        tokenSub: token?.sub,
-      })
-
-      // Add user ID from token to session
-      if (session.user && token) {
-        session.user.id = token.sub || ""
-        session.user.role = (token.role as string) || "viewer"
-      }
-      return session
-    },
-    async jwt({ token, user }) {
-      debugLog("JWT callback", {
         tokenSub: token?.sub,
         userId: user?.id,
       })
 
+      // Add user role to session
+      if (session.user) {
+        if (user) {
+          // When using database sessions
+          session.user.id = user.id
+
+          try {
+            debugLog("Fetching user role from database")
+            const { db } = await connectToDatabase()
+            const dbUser = await db.collection("users").findOne({ email: user.email })
+            session.user.role = dbUser?.role || "viewer"
+            debugLog(`User role: ${session.user.role}`)
+          } catch (error) {
+            debugLog("Error fetching user role:", error)
+            session.user.role = "viewer"
+          }
+        } else if (token) {
+          // When using JWT sessions
+          session.user.id = token.sub || ""
+          session.user.role = (token.role as string) || "viewer"
+          debugLog(`Using role from token: ${session.user.role}`)
+        }
+      }
+      return session
+    },
+    async jwt({ token, user, account, profile }) {
+      debugLog("JWT callback", {
+        tokenSub: token?.sub,
+        userId: user?.id,
+        accountProvider: account?.provider,
+      })
+
       if (user) {
         token.id = user.id
-        token.role = "viewer" // Default role
+
+        try {
+          debugLog("Fetching user role for JWT")
+          const { db } = await connectToDatabase()
+          const dbUser = await db.collection("users").findOne({ email: user.email })
+          token.role = dbUser?.role || "viewer"
+          debugLog(`JWT user role: ${token.role}`)
+        } catch (error) {
+          debugLog("Error fetching user role for JWT:", error)
+          token.role = "viewer"
+        }
       }
       return token
     },
   },
+  events: {
+    async signIn(message) {
+      debugLog("User signed in", {
+        user: message.user.email,
+        provider: message.account?.provider,
+      })
+    },
+    async signOut(message) {
+      debugLog("User signed out", { user: message.token?.email })
+    },
+    async createUser(message) {
+      debugLog("User created", { email: message.user.email })
+    },
+    async linkAccount(message) {
+      debugLog("Account linked", {
+        provider: message.account.provider,
+        user: message.user.email,
+      })
+    },
+    async error(message) {
+      debugLog("NextAuth error event", message)
+    },
+  },
+  logger: {
+    error(code, metadata) {
+      debugLog(`Error: ${code}`, metadata)
+    },
+    warn(code) {
+      debugLog(`Warning: ${code}`)
+    },
+    debug(code, metadata) {
+      debugLog(`Debug: ${code}`, metadata)
+    },
+  },
   debug: true,
   session: {
-    strategy: "jwt", // Use JWT for simplicity
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    strategy: "jwt", // Use JWT as the primary strategy for more resilience
   },
   secret: process.env.NEXTAUTH_SECRET,
 }
