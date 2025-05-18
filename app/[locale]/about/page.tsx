@@ -1,26 +1,23 @@
+import { getDictionary } from "@/lib/i18n/server"
 import type { Metadata } from "next"
-
 import Image from "next/image"
 
-export async function generateMetadata({
-  params: { locale },
-}: {
-  params: { locale: string }
-}): Promise<Metadata> {
-  const t = await getTranslations({ locale, namespace: "About" })
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  const dictionary = await getDictionary(locale)
+  const aboutDict = dictionary.About || { title: "About", description: "About this project." }
   return {
-    title: t("title"),
-    description: t("description"),
+    title: aboutDict.title,
+    description: aboutDict.description,
   }
 }
 
-export default async function AboutPage() {
-  const t = await getTranslations("About")
-
+export default async function AboutPage({ params }: { params: { locale: string } }) {
+  const dictionary = await getDictionary(params.locale)
+  const aboutDict = dictionary.About || { title: "About", description: "About this project." }
   return (
     <div className="container py-10">
-      <h1 className="text-4xl font-bold mb-6">{t("title")}</h1>
-      <p className="text-xl text-muted-foreground mb-10">{t("description")}</p>
+      <h1 className="text-4xl font-bold mb-6">{aboutDict.title}</h1>
+      <p className="text-xl text-muted-foreground mb-10">{aboutDict.description}</p>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-8">
         <div className="md:col-span-7">

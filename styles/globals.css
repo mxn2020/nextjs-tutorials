@@ -7,51 +7,43 @@
 
 @layer base {
   :root {
-    /* Mario Theme Variables Integrated into Tailwind's Structure */
+    /* Mario Light Theme Variables */
     --font-family-mario: 'Luckiest Guy', cursive, sans-serif;
 
-    /* Overriding Tailwind's default color palette with Mario theme (HSL format for Tailwind compatibility) */
-    --background: /* #f7e26b */ 53 89% 85%;        /* Base background color from Mario's --color-bg */
-    --foreground: /* #22223b */ 237 27% 18%;      /* Base text color from Mario's --color-text */
+    --background: /* #f7e26b */ 53 89% 85%;
+    --foreground: /* #22223b */ 237 27% 18%;
     
-    --primary: /* #e63946 */ 355 79% 56%;         /* Primary action color from Mario's --color-primary */
-    --primary-foreground: /* #ffffff */ 0 0% 100%; /* Text on primary elements (Mario's --color-text-alt) */
+    --primary: /* #e63946 */ 355 79% 56%;
+    --primary-foreground: /* #ffffff */ 0 0% 100%;
     
-    --secondary: /* #457b9d */ 203 39% 44%;       /* Secondary action/element color from Mario's --color-secondary */
-    --secondary-foreground: /* #ffffff */ 0 0% 100%; /* Text on secondary elements (can adjust if needed) */
+    --secondary: /* #457b9d */ 203 39% 44%;
+    --secondary-foreground: /* #ffffff */ 0 0% 100%;
 
-    --accent: /* #f77f00 */ 31 100% 49%;          /* Accent color from Mario's --color-accent */
-    --accent-foreground: /* #ffffff */ 0 0% 100%;  /* Text on accent elements (can adjust if needed) */
+    --accent: /* #f77f00 */ 31 100% 49%;
+    --accent-foreground: /* #ffffff */ 0 0% 100%; /* For light theme, text on accent is white */
 
-    --border: /* #2d3142 */ 231 20% 22%;          /* Default border color from Mario's --color-border */
+    --border: /* #2d3142 */ 231 20% 22%;
     
-    /* Card specific colors from Mario theme */
-    --card: /* #ffe066 */ 48 100% 70%;            /* Card background (Mario's --color-bg-alt) */
-    --card-foreground: var(--foreground);         /* Text in cards, using main text color */
+    --card: /* #ffe066 */ 48 100% 70%;
+    --card-foreground: var(--foreground);
 
-    /* Popover - using card styles as a base from Mario theme */
     --popover: var(--card);
     --popover-foreground: var(--card-foreground);
     
-    /* Muted, Destructive - Mario theme doesn't explicitly define these.
-       Provide sensible defaults or map them if a Mario color fits.
-    */
-    --muted: /* Adjust as needed, e.g., a desaturated bg or text color */ 230 10% 90%; 
-    --muted-foreground: /* Adjust as needed */ 230 10% 40%;
+    --muted: /* Light theme muted */ 230 10% 90%; 
+    --muted-foreground: /* Light theme muted fg */ 230 10% 40%;
 
-    --destructive: /* A red suitable for destructive actions, e.g., Mario's primary or a variation */ 355 79% 50%; 
+    --destructive: /* Light theme destructive */ 355 79% 50%; 
     --destructive-foreground: var(--primary-foreground);
 
-    /* Input-specific background from Mario theme */
-    --input-mario-bg: #fffbe7;
-    /* Use --border for input borders for consistency with Tailwind's approach */
+    --input-mario-bg-light: #fffbe7; /* Specific for light theme inputs */
     --input: var(--border); 
 
-    --ring: var(--accent); /* Ring color, often used for focus outlines */
+    --ring: var(--accent);
     
-    --radius: 1.5rem; /* General border radius from Mario theme's --border-radius */
+    --radius: 1.5rem;
 
-    /* Mario specific custom properties (can be used directly or as reference) */
+    /* Mario specific custom properties (Light Theme) */
     --color-bg-mario: #f7e26b;
     --color-bg-alt-mario: #ffe066;
     --color-text-mario: #22223b;
@@ -60,141 +52,235 @@
     --color-secondary-mario: #457b9d;
     --color-accent-mario: #f77f00;
     --color-border-mario: #2d3142;
-    --color-shadow-mario: #00000033;
+    --color-shadow-mario: #00000033; /* Light theme shadow color */
     --box-shadow-mario: 0 8px 24px var(--color-shadow-mario), 0 1.5px 0 var(--color-border-mario);
 
-    /* Original Chart colors - commented out, adapt or remove as needed for the new theme.
-    --chart-1: 221.2 83.2% 53.3%;
-    --chart-2: 262.1 83.3% 57.8%;
-    --chart-3: 316.6 73.3% 52.5%;
-    --chart-4: 4.8 90.6% 58.4%;
-    --chart-5: 27.6 87.9% 49.6%;
-    --chart-6: 47.7 80.4% 47.3%;
+
+    /* Mario Dark Theme Variables - Defined here for clarity, applied in .dark selector */
+    --background-dark: 230 25% 18%;        /* Deep Indigo */
+    --foreground-dark: 45 80% 92%;         /* Pale Yellow Cream */
+    
+    --primary-dark: 355 75% 60%;           /* Brighter Red for dark mode */
+    --primary-foreground-dark: 0 0% 100%;   /* White */
+    
+    --secondary-dark: 190 50% 45%;         /* Muted Cyan/Teal */
+    --secondary-foreground-dark: 0 0% 100%; /* White */
+
+    --accent-dark: 35 100% 65%;            /* Vibrant Orange-Yellow */
+    --accent-foreground-dark: 230 25% 10%; /* Very Dark Indigo (for text on accent-dark) */
+
+    --border-dark: 230 15% 40%;            /* Muted Indigo Border */
+    
+    --card-dark: 230 20% 22%;              /* Dark Indigo Card */
+    --card-foreground-dark: var(--foreground-dark);
+
+    --popover-dark: var(--card-dark);
+    --popover-foreground-dark: var(--card-foreground-dark);
+    
+    --muted-dark: 230 20% 30%;
+    --muted-foreground-dark: 230 10% 60%;
+
+    --destructive-dark: 0 70% 58%;
+    --destructive-foreground-dark: 0 0% 100%;
+
+    --input-mario-bg-dark: 230 20% 15%;    /* Very Dark Indigo for input BG in dark mode */
+    --input-dark-border: var(--border-dark); /* Input border in dark mode */
+
+    --ring-dark: var(--accent-dark);
+    
+    /* Mario specific custom properties (Dark Theme) */
+    --color-bg-mario-dark: hsl(var(--background-dark));
+    --color-bg-alt-mario-dark: hsl(230 22% 24%); /* Slightly lighter variant for gradients */
+    --color-text-mario-dark: hsl(var(--foreground-dark));
+    --color-text-alt-mario-dark: hsl(0 0% 100%); /* White for general alt text in dark mode */
+    --color-primary-mario-dark: hsl(var(--primary-dark));
+    --color-secondary-mario-dark: hsl(var(--secondary-dark));
+    --color-accent-mario-dark: hsl(var(--accent-dark));
+    --color-border-mario-dark: hsl(var(--border-dark));
+    --color-shadow-mario-dark: #00000099; /* Dark theme shadow color */
+    --box-shadow-mario-dark: 0 8px 24px var(--color-shadow-mario-dark), 0 1.5px 0 var(--color-border-mario-dark);
+  }
+
+  /* Dark Mode Styles */
+  .dark {
+    --background: var(--background-dark);
+    --foreground: var(--foreground-dark);
+    
+    --primary: var(--primary-dark);
+    --primary-foreground: var(--primary-foreground-dark);
+    
+    --secondary: var(--secondary-dark);
+    --secondary-foreground: var(--secondary-foreground-dark);
+
+    --accent: var(--accent-dark);
+    --accent-foreground: var(--accent-foreground-dark);
+
+    --border: var(--border-dark);
+    
+    --card: var(--card-dark);
+    --card-foreground: var(--card-foreground-dark);
+
+    --popover: var(--popover-dark);
+    --popover-foreground: var(--popover-foreground-dark);
+    
+    --muted: var(--muted-dark);
+    --muted-foreground: var(--muted-foreground-dark);
+
+    --destructive: var(--destructive-dark);
+    --destructive-foreground: var(--destructive-foreground-dark);
+
+    /* For inputs, we'll use the specific dark variable for background, and map --input to the dark border */
+    /* --input-mario-bg is now scoped by light/dark specific vars */
+    --input: var(--input-dark-border); 
+
+    --ring: var(--ring-dark);
+    
+    /* Override Mario specific custom properties for dark mode */
+    /* These are already defined with -dark suffix, but if any global ones were used directly, they'd be overridden here.
+       For instance, if an element directly used var(--color-primary-mario), it would get the light version.
+       It's better to use semantic variables like --primary which are switched by the .dark class.
+       The body gradient and heading shadows will need to use the dark-suffixed variables.
     */
   }
 
-  /* Dark mode from original theme - The Mario theme doesn't specify a dark mode.
-     This block is commented out. You might want to create a new Mario-based dark theme
-     or remove dark mode support if not needed.
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 224.3 76.3% 48%;
-  }
-  */
-}
-
-@layer base {
-  /* The original * { @apply border-border; } has been removed.
-     The Mario theme applies borders to specific elements.
-     If you want a global border, you can add that rule back here. */
-  
   html {
     font-family: var(--font-family-mario);
-    color: hsl(var(--foreground)); /* Uses Mario's text color via --foreground */
+    color: hsl(var(--foreground));
     min-height: 100vh;
-    font-size: 18px; /* Example: default is often 16px. Try 18px, 20px, or even percentages like 112.5% (for 18px if base is 16px) */
+    font-size: 18px; /* Base font size, can be adjusted as discussed */
   }
+
   body {
-    /* Overrides Tailwind's default bg-background to apply the Mario gradient */
+    /* Default Light Theme Gradient */
     background: linear-gradient(135deg, var(--color-bg-mario), var(--color-bg-alt-mario) 80%);
-    /* font-family and color are inherited from html */
-    /* Tailwind's base styles will also apply text-foreground if not overridden */
     min-height: 100vh;
+  }
+
+  .dark body {
+    /* Dark Theme Gradient */
+    background: linear-gradient(135deg, var(--color-bg-mario-dark), var(--color-bg-alt-mario-dark) 80%);
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-family-mario); /* Explicitly set, though inherited */
+    font-family: var(--font-family-mario);
     color: hsl(var(--primary));
+    /* Default Light Theme Text Shadow */
     text-shadow: 2px 2px 0 hsl(var(--border)), 4px 4px 0 var(--color-shadow-mario);
+  }
+
+  .dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+    color: hsl(var(--primary)); /* Uses the switched --primary from .dark scope */
+    /* Dark Theme Text Shadow */
+    text-shadow: 2px 2px 0 hsl(var(--border)), 4px 4px 0 var(--color-shadow-mario-dark);
   }
 
   a {
     color: hsl(var(--secondary));
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.2s;
+    transition: color 0.2s, text-shadow 0.2s;
   }
   a:hover {
     color: hsl(var(--accent));
     text-shadow: 1px 1px 0 hsl(var(--border));
   }
+  /* No specific .dark a:hover needed if --accent and --border are correctly switched */
 
   input, textarea, select {
     font-family: var(--font-family-mario);
-    border: 2px solid hsl(var(--border)); /* Uses Mario's border color via --border */
-    border-radius: 0.75em; /* Mario specific radius for inputs */
+    border: 2px solid hsl(var(--border)); /* Switched by .dark */
+    border-radius: 0.75em;
     padding: 0.5em 1em;
-    background: var(--input-mario-bg); /* Specific Mario input background */
-    color: hsl(var(--foreground)); /* Uses Mario's text color */
-    margin-bottom: 1em; /* As per Mario theme */
+    background: var(--input-mario-bg-light); /* Default to light theme input BG */
+    color: hsl(var(--foreground)); /* Switched by .dark */
+    margin-bottom: 1em;
+  }
+
+  .dark input, .dark textarea, .dark select {
+    background: var(--input-mario-bg-dark); /* Specific dark theme input BG */
+    /* color and border are already handled by .dark's --foreground and --border remapping */
   }
   
-  img, .img-border { /* Style all images and elements with .img-border */
-    border: 4px solid hsl(var(--accent));
-    border-radius: 1.5em; /* Mario specific radius for images */
-    box-shadow: 0 4px 16px var(--color-shadow-mario);
-    background: var(--input-mario-bg); /* Mario uses #fffbe7 for image backgrounds too */
+  img, .img-border {
+    border: 4px solid hsl(var(--accent)); /* Switched by .dark */
+    border-radius: 1.5em;
+    box-shadow: 0 4px 16px var(--color-shadow-mario); /* Light theme shadow */
+    background: var(--input-mario-bg-light); /* Light theme image background */
+  }
+
+  .dark img, .dark .img-border {
+    box-shadow: 0 4px 16px var(--color-shadow-mario-dark); /* Dark theme shadow */
+    background: var(--input-mario-bg-dark); /* Dark theme image background */
+     /* border-color will use the switched --accent */
   }
 }
 
 @layer components {
-  .btn, button { /* Applied to .btn class and button elements */
+  .btn, button {
     font-family: var(--font-family-mario);
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
-    border: 3px solid hsl(var(--border));
-    border-radius: var(--radius); /* Uses the general --radius (1.5rem from Mario) */
-    box-shadow: var(--box-shadow-mario);
+    background: hsl(var(--primary)); /* Switched by .dark */
+    color: hsl(var(--primary-foreground)); /* Switched by .dark */
+    border: 3px solid hsl(var(--border)); /* Switched by .dark */
+    border-radius: var(--radius);
+    box-shadow: var(--box-shadow-mario); /* Light theme box shadow */
     padding: 0.75em 2em;
     font-size: 1.2em;
     letter-spacing: 1px;
     cursor: pointer;
-    transition: background 0.2s, transform 0.1s;
-  }
-  .btn:hover, button:hover {
-    background: hsl(var(--accent));
-    transform: scale(1.05) rotate(-2deg);
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
   }
 
-  .card, .container, .box { /* Custom component classes from Mario theme */
-    background: hsl(var(--card)); /* Uses Mario's --color-bg-alt via --card */
-    border: 3px solid hsl(var(--border));
-    border-radius: var(--radius); /* Uses the general --radius */
-    box-shadow: var(--box-shadow-mario);
+  .dark .btn, .dark button {
+     box-shadow: var(--box-shadow-mario-dark); /* Dark theme box shadow */
+     /* background, color, border already handled by .dark's variable switches */
+  }
+
+  .btn:hover, button:hover {
+    background: hsl(var(--accent)); /* Switched by .dark */
+    /* color: hsl(var(--accent-foreground)); /* This will be switched by .dark too if you want different text color on hover for dark */
+    transform: scale(1.05) rotate(-2deg);
+  }
+  /* If you need different text color on hover for dark mode specifically for buttons: */
+  .dark .btn:hover, .dark button:hover {
+    color: hsl(var(--accent-foreground)); /* Uses the dark mode accent foreground */
+  }
+
+
+  .card, .container, .box {
+    background: hsl(var(--card)); /* Switched by .dark */
+    border: 3px solid hsl(var(--border)); /* Switched by .dark */
+    border-radius: var(--radius);
+    box-shadow: var(--box-shadow-mario); /* Light theme box shadow */
     padding: 2em;
-    margin: 1.5em 0; /* As per Mario theme */
+    margin: 1.5em 0;
+  }
+
+  .dark .card, .dark .container, .dark .box {
+    box-shadow: var(--box-shadow-mario-dark); /* Dark theme box shadow */
+    /* background and border are already handled by .dark's variable switches */
   }
 }
 
 /* Global styles for scrollbar */
 ::-webkit-scrollbar {
   width: 12px;
-  background: var(--color-bg-alt-mario);
+  background: var(--color-bg-alt-mario); /* Light theme scrollbar track */
 }
 ::-webkit-scrollbar-thumb {
-  background: hsl(var(--primary));
+  background: hsl(var(--primary)); /* Light theme scrollbar thumb */
   border-radius: 6px;
-  border: 2px solid hsl(var(--border));
+  border: 2px solid hsl(var(--border)); /* Light theme scrollbar thumb border */
 }
 
-/* Animations and Keyframes from Mario Theme */
+.dark ::-webkit-scrollbar {
+  background: var(--color-bg-alt-mario-dark); /* Dark theme scrollbar track */
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary-dark)); /* Dark theme scrollbar thumb */
+  border: 2px solid hsl(var(--border-dark)); /* Dark theme scrollbar thumb border */
+}
+
+/* Animations and Keyframes from Mario Theme (Unaffected by dark mode directly) */
 .pop {
   animation: pop 0.3s cubic-bezier(.36,1.56,.64,1) both;
 }
@@ -212,8 +298,9 @@
   100% { transform: rotateY(360deg); }
 }
 
-/* Utility Classes from Mario Theme */
+/* Utility Classes from Mario Theme (Unaffected by dark mode directly unless they use themed variables) */
 .comic-outline {
+  /* This uses --border, which is switched by .dark, so it will adapt */
   text-shadow:
     2px 2px 0 hsl(var(--border)),
     -2px 2px 0 hsl(var(--border)),
