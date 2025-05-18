@@ -18,6 +18,11 @@ import { useToast } from "@/hooks/use-toast"
 import { Suspense } from "react"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
+// Debug logger function
+const debugLog = (message: string, data?: any) => {
+  console.log(`[Auth UI Debug] ${message}`, data ? JSON.stringify(data, null, 2) : "")
+}
+
 function SignInForm() {
   const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
@@ -25,12 +30,15 @@ function SignInForm() {
   const searchParams = useSearchParams()
   const { toast } = useToast()
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [debugInfo, setDebugInfo] = useState<string | null>(null)
 
   // Get the callbackUrl and error from the URL
   const callbackUrl = searchParams.get("callbackUrl") || "/"
   const error = searchParams.get("error")
 
   useEffect(() => {
+    debugLog("SignInForm mounted", { callbackUrl, error })
+
     if (error) {
       const errorMessages: Record<string, string> = {
         Callback: "There was a problem with the authentication callback.",
@@ -38,7 +46,6 @@ function SignInForm() {
         OAuthCallback: "Error in the OAuth callback process.",
         OAuthCreateAccount: "Error creating a new account with the OAuth provider.",
         EmailCreateAccount: "Error creating a new account with email.",
-        Callback: "Error in the authentication callback process.",
         OAuthAccountNotLinked: "This email is already associated with another account.",
         EmailSignin: "Error sending the verification email.",
         CredentialsSignin: "The credentials you provided are invalid.",
@@ -46,14 +53,20 @@ function SignInForm() {
         default: "An unknown error occurred during authentication.",
       }
 
-      setErrorMessage(errorMessages[error] || errorMessages.default)
+      const errorMsg = errorMessages[error] || errorMessages.default
+      setErrorMessage(errorMsg)
+      setDebugInfo(`Error type: ${error}, URL: ${window.location.href}`)
+      debugLog("Authentication error", { error, errorMsg })
     }
-  }, [error])
+  }, [error, callbackUrl])
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
     setErrorMessage(null)
+    setDebugInfo(null)
+
+    debugLog("Attempting email sign in", { email, callbackUrl })
 
     try {
       const result = await signIn("email", {
@@ -62,6 +75,8 @@ function SignInForm() {
         callbackUrl,
       })
 
+      debugLog("Email sign in result", result)
+
       if (result?.error) {
         toast({
           title: "Error",
@@ -69,16 +84,19 @@ function SignInForm() {
           variant: "destructive",
         })
         setErrorMessage("Failed to send verification email. Please try again.")
+        setDebugInfo(`Error: ${result.error}, Status: ${result.status}`)
       } else {
         router.push("/auth/verify-request")
       }
     } catch (error) {
+      debugLog("Exception during email sign in", error)
       toast({
         title: "Error",
         description: "Something went wrong. Please try again.",
         variant: "destructive",
       })
       setErrorMessage("An unexpected error occurred. Please try again.")
+      setDebugInfo(`Exception: ${error instanceof Error ? error.message : String(error)}`)
     } finally {
       setIsLoading(false)
     }
@@ -87,7 +105,14 @@ function SignInForm() {
   const handleProviderSignIn = (provider: string) => {
     setIsLoading(true)
     setErrorMessage(null)
-    signIn(provider, { callbackUrl })
+    setDebugInfo(null)
+
+    debugLog(`Initiating ${provider} sign in`, { callbackUrl })
+
+    // Add a small delay to ensure the debug log is visible in the console
+    setTimeout(() => {
+      signIn(provider, { callbackUrl })
+    }, 100)
   }
 
   return (
@@ -110,6 +135,9 @@ function SignInForm() {
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{errorMessage}</AlertDescription>
+              {debugInfo && (
+                <div className="mt-2 p-2 bg-gray-100 text-xs font-mono overflow-auto max-h-24">{debugInfo}</div>
+              )}
             </Alert>
           )}
           <div className="space-y-2">

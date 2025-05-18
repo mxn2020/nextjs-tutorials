@@ -9,11 +9,23 @@ import { connectToDatabase } from "@/lib/mongodb"
 // Initialize Resend
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+// Debug logger function
+const debugLog = (message: string, data?: any) => {
+  console.log(`[NextAuth Debug] ${message}`, data ? JSON.stringify(data, null, 2) : "")
+}
+
 export const authOptions: NextAuthOptions = {
   adapter: MongoDBAdapter({
     db: (async () => {
-      const { db } = await connectToDatabase()
-      return db
+      try {
+        debugLog("Connecting to MongoDB")
+        const { db } = await connectToDatabase()
+        debugLog("MongoDB connection successful")
+        return db
+      } catch (error) {
+        debugLog("MongoDB connection error", error)
+        throw error
+      }
     })(),
   }),
   providers: [
@@ -37,7 +49,12 @@ export const authOptions: NextAuthOptions = {
       from: process.env.EMAIL_FROM || "noreply@tutorials.coder-verse.io",
       // Custom sendVerificationRequest function using Resend
       async sendVerificationRequest({ identifier, url, provider }) {
+        debugLog(`Sending verification email to ${identifier}`)
+        debugLog(`Verification URL: ${url}`)
+        debugLog(`Email provider configuration:`, provider)
+
         try {
+          debugLog("Attempting to send email via Resend")
           const { data, error } = await resend.emails.send({
             from: provider.from,
             to: identifier,
@@ -53,11 +70,13 @@ export const authOptions: NextAuthOptions = {
           })
 
           if (error) {
-            console.error("Error sending verification email:", error)
+            debugLog("Resend API error:", error)
             throw new Error(`Error sending verification email: ${error.message}`)
           }
+
+          debugLog("Email sent successfully", data)
         } catch (error) {
-          console.error("Error sending verification email:", error)
+          debugLog("Exception in sendVerificationRequest:", error)
           throw new Error("Failed to send verification email")
         }
       },
@@ -70,7 +89,25 @@ export const authOptions: NextAuthOptions = {
     verifyRequest: "/auth/verify-request",
   },
   callbacks: {
+    async signIn({ user, account, profile, email, credentials }) {
+      debugLog("Sign in callback triggered", {
+        user: user ? { id: user.id, email: user.email } : null,
+        account: account ? { provider: account.provider, type: account.type } : null,
+        emailVerified: user?.emailVerified ? "yes" : "no",
+      })
+      return true
+    },
+    async redirect({ url, baseUrl }) {
+      debugLog("Redirect callback", { url, baseUrl })
+      return url.startsWith(baseUrl) ? url : baseUrl
+    },
     async session({ session, user, token }) {
+      debugLog("Session callback", {
+        sessionUser: session.user ? { email: session.user.email } : null,
+        tokenSub: token?.sub,
+        userId: user?.id,
+      })
+
       // Add user role to session
       if (session.user) {
         if (user) {
@@ -78,40 +115,85 @@ export const authOptions: NextAuthOptions = {
           session.user.id = user.id
 
           try {
+            debugLog("Fetching user role from database")
             const { db } = await connectToDatabase()
             const dbUser = await db.collection("users").findOne({ email: user.email })
             session.user.role = dbUser?.role || "viewer"
+            debugLog(`User role: ${session.user.role}`)
           } catch (error) {
-            console.error("Error fetching user role:", error)
+            debugLog("Error fetching user role:", error)
             session.user.role = "viewer"
           }
         } else if (token) {
           // When using JWT sessions
           session.user.id = token.sub
           session.user.role = token.role || "viewer"
+          debugLog(`Using role from token: ${session.user.role}`)
         }
       }
       return session
     },
-    async jwt({ token, user }) {
+    async jwt({ token, user, account, profile }) {
+      debugLog("JWT callback", {
+        tokenSub: token?.sub,
+        userId: user?.id,
+        accountProvider: account?.provider,
+      })
+
       if (user) {
         token.id = user.id
 
         try {
+          debugLog("Fetching user role for JWT")
           const { db } = await connectToDatabase()
           const dbUser = await db.collection("users").findOne({ email: user.email })
           token.role = dbUser?.role || "viewer"
+          debugLog(`JWT user role: ${token.role}`)
         } catch (error) {
-          console.error("Error fetching user role for JWT:", error)
+          debugLog("Error fetching user role for JWT:", error)
           token.role = "viewer"
         }
       }
       return token
     },
   },
+  events: {
+    async signIn(message) {
+      debugLog("User signed in", {
+        user: message.user.email,
+        provider: message.account?.provider,
+      })
+    },
+    async signOut(message) {
+      debugLog("User signed out", { user: message.token?.email })
+    },
+    async createUser(message) {
+      debugLog("User created", { email: message.user.email })
+    },
+    async linkAccount(message) {
+      debugLog("Account linked", {
+        provider: message.account.provider,
+        user: message.user.email,
+      })
+    },
+    async error(message) {
+      debugLog("NextAuth error event", message)
+    },
+  },
+  logger: {
+    error(code, metadata) {
+      debugLog(`Error: ${code}`, metadata)
+    },
+    warn(code) {
+      debugLog(`Warning: ${code}`)
+    },
+    debug(code, metadata) {
+      debugLog(`Debug: ${code}`, metadata)
+    },
+  },
+  debug: true,
   session: {
     strategy: "jwt",
   },
-  debug: process.env.NODE_ENV === "development",
   secret: process.env.NEXTAUTH_SECRET,
 }
