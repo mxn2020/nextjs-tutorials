@@ -38,20 +38,11 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
     EmailProvider({
-      server: {
-        host: process.env.EMAIL_SERVER_HOST || "",
-        port: Number(process.env.EMAIL_SERVER_PORT) || 587,
-        auth: {
-          user: process.env.EMAIL_SERVER_USER || "",
-          pass: process.env.EMAIL_SERVER_PASSWORD || "",
-        },
-      },
       from: process.env.EMAIL_FROM || "noreply@tutorials.coder-verse.io",
-      // Custom sendVerificationRequest function using Resend
+      // Use Resend directly instead of SMTP configuration
       async sendVerificationRequest({ identifier, url, provider }) {
         debugLog(`Sending verification email to ${identifier}`)
         debugLog(`Verification URL: ${url}`)
-        debugLog(`Email provider configuration:`, provider)
 
         try {
           debugLog("Attempting to send email via Resend")
@@ -126,8 +117,8 @@ export const authOptions: NextAuthOptions = {
           }
         } else if (token) {
           // When using JWT sessions
-          session.user.id = token.sub
-          session.user.role = token.role || "viewer"
+          session.user.id = token.sub || ""
+          session.user.role = (token.role as string) || "viewer"
           debugLog(`Using role from token: ${session.user.role}`)
         }
       }
