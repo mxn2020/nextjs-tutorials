@@ -27,16 +27,16 @@ export const authOptions: NextAuthOptions = {
     }),
     EmailProvider({
       server: {
-        host: process.env.EMAIL_SERVER_HOST || "smtp.resend.com",
-        port: Number(process.env.EMAIL_SERVER_PORT) || 465,
+        host: process.env.EMAIL_SERVER_HOST || "",
+        port: Number(process.env.EMAIL_SERVER_PORT) || 587,
         auth: {
-          user: "resend",
-          pass: process.env.RESEND_API_KEY || "",
+          user: process.env.EMAIL_SERVER_USER || "",
+          pass: process.env.EMAIL_SERVER_PASSWORD || "",
         },
       },
-      from: process.env.EMAIL_FROM || "onboarding@resend.dev",
-      // Custom sendVerificationRequest function
-      sendVerificationRequest: async ({ identifier, url, provider }) => {
+      from: process.env.EMAIL_FROM || "noreply@tutorials.coder-verse.io",
+      // Custom sendVerificationRequest function using Resend
+      async sendVerificationRequest({ identifier, url, provider }) {
         try {
           const { data, error } = await resend.emails.send({
             from: provider.from,
@@ -53,10 +53,11 @@ export const authOptions: NextAuthOptions = {
           })
 
           if (error) {
+            console.error("Error sending verification email:", error)
             throw new Error(`Error sending verification email: ${error.message}`)
           }
         } catch (error) {
-          console.error("Error sending verification email", error)
+          console.error("Error sending verification email:", error)
           throw new Error("Failed to send verification email")
         }
       },
@@ -69,14 +70,26 @@ export const authOptions: NextAuthOptions = {
     verifyRequest: "/auth/verify-request",
   },
   callbacks: {
-    async session({ session, user }) {
+    async session({ session, user, token }) {
       // Add user role to session
       if (session.user) {
-        const { db } = await connectToDatabase()
-        const dbUser = await db.collection("users").findOne({ email: user.email })
+        if (user) {
+          // When using database sessions
+          session.user.id = user.id
 
-        session.user.id = user.id
-        session.user.role = dbUser?.role || "viewer"
+          try {
+            const { db } = await connectToDatabase()
+            const dbUser = await db.collection("users").findOne({ email: user.email })
+            session.user.role = dbUser?.role || "viewer"
+          } catch (error) {
+            console.error("Error fetching user role:", error)
+            session.user.role = "viewer"
+          }
+        } else if (token) {
+          // When using JWT sessions
+          session.user.id = token.sub
+          session.user.role = token.role || "viewer"
+        }
       }
       return session
     },
@@ -84,10 +97,14 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id
 
-        const { db } = await connectToDatabase()
-        const dbUser = await db.collection("users").findOne({ email: user.email })
-
-        token.role = dbUser?.role || "viewer"
+        try {
+          const { db } = await connectToDatabase()
+          const dbUser = await db.collection("users").findOne({ email: user.email })
+          token.role = dbUser?.role || "viewer"
+        } catch (error) {
+          console.error("Error fetching user role for JWT:", error)
+          token.role = "viewer"
+        }
       }
       return token
     },
@@ -95,5 +112,6 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
+  debug: process.env.NODE_ENV === "development",
   secret: process.env.NEXTAUTH_SECRET,
 }

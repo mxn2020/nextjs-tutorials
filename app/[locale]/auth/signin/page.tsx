@@ -2,8 +2,8 @@
 
 import type React from "react"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react"
+import { useRouter, useSearchParams } from "next/navigation"
 import { signIn } from "next-auth/react"
 import { motion } from "framer-motion"
 import { SiteHeader } from "@/components/site-header"
@@ -13,23 +13,47 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Separator } from "@/components/ui/separator"
-import { Github, Mail } from "lucide-react"
+import { Github, Mail, AlertCircle } from "lucide-react"
 import { useToast } from "@/hooks/use-toast"
 import { Suspense } from "react"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 
 function SignInForm() {
   const [email, setEmail] = useState("")
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+  const searchParams = useSearchParams()
   const { toast } = useToast()
+  const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
-  // Get the callbackUrl from the URL
-  const callbackUrl =
-    typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("callbackUrl") || "/" : "/"
+  // Get the callbackUrl and error from the URL
+  const callbackUrl = searchParams.get("callbackUrl") || "/"
+  const error = searchParams.get("error")
+
+  useEffect(() => {
+    if (error) {
+      const errorMessages: Record<string, string> = {
+        Callback: "There was a problem with the authentication callback.",
+        OAuthSignin: "Error in the OAuth sign-in process.",
+        OAuthCallback: "Error in the OAuth callback process.",
+        OAuthCreateAccount: "Error creating a new account with the OAuth provider.",
+        EmailCreateAccount: "Error creating a new account with email.",
+        Callback: "Error in the authentication callback process.",
+        OAuthAccountNotLinked: "This email is already associated with another account.",
+        EmailSignin: "Error sending the verification email.",
+        CredentialsSignin: "The credentials you provided are invalid.",
+        SessionRequired: "You need to be signed in to access this page.",
+        default: "An unknown error occurred during authentication.",
+      }
+
+      setErrorMessage(errorMessages[error] || errorMessages.default)
+    }
+  }, [error])
 
   const handleEmailSignIn = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setErrorMessage(null)
 
     try {
       const result = await signIn("email", {
@@ -44,6 +68,7 @@ function SignInForm() {
           description: "Something went wrong. Please try again.",
           variant: "destructive",
         })
+        setErrorMessage("Failed to send verification email. Please try again.")
       } else {
         router.push("/auth/verify-request")
       }
@@ -53,12 +78,15 @@ function SignInForm() {
         description: "Something went wrong. Please try again.",
         variant: "destructive",
       })
+      setErrorMessage("An unexpected error occurred. Please try again.")
     } finally {
       setIsLoading(false)
     }
   }
 
   const handleProviderSignIn = (provider: string) => {
+    setIsLoading(true)
+    setErrorMessage(null)
     signIn(provider, { callbackUrl })
   }
 
@@ -77,6 +105,13 @@ function SignInForm() {
           </CardDescription>
         </CardHeader>
         <CardContent className="space-y-4">
+          {errorMessage && (
+            <Alert variant="destructive">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{errorMessage}</AlertDescription>
+            </Alert>
+          )}
           <div className="space-y-2">
             <Button
               variant="outline"
